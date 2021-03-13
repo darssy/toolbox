@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Threading;
 using MmiSoft.Core.Math;
 using Newtonsoft.Json;
 using SysMath = System.Math;
@@ -17,11 +16,6 @@ namespace MmiSoft.Core
 	public static class Extensions
 	{
 		private static readonly BrowsableAttribute BrowsableFalse = new BrowsableAttribute(false);
-#if DEBUG
-		private const int DefaultLockTimeout = -1;
-#else
-		private const int DefaultLockTimeout = 5000;
-#endif
 
 		public static Color Negate(in this Color c)
 		{
@@ -239,53 +233,6 @@ namespace MmiSoft.Core
 					value = JsonConvert.DeserializeObject(json, value.GetType(), settings);
 				}
 				info.GetSetMethod().Invoke(to, new[] { value });
-			}
-		}
-
-		public static R GetReadProtected<R>(this ReaderWriterLockSlim rwLock, Func<R> producer, int timeoutMillis = DefaultLockTimeout)
-		{
-			try
-			{
-				if (rwLock.TryEnterReadLock(timeoutMillis)) return producer();
-
-				EventLogger.Warn($"Unable to take read lock within {timeoutMillis} ms");
-				return default;
-			}
-			finally
-			{
-				rwLock.ExitReadLock();
-			}
-		}
-
-		public static void DoReadProtected(this ReaderWriterLockSlim rwLock, Action action, int timeoutMillis = DefaultLockTimeout)
-		{
-			try
-			{
-				if (!rwLock.TryEnterReadLock(timeoutMillis))
-				{
-					EventLogger.Warn($"Unable to take read lock within {timeoutMillis} ms");
-				}
-				else action();
-			}
-			finally
-			{
-				rwLock.ExitReadLock();
-			}
-		}
-
-		public static void DoWriteProtected(this ReaderWriterLockSlim rwLock, Action action, int timeoutMillis = DefaultLockTimeout)
-		{
-			try
-			{
-				if (!rwLock.TryEnterReadLock(timeoutMillis))
-				{
-					EventLogger.Warn($"Unable to take read lock within {timeoutMillis} ms");
-				}
-				else action();
-			}
-			finally
-			{
-				rwLock.ExitWriteLock();
 			}
 		}
 
