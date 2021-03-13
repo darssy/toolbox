@@ -1,2 +1,2 @@
-# toolbox
-A collection of classes and methods that seem useful and quite common to me 
+# Toolbox
+A collection of classes methods and utilities that seem useful and quite common to me 
