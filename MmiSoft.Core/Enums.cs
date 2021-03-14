@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 
 namespace MmiSoft.Core
 {
@@ -18,6 +19,11 @@ namespace MmiSoft.Core
 		{
 			string name = Enum.GetName(e.GetType(), e);
 			return Array.IndexOf(Enum.GetNames(e.GetType()), name);
+		}
+
+		public static string ToText(this Enum e)
+		{
+			return Regex.Replace(e.ToString(), "(?<=[a-z])([A-Z])", " $1", RegexOptions.Compiled).Trim();
 		}
 	}
 }

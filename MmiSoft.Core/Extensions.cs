@@ -155,11 +155,6 @@ namespace MmiSoft.Core
 			second = list.Count > 1 ? list[1] : default; // or throw
 			rest = list.Skip(2).ToList();
 		}
-		
-		public static string ToText(this Enum e)
-		{
-			return Regex.Replace(e.ToString(), "(?<=[a-z])([A-Z])", " $1", RegexOptions.Compiled).Trim();
-		}
 
 		public static UInt64 DoubleToLongBits(this double d)
 		{
