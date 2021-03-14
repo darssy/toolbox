@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using MmiSoft.Core.Collections;
 using MmiSoft.Core.Math;
 
 namespace MmiSoft.Core

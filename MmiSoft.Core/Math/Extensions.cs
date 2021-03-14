@@ -20,17 +20,17 @@ namespace MmiSoft.Core.Math
 		{
 			return Math.Abs(number);
 		}
-		
+
 		public static decimal Abs(this decimal number)
 		{
 			return Math.Abs(number);
 		}
-		
+
 		public static double Sqrt(this double number)
 		{
 			return Math.Sqrt(number);
 		}
-		
+
 		public static double Sqrt(this int number)
 		{
 			return Math.Sqrt(number);
@@ -64,37 +64,6 @@ namespace MmiSoft.Core.Math
 		public static int Ceiling(this double number)
 		{
 			return (int) Math.Ceiling(number);
-		}
-
-		public static Point Center(this Size s)
-		{
-			return new Point(s.Width / 2, s.Height / 2);
-		}
-
-		public static Percent PercentBetween(this int value, int from, int to)
-		{
-			float dif = value - from;
-			return new Percent(dif * 100 / (to - from));
-		}
-
-		public static float[] FillSeries(this float start, float end, int series)
-		{
-			int totalSteps = series + 1;
-			float step = (end - start) / totalSteps;
-			float[] result = new float[series];
-			result[0] = start + step;
-			for (int i = 1; i < series; i++)
-			{
-				result[i] = result[i - 1] + step;
-			}
-			return result;
-		}
-
-		public static double InterpolateWith(this int start, double end, Percent percent)
-		{
-			double diff = end - start;
-
-			return start + diff * percent;
 		}
 
 		/*public static T InterpolateWith<T>(this SpeedUnit start, SpeedUnit end, Percent percent) where T : SpeedUnit, new()
@@ -146,16 +115,6 @@ namespace MmiSoft.Core.Math
 		public static bool AlmostEqual(this float left, float right, float tolerance=0.000001f)
 		{
 			return (left - right).Abs() < tolerance;
-		}
-
-		public static T Max<T>(this T first, T second) where T: IComparable<T>
-		{
-			return first.CompareTo(second) >= 0 ? first : second;
-		}
-
-		public static T Min<T>(this T first, T second) where T: IComparable<T>
-		{
-			return first.CompareTo(second) <= 0 ? first : second;
 		}
 	}
 }
