@@ -29,10 +29,6 @@ namespace MmiSoft.Core
 				(int) SysMath.Round(c.B * 0.5));
 		}
 
-		public static Color Alpha(in this Color c, in byte alpha)
-		{
-			return Color.FromArgb(alpha, c.R, c.G, c.B);
-		}
 		public static Color Lighten(in this Color c)
 		{
 			int r = (int)SysMath.Round(c.R * 1.45);
