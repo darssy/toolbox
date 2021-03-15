@@ -12,6 +12,12 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <LangVersion>7.3</LangVersion>
+    <PackageId>MmiSoft.Core</PackageId>
+    <Version>0.0.1-rc</Version>
+    <Authors>adamstyl</Authors>
+    <Company>ATM-DEV</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageOutputPath>bin\$(Configuration)\</PackageOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -91,5 +97,15 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <!--<Target Name="PublishNuGetLocally" AfterTargets="Build">
+    <Exec Command="dotnet nuget delete &#45;&#45;source $(UserProfile)\.nuget\packages $(PackageId) $(PackageVersion) &#45;&#45;non-interactive" ContinueOnError="WarnAndContinue" />
+    <Exec Command="dotnet nuget push &#45;&#45;source $(UserProfile)\.nuget\packages $(ProjectDir)bin\$(ConfigurationName)\$(PackageId).$(PackageVersion).nupkg" />
+  </Target>-->
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NuGet.Build.Tasks.Pack.5.9.0\build\NuGet.Build.Tasks.Pack.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NuGet.Build.Tasks.Pack.5.9.0\build\NuGet.Build.Tasks.Pack.targets'))" />
+  </Target>
 
 </Project>
