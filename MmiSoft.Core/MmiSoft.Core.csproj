@@ -99,8 +99,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <!--<Target Name="PublishNuGetLocally" AfterTargets="Build">
-    <Exec Command="dotnet nuget delete &#45;&#45;source $(UserProfile)\.nuget\packages $(PackageId) $(PackageVersion) &#45;&#45;non-interactive" ContinueOnError="WarnAndContinue" />
-    <Exec Command="dotnet nuget push &#45;&#45;source $(UserProfile)\.nuget\packages $(ProjectDir)bin\$(ConfigurationName)\$(PackageId).$(PackageVersion).nupkg" />
-  </Target>-->
+  <Target Name="PublishNuGetLocally" AfterTargets="Build" Condition=" '$(Configuration)' == 'Release' ">
+    <Exec Command="dotnet nuget delete --source $(UserProfile)\.nuget\packages $(PackageId) $(PackageVersion) --non-interactive" ContinueOnError="WarnAndContinue" />
+    <Exec Command="dotnet nuget push --source $(UserProfile)\.nuget\packages $(ProjectDir)bin\$(ConfigurationName)\$(PackageId).$(PackageVersion).nupkg" />
+  </Target>
 </Project>
