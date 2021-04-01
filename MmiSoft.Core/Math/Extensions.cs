@@ -56,6 +56,11 @@ namespace MmiSoft.Core.Math
 			return Math.Round(number, decimals);
 		}
 
+		public static int RoundToInt(this double number)
+		{
+			return (int) Math.Round(number);
+		}
+
 		public static int Floor(this double number)
 		{
 			return (int) Math.Floor(number);
