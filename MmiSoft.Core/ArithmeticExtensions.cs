@@ -65,5 +65,7 @@ namespace MmiSoft.Core
 		{
 			return first.CompareTo(second) < 0 ? first : second;
 		}
+
+		public static Percent Percent(this int value) => new Percent(value);
 	}
 }

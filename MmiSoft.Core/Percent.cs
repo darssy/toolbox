@@ -168,11 +168,17 @@ namespace MmiSoft.Core
 
 		private static Dictionary<IFormatProvider, Regex> Validators = new Dictionary<IFormatProvider, Regex>();
 
+		public static Regex GetValidator(IFormatProvider provider)
+		{
+			NumberFormatInfo formatInfo = NumberFormatInfo.GetInstance(provider);
+			return Validators.GetOrCreate(provider, formatInfo,
+				info => new Regex($@"^-?\d+({info.PercentDecimalSeparator}\d+)?{info.PercentSymbol}$"));
+		}
+
 		public static Percent Parse(string text, IFormatProvider provider)
 		{
 			NumberFormatInfo formatInfo = NumberFormatInfo.GetInstance(provider);
-			Regex validator = Validators.GetOrCreate(provider,
-				() => new Regex($@"^-?\d+({formatInfo.PercentDecimalSeparator}\d+)?{formatInfo.PercentSymbol}$"));
+			Regex validator = GetValidator(provider);
 			if (!validator.IsMatch(text))
 			{
 				throw new FormatException($"Text '{text}' does not match a fixed-point format (\"F\") with a trailing % sign");

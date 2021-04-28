@@ -26,5 +26,23 @@ namespace MmiSoft.Core
 			dictionary[key] = value;
 			return value;
 		}
+
+		public static V GetOrCreate<K, V, S>(this IDictionary<K, V> dictionary, in K key, in S seed, Func<S, V> creator)
+		{
+			if (dictionary.TryGetValue(key, out V value)) return value;
+
+			value = creator.Invoke(seed);
+			dictionary[key] = value;
+			return value;
+		}
+
+		public static V GetOrCreate<K, V>(this IDictionary<K, V> dictionary, in K key, Func<K, V> creator)
+		{
+			if (dictionary.TryGetValue(key, out V value)) return value;
+
+			value = creator.Invoke(key);
+			dictionary[key] = value;
+			return value;
+		}
 	}
 }
