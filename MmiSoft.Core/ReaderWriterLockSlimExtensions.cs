@@ -47,7 +47,7 @@ namespace MmiSoft.Core
 		{
 			try
 			{
-				if (!rwLock.TryEnterReadLock(timeoutMillis))
+				if (!rwLock.TryEnterWriteLock(timeoutMillis))
 				{
 					EventLogger.Warn($"Unable to take read lock within {timeoutMillis} ms");
 				}
