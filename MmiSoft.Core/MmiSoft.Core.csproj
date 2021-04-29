@@ -15,7 +15,7 @@
     <Date>$([System.DateTime]::Now.ToString("yyyy.M.d"))</Date>
     <Time>$([System.DateTime]::Now.ToString("HHmm"))</Time>
     <PackageId>MmiSoft.Core</PackageId>
-    <AssemblyVersion>0.0.2</AssemblyVersion>
+    <AssemblyVersion>0.0.3</AssemblyVersion>
     <Version>$(AssemblyVersion)</Version>
     <Authors>adamstyl</Authors>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
