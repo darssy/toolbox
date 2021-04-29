@@ -58,6 +58,7 @@
     <Compile Include="ArithmeticExtensions.cs" />
     <Compile Include="AutoIncrementGenerator.cs" />
     <Compile Include="CollectionExtensions.cs" />
+    <Compile Include="Collections\GenericStringCollectionAdapter.cs" />
     <Compile Include="DateAndTimeExtensions.cs" />
     <Compile Include="DrawingExtensions.cs" />
     <Compile Include="Enums.cs" />
