@@ -10,6 +10,11 @@ namespace MmiSoft.Core
 			       || number.CompareTo(b) <= 0 && number.CompareTo(a) >= 0;
 		}
 
+		public static bool Between(this char character, char a, char b)
+		{
+			return character <= a && character >= b || character <= b && character >= a;
+		}
+
 		public static bool Between(this int number, int a, int b)
 		{
 			return number <= a && number >= b || number <= b && number >= a;
