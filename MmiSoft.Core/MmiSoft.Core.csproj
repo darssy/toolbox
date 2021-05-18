@@ -61,6 +61,7 @@
     <Compile Include="Collections\GenericStringCollectionAdapter.cs" />
     <Compile Include="ComponentModel\IDesignatedItem.cs" />
     <Compile Include="ComponentModel\ISelectableItem.cs" />
+    <Compile Include="ComponentModel\PercentTypeConverter.cs" />
     <Compile Include="ComponentModel\SelectableItemBase.cs" />
     <Compile Include="DateAndTimeExtensions.cs" />
     <Compile Include="DrawingExtensions.cs" />
