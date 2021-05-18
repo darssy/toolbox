@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="PercentTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValueRangeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MmiSoft.Core\MmiSoft.Core.csproj">
