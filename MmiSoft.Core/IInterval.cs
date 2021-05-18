@@ -154,6 +154,12 @@ namespace MmiSoft.Core
 	/// <typeparam name="T"></typeparam>
 	public class Any<T>: IInterval<T>
 	{
+		private string displayText;
+		public Any(string displayText = "(-\u221E,\u221E)")
+		{
+			this.displayText = displayText;
+		}
+
 		public bool IsValueBefore(T value) => false;
 
 		public bool IsValueAfter(T value) => false;
@@ -161,6 +167,8 @@ namespace MmiSoft.Core
 		public bool Contains(T value) => true;
 
 		public T Closest(T value) => value;
+
+		public override string ToString() => displayText;
 	}
 
 	/// <summary>
@@ -169,6 +177,12 @@ namespace MmiSoft.Core
 	/// <typeparam name="T"></typeparam>
 	public class None<T>: IInterval<T>
 	{
+		private string displayText;
+		public None(string displayText = "{∅}")
+		{
+			this.displayText = displayText;
+		}
+
 		public bool IsValueBefore(T value) => true;
 
 		public bool IsValueAfter(T value) => true;
@@ -176,5 +190,7 @@ namespace MmiSoft.Core
 		public bool Contains(T value) => false;
 
 		public T Closest(T value) => default;
+
+		public override string ToString() => displayText;
 	}
 }

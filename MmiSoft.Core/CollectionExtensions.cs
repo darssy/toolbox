@@ -26,7 +26,7 @@ namespace MmiSoft.Core
 		/// This overload is more straightforward syntactically, but if the creator captures variables from the call site
 		/// you might find yourself with extra allocations (and garbage collections later on) that might impact performance
 		/// if this method is called in a hotspot. Use this function if readability is more important than performance.
-		/// Otherwise consider using one of the other 2 overloards.
+		/// Otherwise consider using one of the other 2 overloads.
 		/// </remarks>
 		/// <param name="dictionary">The dictionary to operate on</param>
 		/// <param name="key">The key to search with</param>
