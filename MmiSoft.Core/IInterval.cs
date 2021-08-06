@@ -22,6 +22,7 @@ namespace MmiSoft.Core
 		T Closest(T value);
 	}
 
+	[Serializable]
 	public abstract class InfiniteEndpointInterval<T> : IInterval<T> where T: IComparable<T>
 	{
 		public static readonly IInterval<T> Any = new Any<T>();
@@ -53,6 +54,7 @@ namespace MmiSoft.Core
 		}
 	}
 
+	[Serializable]
 	public class LessThanInterval<T> : InfiniteEndpointInterval<T> where T: IComparable<T>
 	{
 		public LessThanInterval(T endpoint, string format="(-\u221E,{0}]") : base(endpoint, format)
@@ -67,6 +69,7 @@ namespace MmiSoft.Core
 		}
 	}
 
+	[Serializable]
 	public class GreaterThanInterval<T> : InfiniteEndpointInterval<T> where T: IComparable<T>
 	{
 
@@ -82,6 +85,7 @@ namespace MmiSoft.Core
 		}
 	}
 
+	[Serializable]
 	public class BoundedInterval<T> : IInterval<T> where T: IComparable<T>
 	{
 		private GreaterThanInterval<T> lower;
@@ -124,6 +128,7 @@ namespace MmiSoft.Core
 		}
 	}
 
+	[Serializable]
 	public class DegenerateInterval<T> : IInterval<T> where T: IComparable<T>
 	{
 		private T endpoint;
@@ -152,6 +157,7 @@ namespace MmiSoft.Core
 	/// Equivalent to (-∞,∞)
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
+	[Serializable]
 	public class Any<T>: IInterval<T>
 	{
 		private string displayText;
@@ -175,6 +181,7 @@ namespace MmiSoft.Core
 	/// Equivalent to {∅}
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
+	[Serializable]
 	public class None<T>: IInterval<T>
 	{
 		private string displayText;
