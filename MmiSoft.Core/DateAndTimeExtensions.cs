@@ -1,4 +1,5 @@
 using System;
+using MmiSoft.Core.Math;
 
 namespace MmiSoft.Core
 {
@@ -6,16 +7,8 @@ namespace MmiSoft.Core
 	{
 		public static DateTime RoundToMinute(this DateTime date)
 		{
-			int second = date.Second;
-			if (second >= 30)
-			{
-				date = date.AddSeconds(60 - second);
-			}
-			else
-			{
-				date = date.AddSeconds(-second);
-			}
-			return date;
+			double totalMinutes = date.Ticks / (double)TimeSpan.TicksPerMinute;
+			return new DateTime((long) (totalMinutes.Round() * TimeSpan.TicksPerMinute));
 		}
 
 		public static TimeSpan Magnify(in this TimeSpan span, int factor)
