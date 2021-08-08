@@ -1,0 +1,13 @@
+version: 0.0.4.{build}
+configuration: Release
+before_build:
+- cmd: nuget restore
+build:
+  verbosity: normal
+artifacts:
+- path: MmiSoft.Core\bin\$(configuration)\*.nupkg
+assembly_info:
+  patch: true
+  file: '**\VersionInfo.cs'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
