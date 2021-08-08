@@ -69,6 +69,7 @@
     <Compile Include="EventLogger.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="FunctionExtensions.cs" />
     <Compile Include="IEventLogProvider.cs" />
     <Compile Include="IInterval.cs" />
     <Compile Include="LogEntry.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Properties\VersionInfo.cs" />
     <Compile Include="ReaderWriterLockSlimExtensions.cs" />
     <Compile Include="StringExtensions.cs" />
+    <Compile Include="UniChar.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="ValueChangedEventArgs.cs" />
     <Compile Include="ValueEventArgs.cs" />

@@ -19,6 +19,30 @@ namespace MmiSoft.Core
 		}
 
 		/// <summary>
+		/// Convenience method for list[list.Count - 1]
+		/// </summary>
+		/// <returns>The last element of the list</returns>
+		/// <exception cref="IndexOutOfRangeException">If the list is empty</exception>
+		public static T Last<T>(this IList<T> list) => list[list.Count - 1];
+
+		/// <summary>
+		/// Returns the first node matching the given condition
+		/// </summary>
+		/// <param name="list">The list to work on</param>
+		/// <param name="condition">The function providing the condition</param>
+		/// <typeparam name="T"></typeparam>
+		/// <returns>The first node matching the given condition or null in case of empty list or no match</returns>
+		public static LinkedListNode<T> GetNode<T>(this LinkedList<T> list, Func<T, bool> condition)
+		{
+			LinkedListNode<T> temp = list.First;
+			while (temp != null && !condition.Invoke(temp.Value))
+			{
+				temp = temp.Next;
+			}
+			return temp;
+		}
+
+		/// <summary>
 		/// Returns the value of the key if it exists in the dictionary. Otherwise it creates the value using the creator
 		/// function, stores the value in the dictionary and returns the newly created value.
 		/// </summary>
