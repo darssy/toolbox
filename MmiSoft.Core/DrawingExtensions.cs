@@ -66,6 +66,24 @@ namespace MmiSoft.Core
 			return (dx * dx + dy * dy).Sqrt();
 		}
 
+		/// <summary>
+		/// Returns the azimuth or bearing of the second argument relative to the first one.
+		/// </summary>
+		/// <param name="from">The start point or the "observer"</param>
+		/// <param name="to">The end point or the "destination"</param>
+		/// <param name="invertAxles">Set to true to get the azimuth from "north", clockwise. The default is from "east"
+		/// and counterclockwise</param>
+		/// <returns>The azimuth of <c>to</c> relative to <c>from</c> in radians.</returns>
+		public static double AzimuthTo(this Point from, Point to, bool invertAxles = false)
+		{
+			int dx = to.X - from.X;
+			int dy = to.Y - from.Y;
+
+			return invertAxles
+				? System.Math.Atan2(dy, dx)
+				: System.Math.Atan2(dx, dy);
+		}
+
 		public static Rectangle Subtract(this Rectangle r, Size subtraction)
 		{
 			return new Rectangle(r.X, r.Y, r.Width - subtraction.Width, r.Height - subtraction.Height);
