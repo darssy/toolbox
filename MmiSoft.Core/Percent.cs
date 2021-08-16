@@ -122,13 +122,16 @@ namespace MmiSoft.Core
 
 		public override string ToString()
 		{
-			return $"p:{value}";
+			return $"Percent raw value: '{value}' computed {GetDisplayValue()}";
 		}
 
+		/// <summary>
+		/// Convenience method for calling <c>ToString("P", CultureInfo.CurrentCulture);</c>
+		/// </summary>
+		/// <returns></returns>
 		public string GetDisplayValue()
 		{
-			//the real percent value is recomputed to keep the struct short
-			return $"{value * 100:0.##}%";
+			return ToString("P", CultureInfo.CurrentCulture);
 		}
 
 		public int CompareTo(Percent other)

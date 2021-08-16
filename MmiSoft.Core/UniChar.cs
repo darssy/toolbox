@@ -6,6 +6,7 @@ namespace MmiSoft.Core
 	/// </summary>
 	public static class UniChar
 	{
+		public const char Degrees = '\u00B0';
 		public const char Ellipsis = '\u2026';
 
 		public const char RightFilledTriangle = '\u25B6';

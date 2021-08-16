@@ -63,9 +63,24 @@ namespace MmiSoft.Core.Test
 		}
 
 		[Test]
+		public void MinusOperators()
+		{
+			Assert.AreEqual((-15).Percent(), new Percent(30) - new Percent(45));
+		}
+
+		[Test]
 		public void FromDecimal_ConvertsCoefficientToPercentage()
 		{
 			Assert.AreEqual(new Percent(30), Percent.FromDecimal(1.3));
+		}
+
+		[Test]
+		public void GetDisplayValue_ReturnsTheDefaultPercentFormatOfTheCurrentCulture()
+		{
+			CultureInfo culture = CultureInfo.CurrentCulture;
+			string dot = culture.NumberFormat.PercentDecimalSeparator;
+			Assert.AreEqual($"28{dot}39%", new Percent(28.392).GetDisplayValue());
+			Assert.AreEqual($"28{dot}33%", new Percent(28.329).GetDisplayValue());
 		}
 	}
 }
