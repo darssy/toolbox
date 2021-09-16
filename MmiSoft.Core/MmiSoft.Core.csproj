@@ -75,6 +75,14 @@
     <Compile Include="LogEntry.cs" />
     <Compile Include="LogSeverity.cs" />
     <Compile Include="Math\Extensions.cs" />
+    <Compile Include="Patterns\ChainOfResponsibility.cs" />
+    <Compile Include="Patterns\DelegateCommand.cs" />
+    <Compile Include="Patterns\ExceptionHandlingCommandWrapper.cs" />
+    <Compile Include="Patterns\ExecutionTimeCommand.cs" />
+    <Compile Include="Patterns\ExecutionTimeGetterDecorator.cs" />
+    <Compile Include="Patterns\CommandExtensions.cs" />
+    <Compile Include="Patterns\ICommand.cs" />
+    <Compile Include="Patterns\LoggingCommandWrapper.cs" />
     <Compile Include="Percent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\VersionInfo.cs" />
