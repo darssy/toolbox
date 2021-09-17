@@ -6,7 +6,7 @@
 	public interface IDesignatedItem
 	{
 		/// <summary>
-		/// The designation of the object, ideally immutable and unique among the items of the same same category
+		/// The designation of the object, ideally immutable and unique among the items of the same category
 		/// </summary>
 		string Designation { get; }
 	}
