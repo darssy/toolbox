@@ -59,6 +59,7 @@
     <Compile Include="AutoIncrementGenerator.cs" />
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="Collections\GenericStringCollectionAdapter.cs" />
+    <Compile Include="Collections\ListTree.cs" />
     <Compile Include="ComponentModel\IDesignatedItem.cs" />
     <Compile Include="ComponentModel\ISelectableItem.cs" />
     <Compile Include="ComponentModel\PercentTypeConverter.cs" />
