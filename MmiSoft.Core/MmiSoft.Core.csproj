@@ -60,10 +60,14 @@
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="Collections\GenericStringCollectionAdapter.cs" />
     <Compile Include="Collections\ListTree.cs" />
+    <Compile Include="ComponentModel\EditableObjectHolder.cs" />
     <Compile Include="ComponentModel\IDesignatedItem.cs" />
+    <Compile Include="ComponentModel\IEditableObjectWrapper.cs" />
+    <Compile Include="ComponentModel\IExternallyEditable.cs" />
     <Compile Include="ComponentModel\ISelectableItem.cs" />
     <Compile Include="ComponentModel\PercentTypeConverter.cs" />
     <Compile Include="ComponentModel\SelectableItemBase.cs" />
+    <Compile Include="Configuration\ConfigurationBase.cs" />
     <Compile Include="DateAndTimeExtensions.cs" />
     <Compile Include="DrawingExtensions.cs" />
     <Compile Include="Enums.cs" />
@@ -73,6 +77,11 @@
     <Compile Include="FunctionExtensions.cs" />
     <Compile Include="IEventLogProvider.cs" />
     <Compile Include="IInterval.cs" />
+    <Compile Include="IO\FileReader.cs" />
+    <Compile Include="IO\FileWriter.cs" />
+    <Compile Include="Json\IpAddressJsonConverter.cs" />
+    <Compile Include="Json\PercentJsonConverter.cs" />
+    <Compile Include="Json\UnitConverter.cs" />
     <Compile Include="LogEntry.cs" />
     <Compile Include="LogSeverity.cs" />
     <Compile Include="Math\Extensions.cs" />
@@ -111,6 +120,9 @@
       <Version>5.9.0</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="sharpconvert">
+      <Version>1.1.0.4</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
