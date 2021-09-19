@@ -1,6 +1,6 @@
 using System;
 
-namespace MmiSoft.Core.Text
+namespace MmiSoft.Core
 {
 	public class ResultBase<R>
 	{

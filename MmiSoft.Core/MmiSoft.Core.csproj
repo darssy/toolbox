@@ -97,9 +97,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\VersionInfo.cs" />
     <Compile Include="ReaderWriterLockSlimExtensions.cs" />
+    <Compile Include="ResultBase.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Text\ITextParser.cs" />
-    <Compile Include="Text\ResultBase.cs" />
     <Compile Include="UniChar.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="ValueChangedEventArgs.cs" />
