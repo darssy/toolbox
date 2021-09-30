@@ -12,8 +12,6 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <LangVersion>7.3</LangVersion>
-    <Date>$([System.DateTime]::Now.ToString("yyyy.M.d"))</Date>
-    <Time>$([System.DateTime]::Now.ToString("HHmm"))</Time>
     <PackageId>MmiSoft.Core</PackageId>
     <AssemblyVersion>0.0.5</AssemblyVersion>
     <Version>$(AssemblyVersion)</Version>
@@ -24,8 +22,6 @@
     <PackageFileName>$(PackageId).$(Version).nupkg</PackageFileName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <AssemblyFileVersionAttribute>[assembly:System.Reflection.AssemblyFileVersion("$(AssemblyVersion).$(Time)")]</AssemblyFileVersionAttribute>
-    <AssemblyVersionAttribute>[assembly:System.Reflection.AssemblyVersion("$(AssemblyVersion).$(Time)")]</AssemblyVersionAttribute>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -133,10 +129,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Target Name="BeforeBuild">
-    <WriteLinesToFile File="Properties\VersionInfo.cs" Lines="$(AssemblyFileVersionAttribute)" Overwrite="true">
-    </WriteLinesToFile>
-    <WriteLinesToFile File="Properties\VersionInfo.cs" Lines="$(AssemblyVersionAttribute)" Overwrite="false">
-    </WriteLinesToFile>
-  </Target>
 </Project>
