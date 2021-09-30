@@ -1,11 +1,14 @@
-version: 0.0.5.{build}
+version: 0.0.6.{build}
+branches:
+  only:
+    - master
 configuration: Release
 before_build:
-- cmd: nuget restore
+  - cmd: nuget restore
 build:
   verbosity: normal
 artifacts:
-- path: MmiSoft.Core\bin\$(configuration)\*.nupkg
+  - path: MmiSoft.Core\bin\$(configuration)\*.nupkg
 assembly_info:
   patch: true
   file: '**\VersionInfo.cs'
