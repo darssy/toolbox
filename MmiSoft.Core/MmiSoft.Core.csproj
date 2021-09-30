@@ -64,6 +64,7 @@
     <Compile Include="ComponentModel\PercentTypeConverter.cs" />
     <Compile Include="ComponentModel\SelectableItemBase.cs" />
     <Compile Include="Configuration\ConfigurationBase.cs" />
+    <Compile Include="Configuration\IPropertyGridTarget.cs" />
     <Compile Include="DateAndTimeExtensions.cs" />
     <Compile Include="DrawingExtensions.cs" />
     <Compile Include="Enums.cs" />
