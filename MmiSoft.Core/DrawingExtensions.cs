@@ -71,17 +71,39 @@ namespace MmiSoft.Core
 		/// </summary>
 		/// <param name="from">The start point or the "observer"</param>
 		/// <param name="to">The end point or the "destination"</param>
-		/// <param name="invertAxles">Set to true to get the azimuth from "north", clockwise. The default is from "east"
+		/// <param name="swapAxles">Set to true to get the azimuth from "north", clockwise. The default is from "east"
 		/// and counterclockwise</param>
 		/// <returns>The azimuth of <c>to</c> relative to <c>from</c> in radians.</returns>
-		public static double AzimuthTo(this Point from, Point to, bool invertAxles = false)
+		public static double AzimuthTo(this Point from, Point to, bool swapAxles = false)
 		{
 			int dx = to.X - from.X;
 			int dy = to.Y - from.Y;
 
-			return invertAxles
+			return swapAxles
 				? System.Math.Atan2(dy, dx)
 				: System.Math.Atan2(dx, dy);
+		}
+
+		public static Point ExtrapolateTo(this Point from, double bearing, double distance,
+			CoordinatesSystem cs = CoordinatesSystem.Arithmetic)
+		{
+			int ex = (distance * System.Math.Cos(bearing)).RoundToInt();
+			int ey = (distance * System.Math.Sin(bearing)).RoundToInt();
+
+			if ((cs & CoordinatesSystem.SwapAxles) == CoordinatesSystem.SwapAxles)
+			{
+				Util.Swap(ref ex, ref ey);
+			}
+			if ((cs & CoordinatesSystem.NegateX) == CoordinatesSystem.NegateX)
+			{
+				ex = -ex;
+			}
+			if ((cs & CoordinatesSystem.NegateY) == CoordinatesSystem.NegateY)
+			{
+				ey = -ey;
+			}
+
+			return new Point(from.X + ex, from.Y + ey);
 		}
 
 		public static Rectangle Subtract(this Rectangle r, Size subtraction)
@@ -89,4 +111,5 @@ namespace MmiSoft.Core
 			return new Rectangle(r.X, r.Y, r.Width - subtraction.Width, r.Height - subtraction.Height);
 		}
 	}
+
 }

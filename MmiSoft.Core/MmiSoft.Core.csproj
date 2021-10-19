@@ -69,6 +69,7 @@
     <Compile Include="Controls\ICuePainter.cs" />
     <Compile Include="Controls\IPointTranslator.cs" />
     <Compile Include="Controls\IRectanglePainter.cs" />
+    <Compile Include="CoordinatesSystem.cs" />
     <Compile Include="DateAndTimeExtensions.cs" />
     <Compile Include="DrawingExtensions.cs" />
     <Compile Include="Enums.cs" />
