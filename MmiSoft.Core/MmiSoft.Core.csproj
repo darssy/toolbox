@@ -61,10 +61,14 @@
     <Compile Include="ComponentModel\IEditableObjectWrapper.cs" />
     <Compile Include="ComponentModel\IExternallyEditable.cs" />
     <Compile Include="ComponentModel\ISelectableItem.cs" />
+    <Compile Include="ComponentModel\NoTypeExpandableConverter.cs" />
     <Compile Include="ComponentModel\PercentTypeConverter.cs" />
     <Compile Include="ComponentModel\SelectableItemBase.cs" />
     <Compile Include="Configuration\ConfigurationBase.cs" />
     <Compile Include="Configuration\IPropertyGridTarget.cs" />
+    <Compile Include="Controls\ICuePainter.cs" />
+    <Compile Include="Controls\IPointTranslator.cs" />
+    <Compile Include="Controls\IRectanglePainter.cs" />
     <Compile Include="DateAndTimeExtensions.cs" />
     <Compile Include="DrawingExtensions.cs" />
     <Compile Include="Enums.cs" />
@@ -72,6 +76,10 @@
     <Compile Include="Exceptions.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FunctionExtensions.cs" />
+    <Compile Include="Geometry\Arc.cs" />
+    <Compile Include="Geometry\IntersectionType.cs" />
+    <Compile Include="Geometry\LineSegment.cs" />
+    <Compile Include="Geometry\Polygon.cs" />
     <Compile Include="IEventLogProvider.cs" />
     <Compile Include="IInterval.cs" />
     <Compile Include="IO\FileReader.cs" />
@@ -82,6 +90,7 @@
     <Compile Include="LogEntry.cs" />
     <Compile Include="LogSeverity.cs" />
     <Compile Include="Math\Extensions.cs" />
+    <Compile Include="Math\Geometry.cs" />
     <Compile Include="Patterns\ChainOfResponsibility.cs" />
     <Compile Include="Patterns\DelegateCommand.cs" />
     <Compile Include="Patterns\ExceptionHandlingCommandWrapper.cs" />

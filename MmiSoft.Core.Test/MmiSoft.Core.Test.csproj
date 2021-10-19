@@ -37,6 +37,10 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SharpConvert, Version=1.1.0.4, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\SharpConvert.1.1.0.4\lib\net40\SharpConvert.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -51,6 +55,8 @@
     <Compile Include="Configuration\ConfigurationBaseTest.cs" />
     <Compile Include="DateAndTimeExtensionsTest.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Geometry\ArcTest.cs" />
+    <Compile Include="Geometry\LineSegmentTest.cs" />
     <Compile Include="PercentTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValueRangeTest.cs" />
