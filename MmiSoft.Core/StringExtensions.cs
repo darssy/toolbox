@@ -16,5 +16,7 @@ namespace MmiSoft.Core
 		public static string[] SplitNewLine(this string s) => s?.Split(NewLines, StringSplitOptions.None);
 
 		public static bool ContainsAnyOf(this string s, IEnumerable<string> elements) => elements.Any(s.Contains);
+
+		public static char Last(this string str) => str[str.Length - 1];
 	}
 }
