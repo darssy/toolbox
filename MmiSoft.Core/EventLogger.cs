@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using NLog;
 
 namespace MmiSoft.Core
@@ -28,6 +26,17 @@ namespace MmiSoft.Core
 		public static void WriteEntry(string message, Type callerType = null, LogSeverity severity = LogSeverity.Info)
 		{
 			Logger logger = callerType == null ? nLogger : LogManager.GetLogger(callerType.FullName);
+			WriteEntry(message, logger, severity);
+		}
+
+		public static void WriteEntry(string message, string module, LogSeverity severity = LogSeverity.Info)
+		{
+			Logger logger = module == null ? nLogger : LogManager.GetLogger(module);
+			WriteEntry(message, logger, severity);
+		}
+
+		private static void WriteEntry(string message, Logger logger, LogSeverity severity)
+		{
 			switch (severity)
 			{
 				case LogSeverity.Error:
