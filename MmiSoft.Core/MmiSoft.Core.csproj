@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <LangVersion>7.3</LangVersion>
     <PackageId>MmiSoft.Core</PackageId>
-    <AssemblyVersion>0.0.6</AssemblyVersion>
+    <AssemblyVersion>0.0.7</AssemblyVersion>
     <Authors>adamstyl</Authors>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
