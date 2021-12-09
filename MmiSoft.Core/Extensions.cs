@@ -75,11 +75,13 @@ namespace MmiSoft.Core
 				{
 					continue;
 				}
-				object value = info.GetGetMethod().Invoke(from, new object[] { });
+
+				MethodInfo propertyGetter = info.GetGetMethod();
+				object value = propertyGetter.Invoke(from, new object[] { });
 				if (!info.PropertyType.IsValueType && !ignoredTypes.Contains(info.PropertyType))
 				{
 					string json = JsonConvert.SerializeObject(value, settings);
-					value = JsonConvert.DeserializeObject(json, value.GetType(), settings);
+					value = JsonConvert.DeserializeObject(json, propertyGetter.ReturnType, settings);
 				}
 				info.GetSetMethod().Invoke(to, new[] { value });
 			}
