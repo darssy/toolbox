@@ -5,15 +5,11 @@ namespace MmiSoft.Core
 {
 	public static class DrawingExtensions
 	{
-		public static Size Half(this Size s)
-		{
-			return new Size(s.Width / 2, s.Height / 2);
-		}
+		public static Size Half(this Size s) => new Size(s.Width / 2, s.Height / 2);
 
-		public static Point Center(this Size s)
-		{
-			return new Point(s.Width / 2, s.Height / 2);
-		}
+		public static Point Center(this Size s) => new Point(s.Width / 2, s.Height / 2);
+
+		public static Point Center(this Rectangle r) => new Point(r.X + r.Width / 2, r.Y + r.Height / 2);
 
 		public static void InvertRef(ref this Point p)
 		{

@@ -8,7 +8,7 @@ namespace MmiSoft.Core
 		/// Returns a new function that will evaluate to true if either of the 2 argument functions will be true
 		/// </summary>
 		/// <param name="first">First function to evaluate</param>
-		/// <param name="second">First function to evaluate</param>
+		/// <param name="second">Second function to evaluate</param>
 		/// <returns>True if either <c>first</c> or <c>second</c> invocations results to true</returns>
 		/// <exception cref="NullReferenceException">If either of the 2 functions is null (actually you can get away with
 		/// it if <c>second</c> is null and <c>first</c> yields true)</exception>
@@ -21,7 +21,7 @@ namespace MmiSoft.Core
 		/// Returns a new function that will evaluate to true if both of the 2 argument functions will be true.
 		/// </summary>
 		/// <param name="first">First function to evaluate</param>
-		/// <param name="second">First function to evaluate</param>
+		/// <param name="second">Second function to evaluate</param>
 		/// <returns>True if both <c>first</c> and <c>second</c> invocations results to true</returns>
 		/// <exception cref="NullReferenceException">If either of the 2 functions is null</exception>
 		public static Func<T, bool> And<T>(this Func<T, bool> first, Func<T, bool> second)
