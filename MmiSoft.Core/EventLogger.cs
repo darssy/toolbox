@@ -46,6 +46,16 @@ namespace MmiSoft.Core
 			loggerImplementation.Log(severity, message, type.FullName);
 		}
 
+		[Obsolete("For backwards compatibility.")]
+		public static void WriteEntry(LogEntry entry)
+		{
+			if (entry.IsSevere)
+			{
+				loggerImplementation.Exception(entry.Exception, entry.Severity, entry.Message, entry.Module);
+			}
+			else loggerImplementation.Log(entry.Severity, entry.Message, entry.Module);
+		}
+
 		public static void Fatal(string message, string category)
 		{
 			loggerImplementation.Log(LogSeverity.Fatal, message, category);
