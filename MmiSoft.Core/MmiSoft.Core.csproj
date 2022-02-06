@@ -66,6 +66,7 @@
     <Compile Include="ComponentModel\SelectableItemBase.cs" />
     <Compile Include="Configuration\ConfigurationBase.cs" />
     <Compile Include="Configuration\IPropertyGridTarget.cs" />
+    <Compile Include="Configuration\JsonConverterBaseAttribute.cs" />
     <Compile Include="Controls\ICuePainter.cs" />
     <Compile Include="Controls\IPointTranslator.cs" />
     <Compile Include="Controls\IRectanglePainter.cs" />

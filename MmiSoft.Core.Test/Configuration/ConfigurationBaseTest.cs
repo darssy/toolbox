@@ -5,6 +5,7 @@ using System.Net;
 using MmiSoft.Core.ComponentModel;
 using MmiSoft.Core.Configuration;
 using MmiSoft.Core.Math;
+using MmiSoft.Core.Math.Units;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -15,7 +16,6 @@ namespace MmiSoft.Core.Test.Configuration
 	public class ConfigurationBaseTest
 	{
 		[Test]
-		[Ignore("The static ctor is not called and the converter is not loaded.")]
 		public void ReadConfigurationFromFileWithConverterAddedInSubclass()
 		{
 			string filePath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Configuration", "TestConfig.json");
@@ -43,22 +43,26 @@ namespace MmiSoft.Core.Test.Configuration
 			TestConfig config = ConfigurationBase.ReadConfig<TestConfig>(filePath);
 			Assert.AreEqual(config.AccInputMethod, TestEnum.Three);
 			Assert.AreEqual(config.ConnectionAddress, IPAddress.Parse("192.168.1.1"));
+			Assert.AreEqual(config.Inflation, new Percent(2.34));
+			Assert.AreEqual(config.Acceleration, new FeetPerSecondSquared(4.56));
 		}
 
+		[UnitConverter("el-gr")]
+		[EnumConverter]
+		[PercentConverter("el-gr")]
+		[IpAddressConverter]
 		private class TestConfig : ConfigurationBase
 		{
 			public IPAddress ConnectionAddress {get; set; } = IPAddress.Loopback;
 			public TestEnum AccInputMethod {get; set; } = TestEnum.Two;
 			public int AccMaxCmdDelay { get; set; } = 7;
+			public Percent Inflation { get; set; } = new Percent(32.5);
+			public FeetPerSecondSquared Acceleration { get; set; } = new FeetPerSecondSquared(1.25);
 		}
 
+		[RoTypeJsonConverter]
 		private class TestConfigExt: TestConfig
 		{
-			static TestConfigExt()
-			{
-				JsonSettings.Converters.Add(new RoTypeJsonConverter());
-			}
-
 			public TypeWith2Ctors Test { get; set; }
 		}
 
@@ -80,6 +84,11 @@ namespace MmiSoft.Core.Test.Configuration
 				int value = jObject[nameof(TypeWith2Ctors.Value)].Value<int>();
 				return new TypeWith2Ctors(value);
 			}
+		}
+
+		internal class RoTypeJsonConverterAttribute : JsonConverterBaseAttribute
+		{
+			public override JsonConverter Create() => new RoTypeJsonConverter();
 		}
 
 		public enum TestEnum

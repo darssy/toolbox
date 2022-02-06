@@ -7,6 +7,13 @@ namespace MmiSoft.Core.Json
 {
 	public class PercentJsonConverter : JsonConverter<Percent>
 	{
+		private CultureInfo culture;
+
+		public PercentJsonConverter(CultureInfo culture)
+		{
+			this.culture = culture;
+		}
+
 		public override void WriteJson(JsonWriter writer, Percent value, JsonSerializer serializer)
 		{
 			serializer.Serialize(writer, new JValue(value.GetDisplayValue()));
@@ -16,8 +23,8 @@ namespace MmiSoft.Core.Json
 			JsonSerializer serializer)
 		{
 			string unitAsText = JToken.Load(reader).Value<string>();
-			Percent unit = Percent.Parse(unitAsText, CultureInfo.CurrentCulture);
-			return unit;
+			Percent value = Percent.Parse(unitAsText, culture ?? CultureInfo.CurrentCulture);
+			return value;
 		}
 	}
 }

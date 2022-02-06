@@ -8,42 +8,42 @@ namespace MmiSoft.Core.Test.Geometry
 	public class LineSegmentTest
 	{
 		[Test]
-		public void IsNear_TolleranceIs0_PointIsOnLine_ReturnsTrue()
+		public void IsNear_ToleranceIs0_PointIsOnLine_ReturnsTrue()
 		{
 			var segment = new LineSegment(new Point(5, 5), new Point(10, 10));
 			Assert.IsTrue(segment.IsNear(new Point(7, 7), 0));
 		}
 		
 		[Test]
-		public void IsNear_TolleranceIs0_PointIsOnLineExtension_ReturnsFalse()
+		public void IsNear_ToleranceIs0_PointIsOnLineExtension_ReturnsFalse()
 		{
 			var segment = new LineSegment(new Point(5, 5), new Point(10, 10));
 			Assert.IsFalse(segment.IsNear(new Point(4, 4), 0));
 		}
 		
 		[Test]
-		public void IsNear_TolleranceIs3_PointIsNextToLine_ReturnsTrue()
+		public void IsNear_ToleranceIs3_PointIsNextToLine_ReturnsTrue()
 		{
 			var segment = new LineSegment(new Point(5, 5), new Point(10, 10));
 			Assert.IsTrue(segment.IsNear(new Point(6, 7), 3));
 		}
 		
 		[Test]
-		public void IsNear_TolleranceIs2_PointIsNextToLine_ReturnsFalse()
+		public void IsNear_ToleranceIs2_PointIsNextToLine_ReturnsFalse()
 		{
 			var segment = new LineSegment(new Point(5, 5), new Point(10, 10));
 			Assert.IsFalse(segment.IsNear(new Point(5, 8), 2));
 		}
 		
 		[Test]
-		public void IsNear_TolleranceIs2_PointIsOnLineExtension_ReturnsFalse()
+		public void IsNear_ToleranceIs2_PointIsOnLineExtension_ReturnsFalse()
 		{
 			var segment = new LineSegment(new Point(5, 5), new Point(10, 10));
 			Assert.IsFalse(segment.IsNear(new Point(12, 12), 2));
 		}
 		
 		[Test]
-		public void IsNear_TolleranceIs2_PointIsOnLineExtension_ReturnsTrue()
+		public void IsNear_ToleranceIs2_PointIsOnLineExtension_ReturnsTrue()
 		{
 			var segment = new LineSegment(new Point(5, 5), new Point(10, 10));
 			Assert.IsTrue(segment.IsNear(new Point(11, 11), 2));
