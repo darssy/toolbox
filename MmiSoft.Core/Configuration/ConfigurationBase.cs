@@ -41,14 +41,14 @@ namespace MmiSoft.Core.Configuration
 		public static T ReadConfig<T>(string fullFilePath) where T : ConfigurationBase
 		{
 			if (!File.Exists(fullFilePath)) throw new FileNotFoundException($"Could not locate '{fullFilePath}'");
-			EventLogger.WriteEntry($"Reading configuration from {fullFilePath}");
+			EventLogger.Info($"Reading configuration from {fullFilePath}");
 			return FileReader.ReadJson<T>(fullFilePath, JsonSettings);
 		}
 
 		public void WriteConfig(string fullFilePath)
 		{
 			FileWriter.WriteJson(fullFilePath, this, JsonSettings);
-			EventLogger.WriteEntry($"Configuration saved to {fullFilePath}");
+			EventLogger.Info($"Configuration saved to {fullFilePath}");
 		}
 
 		public void ReadConfig(string fullFilePath)

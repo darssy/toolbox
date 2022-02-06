@@ -89,6 +89,10 @@
     <Compile Include="Json\PercentJsonConverter.cs" />
     <Compile Include="Json\UnitConverter.cs" />
     <Compile Include="LogEntry.cs" />
+    <Compile Include="Logging\ConsoleLogWrapper.cs" />
+    <Compile Include="Logging\ILogWrapper.cs" />
+    <Compile Include="Logging\LogWrapperExtensions.cs" />
+    <Compile Include="Logging\NLogWrapper.cs" />
     <Compile Include="LogSeverity.cs" />
     <Compile Include="Math\Extensions.cs" />
     <Compile Include="Math\Geometry.cs" />
