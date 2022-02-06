@@ -6,7 +6,7 @@ namespace MmiSoft.Core
 	public enum CoordinatesSystem : byte
 	{
 		/// <summary>
-		/// The "normal" cartesian system, x is vertical and is increasing up, y is horizontal increasing right.
+		/// The "normal" cartesian system, y-y' is vertical and is increasing up, x-x' is horizontal increasing right.
 		/// </summary>
 		Arithmetic = 0,
 
