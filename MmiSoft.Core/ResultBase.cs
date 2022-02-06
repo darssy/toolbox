@@ -9,7 +9,12 @@ namespace MmiSoft.Core
 
 		public ResultBase(string errorMessage)
 			: this(errorMessage, default)
-		{ }
+		{
+			if (errorMessage == "")
+			{
+				throw new ArgumentException("Error message can't be empty string -it will \"impersonate\" Success");
+			}
+		}
 
 		public ResultBase(R value)
 			: this("", value)
@@ -19,10 +24,6 @@ namespace MmiSoft.Core
 
 		private ResultBase(string errorMessage, R value)
 		{
-			if (errorMessage == "")
-			{
-				throw new ArgumentException("Error message can't be empty string -it will \"impersonate\" Success");
-			}
 			this.errorMessage = errorMessage ?? throw new ArgumentNullException(nameof(errorMessage));
 			this.value = value;
 		}
