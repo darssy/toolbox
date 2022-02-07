@@ -14,3 +14,6 @@ assembly_info:
   file: '**\VersionInfo.cs'
   assembly_version: '{version}'
   assembly_file_version: '{version}'
+nuget:
+  account_feed: true
+  
