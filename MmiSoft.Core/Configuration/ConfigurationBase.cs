@@ -9,12 +9,7 @@ namespace MmiSoft.Core.Configuration
 {
 	public abstract class ConfigurationBase
 	{
-		private static readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings
-		{
-			Formatting = Formatting.Indented,
-			ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
-			DefaultValueHandling = DefaultValueHandling.Include
-		};
+		private static readonly Dictionary<Type, List<JsonConverter>> ConverterCache = new Dictionary<Type, List<JsonConverter>>();
 
 		public event EventHandler<ValueEventArgs<string>> Error;
 
@@ -26,15 +21,13 @@ namespace MmiSoft.Core.Configuration
 		public static T ReadConfig<T>(string fullFilePath) where T : ConfigurationBase
 		{
 			if (!File.Exists(fullFilePath)) throw new FileNotFoundException($"Could not locate '{fullFilePath}'");
-			CreateConvertersForClass(typeof(T));
 			EventLogger.Info($"Reading configuration from {fullFilePath}");
-			return FileReader.ReadJson<T>(fullFilePath, JsonSettings);
+			return FileReader.ReadJson<T>(fullFilePath, CreateConvertersForClass(typeof(T)));
 		}
 
 		public void WriteConfig(string fullFilePath)
 		{
-			CreateConvertersForClass(GetType());
-			FileWriter.WriteJson(fullFilePath, this, JsonSettings);
+			FileWriter.WriteJson(fullFilePath, this, CreateConvertersForClass(GetType()));
 			EventLogger.Info($"Configuration saved to {fullFilePath}");
 		}
 
@@ -48,8 +41,7 @@ namespace MmiSoft.Core.Configuration
 
 			try
 			{
-				CreateConvertersForClass(GetType());
-				JsonConvert.PopulateObject(jsonText, this, JsonSettings);
+				JsonConvert.PopulateObject(jsonText, this, CreateConvertersForClass(GetType()));
 			}
 			catch (JsonSerializationException e)
 			{
@@ -57,13 +49,10 @@ namespace MmiSoft.Core.Configuration
 			}
 		}
 
-		private static readonly Dictionary<Type, List<JsonConverter>> ConverterCache = new Dictionary<Type, List<JsonConverter>>();
-
-		private static void CreateConvertersForClass(Type type)
+		private static JsonSerializerSettings CreateConvertersForClass(Type type)
 		{
-			JsonSettings.Converters.Clear();
+			JsonSerializerSettings jsonSettings = CreateJsonSettings();
 
-			//Could use some more clever caching on Converter level as well.
 			List<JsonConverter> converters = ConverterCache.GetOrCreate(type, () => type
 				.GetCustomAttributes(true)
 				.OfType<JsonConverterBaseAttribute>()
@@ -72,8 +61,19 @@ namespace MmiSoft.Core.Configuration
 
 			foreach (JsonConverter jsonConverter in converters)
 			{
-				JsonSettings.Converters.Add(jsonConverter);
+				jsonSettings.Converters.Add(jsonConverter);
 			}
+			return jsonSettings;
+		}
+
+		private static JsonSerializerSettings CreateJsonSettings()
+		{
+			return new JsonSerializerSettings
+			{
+				Formatting = Formatting.Indented,
+				ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
+				DefaultValueHandling = DefaultValueHandling.Include
+			};
 		}
 	}
 }
