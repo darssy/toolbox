@@ -30,6 +30,7 @@ namespace MmiSoft.Core.ComponentModel
 		public void BeginEdit()
 		{
 			if (IsEditing) return;
+			IsEditing = true;
 			if (copyAction == null)
 			{
 				original = new T();
@@ -39,15 +40,14 @@ namespace MmiSoft.Core.ComponentModel
 			{
 				original = copyAction.Invoke(Object);
 			}
-			IsEditing = true;
 		}
 
 		public void CancelEdit()
 		{
 			if (!IsEditing) return;
-			IsEditing = false;
 			original.Copy(Object);
 			original = null;
+			IsEditing = false;
 		}
 
 		public void EndEdit()
