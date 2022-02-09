@@ -24,16 +24,33 @@ namespace MmiSoft.Core.Test.Configuration
 		}
 
 		[Test]
-		public void ConfigurationEditing()
+		public void ConfigurationEditing_Canceled()
 		{
 			EditableObjectHolder<TestConfig> editable = new EditableObjectHolder<TestConfig>(new TestConfig());
 			editable.BeginEdit();
 			editable.Object.AccInputMethod = TestEnum.One;
 			editable.Object.AccMaxCmdDelay = 5;
 			editable.Object.ConnectionAddress = IPAddress.Parse("192.168.1.1");
+			editable.Object.Acceleration = new FeetPerSecondSquared(9.99);
 			editable.CancelEdit();
 			Assert.AreEqual(editable.Object.AccInputMethod, TestEnum.Two);
 			Assert.AreEqual(editable.Object.ConnectionAddress, IPAddress.Loopback);
+			Assert.AreEqual(new FeetPerSecondSquared(1.25), editable.Object.Acceleration);
+		}
+
+		[Test]
+		public void ConfigurationEditing_Applied()
+		{
+			EditableObjectHolder<TestConfig> editable = new EditableObjectHolder<TestConfig>(new TestConfig());
+			editable.BeginEdit();
+			editable.Object.AccInputMethod = TestEnum.One;
+			editable.Object.AccMaxCmdDelay = 5;
+			editable.Object.ConnectionAddress = IPAddress.Parse("192.168.1.1");
+			editable.Object.Acceleration = new FeetPerSecondSquared(9.99);
+			editable.EndEdit();
+			Assert.AreEqual(TestEnum.One, editable.Object.AccInputMethod);
+			Assert.AreEqual(IPAddress.Parse("192.168.1.1"), editable.Object.ConnectionAddress);
+			Assert.AreEqual(new FeetPerSecondSquared(9.99), editable.Object.Acceleration);
 		}
 
 		[Test]

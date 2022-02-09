@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using MmiSoft.Core.Configuration;
 using Newtonsoft.Json;
 using SysMath = System.Math;
 
@@ -13,7 +14,14 @@ namespace MmiSoft.Core
 {
 	public static class Extensions
 	{
+		private static readonly Dictionary<Type, List<JsonConverter>> ConverterCache = new Dictionary<Type, List<JsonConverter>>();
 		private static readonly BrowsableAttribute BrowsableFalse = new BrowsableAttribute(false);
+
+		private static List<Type> ignoredTypes = new List<Type>
+		{
+			typeof(string),
+			typeof(IPAddress)
+		};
 
 		public static Color Negate(in this Color c)
 		{
@@ -57,18 +65,26 @@ namespace MmiSoft.Core
 			}
 		}
 
-		private static List<Type> ignoredTypes = new List<Type>
+		internal static IList<JsonConverter> GetJsonConverters(this Type type)
 		{
-			typeof(string),
-			typeof(IPAddress)
-		};
+			return ConverterCache.GetOrCreate(type, () => type
+				.GetCustomAttributes(true)
+				.OfType<JsonConverterBaseAttribute>()
+				.Select(attr => attr.Create())
+				.ToList());
+		}
 
 		public static void Copy<T>(this T from, T to)
 		{
-			JsonSerializerSettings settings = new JsonSerializerSettings();
-			settings.TypeNameHandling = TypeNameHandling.All;
+			JsonSerializerSettings settings = new JsonSerializerSettings
+			{
+				TypeNameHandling = TypeNameHandling.All,
+				Converters = typeof(T).GetJsonConverters()
+			};
+
 			IEnumerable<PropertyInfo> properties = typeof(T).GetProperties()
 				.Where(p => p.GetGetMethod() != null && p.GetSetMethod() != null);
+
 			foreach (PropertyInfo info in properties)
 			{
 				if (info.GetCustomAttributes(true).Contains(BrowsableFalse))

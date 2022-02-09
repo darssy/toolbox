@@ -9,8 +9,6 @@ namespace MmiSoft.Core.Configuration
 {
 	public abstract class ConfigurationBase
 	{
-		private static readonly Dictionary<Type, List<JsonConverter>> ConverterCache = new Dictionary<Type, List<JsonConverter>>();
-
 		public event EventHandler<ValueEventArgs<string>> Error;
 
 		protected virtual void OnError(ValueEventArgs<string> e)
@@ -53,13 +51,7 @@ namespace MmiSoft.Core.Configuration
 		{
 			JsonSerializerSettings jsonSettings = CreateJsonSettings();
 
-			List<JsonConverter> converters = ConverterCache.GetOrCreate(type, () => type
-				.GetCustomAttributes(true)
-				.OfType<JsonConverterBaseAttribute>()
-				.Select(attr => attr.Create())
-				.ToList());
-
-			foreach (JsonConverter jsonConverter in converters)
+			foreach (JsonConverter jsonConverter in type.GetJsonConverters())
 			{
 				jsonSettings.Converters.Add(jsonConverter);
 			}
