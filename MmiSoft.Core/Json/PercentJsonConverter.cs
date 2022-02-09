@@ -16,7 +16,7 @@ namespace MmiSoft.Core.Json
 
 		public override void WriteJson(JsonWriter writer, Percent value, JsonSerializer serializer)
 		{
-			serializer.Serialize(writer, new JValue(value.GetDisplayValue()));
+			serializer.Serialize(writer, new JValue(value.ToString("P", culture ?? CultureInfo.CurrentCulture)));
 		}
 
 		public override Percent ReadJson(JsonReader reader, Type objectType, Percent existingValue, bool hasExistingValue,

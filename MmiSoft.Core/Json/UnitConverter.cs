@@ -17,7 +17,7 @@ namespace MmiSoft.Core.Json
 
 		public override void WriteJson(JsonWriter writer, UnitBase value, JsonSerializer serializer)
 		{
-			serializer.Serialize(writer, new JValue(value.ToString()));
+			serializer.Serialize(writer, new JValue(value.ToString("G", culture)));
 		}
 
 		public override UnitBase ReadJson(JsonReader reader, Type objectType, UnitBase existingValue, bool hasExistingValue,
