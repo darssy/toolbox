@@ -11,9 +11,9 @@
     <AssemblyName>MmiSoft.Core</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8</LangVersion>
     <PackageId>MmiSoft.Core</PackageId>
-    <AssemblyVersion>0.0.8</AssemblyVersion>
+    <AssemblyVersion>0.0.9</AssemblyVersion>
     <Authors>adamstyl</Authors>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
