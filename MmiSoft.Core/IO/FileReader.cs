@@ -37,32 +37,19 @@ namespace MmiSoft.Core.IO
 
 		public static T ReadXml<T>(string filename)
 		{
-			T setup = default(T);
-			if (!File.Exists(filename)) return setup;
+			if (!File.Exists(filename)) throw new FileNotFoundException("", filename);
 			XmlSerializer serializer = new XmlSerializer(typeof(T));
-			TextReader textReader = new StreamReader(filename);
-			try
-			{
-				setup = (T)serializer.Deserialize(textReader);
-			}
-			catch (InvalidOperationException exc)
-			{
-				exc.Log("XML deserialization failed");
-			}
-
-			textReader.Close();
-			return setup;
+			using TextReader textReader = new StreamReader(filename);
+			return (T)serializer.Deserialize(textReader);
 		}
 
 		public static T ReadJson<T>(string filename, JsonSerializerSettings serializerSettings)
 		{
 			JsonSerializer serializer = JsonSerializer.CreateDefault(serializerSettings);
 
-			using (var streamReader = new StreamReader(filename))
-			using (var jsonTextReader = new JsonTextReader(streamReader))
-			{
-				return serializer.Deserialize<T>(jsonTextReader);
-			}
+			using var streamReader = new StreamReader(filename);
+			using var jsonTextReader = new JsonTextReader(streamReader);
+			return serializer.Deserialize<T>(jsonTextReader);
 		}
 
 		public static T ReadJson<T>(string filename, params JsonConverter[] converters)

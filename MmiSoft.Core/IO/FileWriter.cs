@@ -11,34 +11,28 @@ namespace MmiSoft.Core.IO
 	{
 		public static void WriteText(string filename, string text)
 		{
-			using (var textWriter = new StreamWriter(filename))
+			using var textWriter = new StreamWriter(filename);
+			try
 			{
-				try
-				{
-					textWriter.Write(text);
-				}
-				catch (Exception exc)
-				{
-					exc.Log($"Failed to write to file '{filename}'");
-				}
-				textWriter.Close();
+				textWriter.Write(text);
+			}
+			catch (Exception exc)
+			{
+				exc.Log($"Failed to write to file '{filename}'");
 			}
 		}
 
 		public static void WriteXml<T>(string filename, T item)
 		{
 			XmlSerializer serializer = new XmlSerializer(typeof(T));
-			using (var textWriter = new StreamWriter(filename))
+			using var textWriter = new StreamWriter(filename);
+			try
 			{
-				try
-				{
-					serializer.Serialize(textWriter, item);
-				}
-				catch (Exception exc)
-				{
-					exc.Log("XML serialization failed");
-				}
-				textWriter.Close();
+				serializer.Serialize(textWriter, item);
+			}
+			catch (Exception exc)
+			{
+				exc.Log("XML serialization failed");
 			}
 		}
 
@@ -62,11 +56,9 @@ namespace MmiSoft.Core.IO
 
 		public static void WriteJson(string filename, object obj, JsonSerializerSettings settings)
 		{
-			using (TextWriter writer = new StreamWriter(filename))
-			{
-				JsonSerializer serializer = JsonSerializer.CreateDefault(settings);
-				serializer.Serialize(writer, obj);
-			}
+			using TextWriter writer = new StreamWriter(filename);
+			JsonSerializer serializer = JsonSerializer.CreateDefault(settings);
+			serializer.Serialize(writer, obj);
 		}
 	}
 }

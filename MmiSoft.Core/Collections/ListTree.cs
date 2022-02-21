@@ -64,7 +64,7 @@ namespace MmiSoft.Core.Collections
 
 		public override string ToString()
 		{
-			return $"NTree Node {data} {children.Count} child(ren)";
+			return $"NTree Node ['{data}', {children.Count} child(ren)]";
 		}
 	}
 }
