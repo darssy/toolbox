@@ -67,6 +67,14 @@ namespace MmiSoft.Core
 
 		internal static IList<JsonConverter> GetJsonConverters(this Type type)
 		{
+			if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
+			{
+				type = type.GetGenericArguments()[0];
+			}
+			else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Dictionary<,>))
+			{
+				type = type.GetGenericArguments()[1];
+			}
 			return ConverterCache.GetOrCreate(type, () => type
 				.GetCustomAttributes(true)
 				.OfType<JsonConverterBaseAttribute>()

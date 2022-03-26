@@ -86,6 +86,8 @@
     <Compile Include="IInterval.cs" />
     <Compile Include="IO\FileReader.cs" />
     <Compile Include="IO\FileWriter.cs" />
+    <Compile Include="IO\JsonFileIO.cs" />
+    <Compile Include="IO\TextFileIO.cs" />
     <Compile Include="Json\IpAddressJsonConverter.cs" />
     <Compile Include="Json\PercentJsonConverter.cs" />
     <Compile Include="Json\UnitConverter.cs" />
