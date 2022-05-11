@@ -2,6 +2,7 @@ using System;
 
 namespace MmiSoft.Core
 {
+    [Serializable]
 	public class ResultBase<R>
 	{
 		private string errorMessage;

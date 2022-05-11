@@ -5,6 +5,7 @@ namespace MmiSoft.Core
 	/// <summary>
 	/// Operation result without a value and only an error message.
 	/// </summary>
+	[Serializable]
 	public class SimpleResult
 	{
 		public static readonly SimpleResult Success = new SimpleResult("");
