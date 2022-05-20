@@ -56,6 +56,22 @@ namespace MmiSoft.Core.Test
 		}
 
 		[Test]
+		public void DateAt30Seconds501MillisTruncatesTo30()
+		{
+			DateTime date = new DateTime(2000, 10, 1, 13, 5, 30, 501);
+			DateTime expected = new DateTime(2000, 10, 1, 13, 5, 30);
+			Assert.AreEqual(expected, date.TruncateMillis());
+		}
+
+		[Test]
+		public void DateAt29SecondsAnd999MillisTruncatesTo29()
+		{
+			DateTime date = new DateTime(2000, 10, 1, 13, 5, 29, 999);
+			DateTime expected = new DateTime(2000, 10, 1, 13, 5, 29);
+			Assert.AreEqual(expected, date.TruncateMillis());
+		}
+
+		[Test]
 		public void TimeSpanMultipliedBy2ReturnsTwiceAsBigValue()
 		{
 			TimeSpan magnified = TimeSpan.FromMinutes(2.5).Magnify(2);

@@ -19,6 +19,12 @@ namespace MmiSoft.Core
 				: new DateTime(date.Ticks - mod);
 		}
 
+		public static DateTime TruncateMillis(this DateTime date)
+		{
+			long mod = date.Ticks % TimeSpan.TicksPerSecond;
+			return new DateTime(date.Ticks - mod, date.Kind);
+		}
+
 		public static TimeSpan Magnify(in this TimeSpan span, int factor)
 		{
 			return new TimeSpan(span.Ticks * factor);
