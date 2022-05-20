@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 
 namespace MmiSoft.Core
@@ -49,6 +50,13 @@ namespace MmiSoft.Core
 			ValueRange<int> range = new ValueRange<int>(13, 2);
 			Assert.AreEqual(2, range.MinValue);
 			Assert.AreEqual(13, range.MaxValue);
+		}
+
+		[Test]
+		public void Constructor_NullArgumentsAreNotAllowed()
+		{
+			Assert.Throws<ArgumentNullException>(() => new ValueRange<string>("", null));
+			Assert.Throws<ArgumentNullException>(() => new ValueRange<string>(null, ""));
 		}
 	}
 }
