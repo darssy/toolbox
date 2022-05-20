@@ -1,16 +1,14 @@
 using System;
-using System.Drawing;
 using System.IO;
 using System.Net;
 using MmiSoft.Core.ComponentModel;
-using MmiSoft.Core.Configuration;
 using MmiSoft.Core.Math;
 using MmiSoft.Core.Math.Units;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
-namespace MmiSoft.Core.Test.Configuration
+namespace MmiSoft.Core.Configuration
 {
 	[TestFixture]
 	public class ConfigurationBaseTest

@@ -1,8 +1,7 @@
-using MmiSoft.Core.Geometry;
 using MmiSoft.Core.Math.Units;
 using NUnit.Framework;
 
-namespace MmiSoft.Core.Test.Geometry
+namespace MmiSoft.Core.Geometry
 {
 	[TestFixture]
 	public class ArcTest

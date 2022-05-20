@@ -1,8 +1,7 @@
 using System.Drawing;
-using MmiSoft.Core.Geometry;
 using NUnit.Framework;
 
-namespace MmiSoft.Core.Test.Geometry
+namespace MmiSoft.Core.Geometry
 {
 	[TestFixture]
 	public class PolygonTest

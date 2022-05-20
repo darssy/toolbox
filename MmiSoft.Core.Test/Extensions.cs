@@ -2,7 +2,7 @@
 using MmiSoft.Core.ComponentModel;
 using NUnit.Framework;
 
-namespace MmiSoft.Core.Test
+namespace MmiSoft.Core
 {
 	[TestFixture]
 	internal class Extensions

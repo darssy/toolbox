@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 
-namespace MmiSoft.Core.Test
+namespace MmiSoft.Core
 {
 	[TestFixture]
 	public class DateAndTimeExtensionsTest

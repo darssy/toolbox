@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel;
-using MmiSoft.Core.ComponentModel;
 using NUnit.Framework;
 
-namespace MmiSoft.Core.Test.ComponentModel
+namespace MmiSoft.Core.ComponentModel
 {
 	[TestFixture]
 	public class EditableObjectHolderTest
