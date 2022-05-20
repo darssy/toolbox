@@ -11,6 +11,14 @@ namespace MmiSoft.Core
 			return new DateTime((long) (totalMinutes.Round() * TimeSpan.TicksPerMinute));
 		}
 
+		public static DateTime RoundToSecond(this DateTime date)
+		{
+			long mod = date.Ticks % TimeSpan.TicksPerSecond;
+			return mod >= TimeSpan.TicksPerSecond / 2
+				? new DateTime(date.Ticks - mod + TimeSpan.TicksPerSecond)
+				: new DateTime(date.Ticks - mod);
+		}
+
 		public static TimeSpan Magnify(in this TimeSpan span, int factor)
 		{
 			return new TimeSpan(span.Ticks * factor);

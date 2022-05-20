@@ -32,6 +32,30 @@ namespace MmiSoft.Core.Test
 		}
 
 		[Test]
+		public void DateAt501MillisRoundsToNextSecond()
+		{
+			DateTime date = new DateTime(2000, 10, 1, 13, 5, 30, 501);
+			DateTime expected = new DateTime(2000, 10, 1, 13, 5, 31);
+			Assert.AreEqual(expected, date.RoundToSecond());
+		}
+
+		[Test]
+		public void DateAt500MillisExactlyRoundsToNextSecond()
+		{
+			DateTime date = new DateTime(2000, 10, 1, 13, 5, 30, 500);
+			DateTime expected = new DateTime(2000, 10, 1, 13, 5, 31);
+			Assert.AreEqual(expected, date.RoundToSecond());
+		}
+
+		[Test]
+		public void DateAt59Minutes59SecondsAnd999MillisRoundsToNextHour()
+		{
+			DateTime date = new DateTime(2000, 10, 1, 13, 59, 59, 999);
+			DateTime expected = new DateTime(2000, 10, 1, 14, 0, 0);
+			Assert.AreEqual(expected, date.RoundToSecond());
+		}
+
+		[Test]
 		public void TimeSpanMultipliedBy2ReturnsTwiceAsBigValue()
 		{
 			TimeSpan magnified = TimeSpan.FromMinutes(2.5).Magnify(2);
