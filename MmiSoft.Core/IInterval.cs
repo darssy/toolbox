@@ -5,18 +5,18 @@ namespace MmiSoft.Core
 	public interface IInterval<T>
 	{
 		/// <summary>
-		/// Checks if the value in the arguments is after the interval eg 5 is after [1,4]
+		/// Checks if the endpoint of the interval is before the value in the argument. eg 4 in [1,4] is before 5
 		/// </summary>
 		/// <param name="value"></param>
 		/// <returns></returns>
-		bool IsValueBefore(T value);
+		bool IsBeforeValue(T value);
 
 		/// <summary>
-		/// Checks if the value in the arguments is before the interval eg -2 is before [1,4]
+		/// Checks if the start point of the interval is after the value in the argument. eg 1 in [1,4] is after -2
 		/// </summary>
 		/// <param name="value"></param>
 		/// <returns></returns>
-		bool IsValueAfter(T value);
+		bool IsAfterValue(T value);
 
 		bool Contains(T value);
 		T Closest(T value);
@@ -39,8 +39,8 @@ namespace MmiSoft.Core
 
 		public T Endpoint => endpoint;
 
-		public abstract bool IsValueBefore(T value);
-		public abstract bool IsValueAfter(T value);
+		public abstract bool IsBeforeValue(T value);
+		public abstract bool IsAfterValue(T value);
 		public abstract bool Contains(T value);
 
 		public virtual T Closest(T value)
@@ -60,8 +60,8 @@ namespace MmiSoft.Core
 		public LessThanInterval(T endpoint, string format="(-\u221E,{0}]") : base(endpoint, format)
 		{ }
 
-		public override bool IsValueBefore(T value) => false;
-		public override bool IsValueAfter(T value) => !Contains(value);
+		public override bool IsBeforeValue(T value) => false;
+		public override bool IsAfterValue(T value) => !Contains(value);
 
 		public override bool Contains(T value)
 		{
@@ -76,8 +76,8 @@ namespace MmiSoft.Core
 		public GreaterThanInterval(T endpoint, string format="[{0},\u221E)") : base(endpoint, format)
 		{ }
 
-		public override bool IsValueBefore(T value) => !Contains(value);
-		public override bool IsValueAfter(T value) => false;
+		public override bool IsBeforeValue(T value) => !Contains(value);
+		public override bool IsAfterValue(T value) => false;
 
 		public override bool Contains(T value)
 		{
@@ -107,8 +107,8 @@ namespace MmiSoft.Core
 			this.format = format;
 		}
 
-		public bool IsValueBefore(T value) => lower.IsValueBefore(value);
-		public bool IsValueAfter(T value) => upper.IsValueAfter(value);
+		public bool IsBeforeValue(T value) => lower.IsBeforeValue(value);
+		public bool IsAfterValue(T value) => upper.IsAfterValue(value);
 
 		public bool Contains(T value)
 		{
@@ -128,6 +128,10 @@ namespace MmiSoft.Core
 		}
 	}
 
+	/// <summary>
+	/// Interval matching an exact value. eg [32,32]
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	[Serializable]
 	public class DegenerateInterval<T> : IInterval<T> where T: IComparable<T>
 	{
@@ -140,8 +144,8 @@ namespace MmiSoft.Core
 			this.format = format;
 		}
 
-		public bool IsValueBefore(T value) => endpoint.CompareTo(value) < 0;
-		public bool IsValueAfter(T value) => endpoint.CompareTo(value) > 0;
+		public bool IsBeforeValue(T value) => endpoint.CompareTo(value) < 0;
+		public bool IsAfterValue(T value) => endpoint.CompareTo(value) > 0;
 
 		public bool Contains(T value) => endpoint.CompareTo(value) == 0;
 
@@ -166,9 +170,9 @@ namespace MmiSoft.Core
 			this.displayText = displayText;
 		}
 
-		public bool IsValueBefore(T value) => false;
+		public bool IsBeforeValue(T value) => false;
 
-		public bool IsValueAfter(T value) => false;
+		public bool IsAfterValue(T value) => false;
 
 		public bool Contains(T value) => true;
 
@@ -190,9 +194,9 @@ namespace MmiSoft.Core
 			this.displayText = displayText;
 		}
 
-		public bool IsValueBefore(T value) => true;
+		public bool IsBeforeValue(T value) => true;
 
-		public bool IsValueAfter(T value) => true;
+		public bool IsAfterValue(T value) => true;
 
 		public bool Contains(T value) => false;
 
