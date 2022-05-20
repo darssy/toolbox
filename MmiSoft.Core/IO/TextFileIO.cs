@@ -42,7 +42,7 @@ namespace MmiSoft.Core.IO
 
 		public static StreamReader CreateStreamReader(string file)
 		{
-			if (!File.Exists(file)) throw new FileNotFoundException("The file specified does no exist", file);
+			if (!File.Exists(file)) throw new FileNotFoundException($"File '{file}' does not exist", file);
 			try
 			{
 				return new StreamReader(file);
@@ -56,7 +56,7 @@ namespace MmiSoft.Core.IO
 
 		public static StreamWriter CreateStreamWriter(string file)
 		{
-			if (!File.Exists(file)) throw new FileNotFoundException("The file specified does no exist", file);
+			if (!File.Exists(file)) throw new FileNotFoundException($"File '{file}' does not exist", file);
 			try
 			{
 				return new StreamWriter(file);

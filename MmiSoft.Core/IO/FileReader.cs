@@ -37,7 +37,7 @@ namespace MmiSoft.Core.IO
 
 		public static T ReadXml<T>(string filename)
 		{
-			if (!File.Exists(filename)) throw new FileNotFoundException("", filename);
+			if (!File.Exists(filename)) throw new FileNotFoundException($"File '{filename}' does not exist", filename);
 			XmlSerializer serializer = new XmlSerializer(typeof(T));
 			using TextReader textReader = new StreamReader(filename);
 			return (T)serializer.Deserialize(textReader);
@@ -73,7 +73,7 @@ namespace MmiSoft.Core.IO
 
 		public static StreamReader CreateStream(string file)
 		{
-			if (!File.Exists(file)) throw new FileNotFoundException("The file specified does no exist", file);
+			if (!File.Exists(file)) throw new FileNotFoundException($"File '{file}' does not exist", file);
 			try
 			{
 				return new StreamReader(file);
