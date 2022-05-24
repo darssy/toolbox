@@ -29,10 +29,15 @@ namespace MmiSoft.Core
 		private static ILogWrapper loggerImplementation = new NLogWrapper();
 		// private static ILogWrapper loggerImplementation = new ConsoleLogWrapper();
 
+		/// <summary>
+		/// Gets or sets the wrapper containing the logging implementation (eg an NLog wrapper a Console.WriteLine
+		/// wrapper etc.
+		/// </summary>
+		/// <exception cref="ArgumentNullException">If the value is null</exception>
 		public static ILogWrapper LoggerImplementation
 		{
 			get => loggerImplementation;
-			set => loggerImplementation = value;
+			set => loggerImplementation = value ?? throw new ArgumentNullException(nameof(value));
 		}
 
 		[Obsolete("For backwards compatibility. Use Info(message) instead")]
