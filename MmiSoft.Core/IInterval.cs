@@ -2,6 +2,10 @@ using System;
 
 namespace MmiSoft.Core
 {
+	/// <summary>
+	/// Represents a mathematical interval abstraction like for example (-∞,10] or [-3,70] etc
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public interface IInterval<T>
 	{
 		/// <summary>
@@ -18,10 +22,31 @@ namespace MmiSoft.Core
 		/// <returns></returns>
 		bool IsAfterValue(T value);
 
+		/// <summary>
+		/// Returns whether the value is contained by the interval or not. eg 10 in [10, 20] returns true, 21 returns
+		/// false 13 returns true and so on and so forth
+		/// </summary>
+		/// <param name="value">The value to check against the interval</param>
+		/// <returns>true if value is contained otherwise false</returns>
 		bool Contains(T value);
+		
+		/// <summary>
+		/// Returns the closes value to that interval. If the value is contained it returns the value. Examples
+		/// <list type="bullet">
+		/// <item><description>[10, 20].Closest(7) returns 10</description></item>
+		/// <item><description>[10, 20].Closest(30) returns 30</description></item>
+		/// <item><description>[10, 20].Closest(17) returns 17</description></item>
+		/// </list>
+		/// </summary>
+		/// <param name="value"></param>
+		/// <returns></returns>
 		T Closest(T value);
 	}
 
+	/// <summary>
+	/// Abstraction that represents either a (-∞,x] or a [x,∞) interval
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	[Serializable]
 	public abstract class InfiniteEndpointInterval<T> : IInterval<T> where T: IComparable<T>
 	{
@@ -31,23 +56,38 @@ namespace MmiSoft.Core
 		private T endpoint;
 		private string format;
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="endpoint"></param>
+		/// <param name="format"></param>
 		protected InfiniteEndpointInterval(T endpoint, string format)
 		{
 			this.endpoint = endpoint;
 			this.format = format;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public T Endpoint => endpoint;
 
+		/// <inheritdoc />
 		public abstract bool IsBeforeValue(T value);
+
+		/// <inheritdoc />
 		public abstract bool IsAfterValue(T value);
+
+		/// <inheritdoc />
 		public abstract bool Contains(T value);
 
+		/// <inheritdoc />
 		public virtual T Closest(T value)
 		{
 			return Contains(value) ? value : Endpoint;
 		}
 
+		/// <inheritdoc />
 		public override string ToString()
 		{
 			return string.Format(format, endpoint);
@@ -60,9 +100,13 @@ namespace MmiSoft.Core
 		public LessThanInterval(T endpoint, string format="(-\u221E,{0}]") : base(endpoint, format)
 		{ }
 
+		/// <inheritdoc />
 		public override bool IsBeforeValue(T value) => false;
+
+		/// <inheritdoc />
 		public override bool IsAfterValue(T value) => !Contains(value);
 
+		/// <inheritdoc />
 		public override bool Contains(T value)
 		{
 			return value.CompareTo(Endpoint) <= 0;
@@ -76,9 +120,13 @@ namespace MmiSoft.Core
 		public GreaterThanInterval(T endpoint, string format="[{0},\u221E)") : base(endpoint, format)
 		{ }
 
+		/// <inheritdoc />
 		public override bool IsBeforeValue(T value) => !Contains(value);
+
+		/// <inheritdoc />
 		public override bool IsAfterValue(T value) => false;
 
+		/// <inheritdoc />
 		public override bool Contains(T value)
 		{
 			return value.CompareTo(Endpoint) >= 0;
@@ -107,14 +155,19 @@ namespace MmiSoft.Core
 			this.format = format;
 		}
 
+		/// <inheritdoc />
 		public bool IsBeforeValue(T value) => lower.IsBeforeValue(value);
+
+		/// <inheritdoc />
 		public bool IsAfterValue(T value) => upper.IsAfterValue(value);
 
+		/// <inheritdoc />
 		public bool Contains(T value)
 		{
 			return lower.Contains(value) && upper.Contains(value);
 		}
 
+		/// <inheritdoc />
 		public T Closest(T value)
 		{
 			if (!lower.Contains(value)) return lower.Endpoint;
@@ -122,6 +175,7 @@ namespace MmiSoft.Core
 			return value;
 		}
 
+		/// <inheritdoc />
 		public override string ToString()
 		{
 			return string.Format(format, lower.Endpoint, upper.Endpoint);
@@ -144,13 +198,19 @@ namespace MmiSoft.Core
 			this.format = format;
 		}
 
+		/// <inheritdoc />
 		public bool IsBeforeValue(T value) => endpoint.CompareTo(value) < 0;
+
+		/// <inheritdoc />
 		public bool IsAfterValue(T value) => endpoint.CompareTo(value) > 0;
 
+		/// <inheritdoc />
 		public bool Contains(T value) => endpoint.CompareTo(value) == 0;
 
+		/// <inheritdoc />
 		public T Closest(T value) => endpoint;
 
+		/// <inheritdoc />
 		public override string ToString()
 		{
 			return string.Format(format, endpoint);
@@ -170,14 +230,19 @@ namespace MmiSoft.Core
 			this.displayText = displayText;
 		}
 
+		/// <inheritdoc />
 		public bool IsBeforeValue(T value) => false;
 
+		/// <inheritdoc />
 		public bool IsAfterValue(T value) => false;
 
+		/// <inheritdoc />
 		public bool Contains(T value) => true;
 
+		/// <inheritdoc />
 		public T Closest(T value) => value;
 
+		/// <inheritdoc />
 		public override string ToString() => displayText;
 	}
 
@@ -194,14 +259,19 @@ namespace MmiSoft.Core
 			this.displayText = displayText;
 		}
 
+		/// <inheritdoc />
 		public bool IsBeforeValue(T value) => true;
 
+		/// <inheritdoc />
 		public bool IsAfterValue(T value) => true;
 
+		/// <inheritdoc />
 		public bool Contains(T value) => false;
 
+		/// <inheritdoc />
 		public T Closest(T value) => default;
 
+		/// <inheritdoc />
 		public override string ToString() => displayText;
 	}
 }
