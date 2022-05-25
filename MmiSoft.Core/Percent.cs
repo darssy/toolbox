@@ -166,13 +166,13 @@ namespace MmiSoft.Core
 		}
 
 		/// <summary>
-		/// Creates a percent from a coefficient. eg 30% from 1,3
+		/// Creates a percent from a coefficient. eg 30% from 1,3 or -10% from 0.9
 		/// </summary>
 		/// <param name="value"></param>
 		/// <returns></returns>
-		public static Percent FromDecimal(double value)
+		public static Percent FromCoefficient(double value)
 		{
-			return new Percent((value - 1) * 100);
+			return new Percent((float)value - 1, false);
 		}
 
 		private static Dictionary<IFormatProvider, Regex> Validators = new Dictionary<IFormatProvider, Regex>();

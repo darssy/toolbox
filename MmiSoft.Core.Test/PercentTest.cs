@@ -69,9 +69,15 @@ namespace MmiSoft.Core
 		}
 
 		[Test]
-		public void FromDecimal_ConvertsCoefficientToPercentage()
+		public void FromCoefficient_ConvertsCoefficientToPercentage()
 		{
-			Assert.AreEqual(new Percent(30), Percent.FromDecimal(1.3));
+			Assert.AreEqual(new Percent(30), Percent.FromCoefficient(1.3));
+		}
+
+		[Test]
+		public void FromCoefficient_CoefficientLessThanOne_CreatesNegativePercent()
+		{
+			Assert.AreEqual(new Percent(-10), Percent.FromCoefficient(.9));
 		}
 
 		[Test]
