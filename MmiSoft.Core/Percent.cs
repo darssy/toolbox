@@ -6,6 +6,9 @@ using MmiSoft.Core.Math;
 
 namespace MmiSoft.Core
 {
+	/// <summary>
+	/// A struct to represent a percent value. Technically a pretty wrapper around a floating point number
+	/// </summary>
 	public readonly struct Percent : IComparable<Percent>, IFormattable
 	{
 		public static readonly Percent Zero = new Percent(0);
@@ -28,6 +31,9 @@ namespace MmiSoft.Core
 			this.value = (float) (value / 100);
 		}
 
+		/// <summary>
+		/// Returns the raw value of this percent. For 20% it will 0.2, for 100% 1 etc.
+		/// </summary>
 		public float Value => value;
 		
 		public static decimal operator * (decimal l, in Percent r)
