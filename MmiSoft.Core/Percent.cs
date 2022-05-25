@@ -175,7 +175,7 @@ namespace MmiSoft.Core
 		{
 			NumberFormatInfo formatInfo = NumberFormatInfo.GetInstance(provider);
 			return Validators.GetOrCreate(provider, formatInfo,
-				info => new Regex($@"^-?\d+({info.PercentDecimalSeparator}\d+)?{info.PercentSymbol}$"));
+				info => new Regex($@"^-?[0-9]+({info.PercentDecimalSeparator}[0-9]+)?{info.PercentSymbol}$"));
 		}
 
 		public static Percent Parse(string text, IFormatProvider provider)
