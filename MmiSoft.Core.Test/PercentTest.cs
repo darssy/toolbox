@@ -81,6 +81,15 @@ namespace MmiSoft.Core
 		}
 
 		[Test]
+		public void FromFractional_ConvertsFractionalToPercentage()
+		{
+			Assert.AreEqual(new Percent(30), Percent.FromFractional(0.3));
+			Assert.AreEqual(new Percent(90), Percent.FromFractional(.9));
+			Assert.AreEqual(new Percent(120), Percent.FromFractional(1.2));
+			Assert.AreEqual(new Percent(73.45), Percent.FromFractional(0.7345f));
+		}
+
+		[Test]
 		public void GetDisplayValue_ReturnsTheDefaultPercentFormatOfTheCurrentCulture()
 		{
 			CultureInfo culture = CultureInfo.CurrentCulture;

@@ -21,18 +21,32 @@ namespace MmiSoft.Core
 			this.value = value;
 		}
 
+		/// <summary>
+		/// Creates an instance of Percent from the value. Note that the value is the percent itself. If the value is
+		/// 73,45 you will get a 73,45% at hand. If you already have the fractional 0,7345 and want to create a percent
+		/// from this don't multiply it by 100 -if performance is important. Use the <see cref="FromFractional(float)"/>
+		/// static method that will avoid this back and forth.
+		/// </summary>
+		/// <param name="value">The value representing a percent. Negative and over 100 is allowed</param>
 		public Percent(float value)
 		{
 			this.value = value / 100;
 		}
 
+		/// <summary>
+		/// Creates an instance of Percent from the value. Note that the value is the percent itself. If the value is
+		/// 73,45 you will get a 73,45% at hand. If you already have the fractional 0,7345 and want to create a percent
+		/// from this don't multiply it by 100 -if performance is important. Use the <see cref="FromFractional(double)"/>
+		/// static method that will avoid this back and forth.
+		/// </summary>
+		/// <param name="value">The value representing a percent. Negative and over 100 is allowed</param>
 		public Percent(double value)
 		{
 			this.value = (float) (value / 100);
 		}
 
 		/// <summary>
-		/// Returns the raw value of this percent. For 20% it will 0.2, for 100% 1 etc.
+		/// Returns the raw value of this percent. For 20% it will be 0.2, for 100% 1 etc.
 		/// </summary>
 		public float Value => value;
 		
@@ -173,6 +187,30 @@ namespace MmiSoft.Core
 		public static Percent FromCoefficient(double value)
 		{
 			return new Percent((float)value - 1, false);
+		}
+
+		/// <summary>
+		/// Creates a percent from a fractional value. eg 30% from 0,3 or 90% from 0.9. Use that if you already have the
+		/// fractional on hand and want to avoid multiplying by 100 only to have the constructor to divide again by 100
+		/// to create the raw value.
+		/// </summary>
+		/// <param name="value">The fractional value to create the percent from</param>
+		/// <returns>A Percent representing the fractional value</returns>
+		public static Percent FromFractional(double value)
+		{
+			return new Percent((float)value, false);
+		}
+
+		/// <summary>
+		/// Creates a percent from a fractional value. eg 30% from 0,3 or 90% from 0.9. Use that if you already have the
+		/// fractional on hand and want to avoid multiplying by 100 only to have the constructor to divide again by 100
+		/// to create the raw value.
+		/// </summary>
+		/// <param name="value">The fractional value to create the percent from</param>
+		/// <returns>A Percent representing the fractional value</returns>
+		public static Percent FromFractional(float value)
+		{
+			return new Percent(value, false);
 		}
 
 		private static Dictionary<IFormatProvider, Regex> Validators = new Dictionary<IFormatProvider, Regex>();
