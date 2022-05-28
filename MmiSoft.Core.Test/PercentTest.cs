@@ -13,7 +13,7 @@ namespace MmiSoft.Core
 			double expectedD = 25;
 			double expectedM = 25;
 			Percent testValue = new Percent(8);
-			Assert.AreEqual(expectedD, 2 / testValue, 0.0000000000001);
+			Assert.AreEqual(expectedD, 2 / testValue, 0.000001);
 			Assert.AreEqual(expectedD, 2d / testValue, 0.000001);
 			Assert.AreEqual(expectedM, 2m / testValue);
 		}

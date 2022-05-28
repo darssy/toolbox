@@ -1,19 +1,52 @@
-version: 0.1.1.{build}
+version: 0.1.1
 branches:
   only:
     - master
+    - develop
+environment:
+  token:
+    secure: dhzlgD6HLoHEQheUEe2ejpED6DATY1Y4XuKeEo6g6j8=
 configuration: Release
 before_build:
   - cmd: nuget restore
 build:
   verbosity: normal
 artifacts:
-  - path: MmiSoft.Core\bin\$(configuration)\*.nupkg
-assembly_info:
+  - path: MmiSoft.Core\bin\$(configuration)\*.*nupkg
+dotnet_csproj:
   patch: true
-  file: '**\VersionInfo.cs'
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
+  file: '**\*.csproj'
+  version_prefix: '{version}'
 nuget:
   account_feed: true
   project_feed: true
+for:
+  -
+    branches:
+      only:
+        - master
+      #This will reset the build number to zero.
+      #It will always work as long as every merge to master is a different version
+    install:
+      - ps: |
+          $apiUrl = 'https://ci.appveyor.com/api'
+          $accountName = $env:APPVEYOR_ACCOUNT_NAME
+          $projectSlug = $env:APPVEYOR_PROJECT_SLUG
+          $token = $env:token
+          
+          $headers = @{
+            "Authorization" = "Bearer $token"
+            "Content-type" = "application/json"
+            "Accept" = "application/json"
+          }
+          $build = @{
+              nextBuildNumber = 0
+          }
+          $json = $build | ConvertTo-Json
+          
+          Invoke-RestMethod -Method Put $apiUrl/projects/$accountName/$projectSlug/settings/build-number -Body $json -Headers $headers
+  -
+    branches:
+      only:
+        - develop
+    version: 0.1.1-dev{build}

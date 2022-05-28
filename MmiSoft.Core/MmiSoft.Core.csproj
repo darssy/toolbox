@@ -1,131 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{04452232-4BCE-4835-B2D1-7B3872B9CE8E}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>8.0</LangVersion>
     <RootNamespace>MmiSoft.Core</RootNamespace>
-    <AssemblyName>MmiSoft.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <LangVersion>8</LangVersion>
-    <PackageId>MmiSoft.Core</PackageId>
-    <AssemblyVersion>0.1.1</AssemblyVersion>
     <Authors>adamstyl</Authors>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <PackageId>MmiSoft.Core</PackageId>
+    <Product>MmiSoft.Core</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageOutputPath>bin\$(Configuration)\</PackageOutputPath>
-    <Version>$(AssemblyVersion)</Version>
-    <PackageFileName>$(PackageId).$(Version).nupkg</PackageFileName>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <BuildCount>$([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)\Properties\build.txt'))</BuildCount>
+    <VersionPrefix>0.1.1.$(BuildCount)</VersionPrefix>
+    <!--<AssemblyVersion>0.1.1</AssemblyVersion>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
+    <InformationalVersion>$(AssemblyVersion)</InformationalVersion>
+    <PackageVersion>$(AssemblyVersion)</PackageVersion>-->
+    <Description>A collection of classes methods and utilities that seem useful and quite common to me -and hopefully to you.</Description>
+    <ThisYear>$([System.DateTime]::Now.ToString("yyyy"))</ThisYear>
+    <Copyright>Copyright © adamstyl 2021-$(ThisYear)</Copyright>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\MmiSoft.Core.xml</DocumentationFile>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ArithmeticExtensions.cs" />
-    <Compile Include="AutoIncrementGenerator.cs" />
-    <Compile Include="CollectionExtensions.cs" />
-    <Compile Include="Collections\GenericStringCollectionAdapter.cs" />
-    <Compile Include="Collections\ListTree.cs" />
-    <Compile Include="ComponentModel\EditableObjectHolder.cs" />
-    <Compile Include="ComponentModel\IDesignatedItem.cs" />
-    <Compile Include="ComponentModel\IEditableObjectWrapper.cs" />
-    <Compile Include="ComponentModel\IExternallyEditable.cs" />
-    <Compile Include="ComponentModel\ISelectableItem.cs" />
-    <Compile Include="ComponentModel\NoTypeExpandableConverter.cs" />
-    <Compile Include="ComponentModel\PercentTypeConverter.cs" />
-    <Compile Include="ComponentModel\SelectableItemBase.cs" />
-    <Compile Include="Configuration\ConfigurationBase.cs" />
-    <Compile Include="Configuration\IPropertyGridTarget.cs" />
-    <Compile Include="Configuration\JsonConverterBaseAttribute.cs" />
-    <Compile Include="Controls\ICuePainter.cs" />
-    <Compile Include="Controls\IPointTranslator.cs" />
-    <Compile Include="Controls\IRectanglePainter.cs" />
-    <Compile Include="CoordinatesSystem.cs" />
-    <Compile Include="DateAndTimeExtensions.cs" />
-    <Compile Include="DrawingExtensions.cs" />
-    <Compile Include="Enums.cs" />
-    <Compile Include="EventLogger.cs" />
-    <Compile Include="Exceptions.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="FunctionExtensions.cs" />
-    <Compile Include="Geometry\Arc.cs" />
-    <Compile Include="Geometry\IntersectionType.cs" />
-    <Compile Include="Geometry\LineSegment.cs" />
-    <Compile Include="Geometry\Polygon.cs" />
-    <Compile Include="IEventLogProvider.cs" />
-    <Compile Include="IInterval.cs" />
-    <Compile Include="IO\FileReader.cs" />
-    <Compile Include="IO\FileWriter.cs" />
-    <Compile Include="IO\JsonFileIO.cs" />
-    <Compile Include="IO\TextFileIO.cs" />
-    <Compile Include="Json\IpAddressJsonConverter.cs" />
-    <Compile Include="Json\PercentJsonConverter.cs" />
-    <Compile Include="Json\UnitConverter.cs" />
-    <Compile Include="LogEntry.cs" />
-    <Compile Include="Logging\ConsoleLogWrapper.cs" />
-    <Compile Include="Logging\ILogWrapper.cs" />
-    <Compile Include="Logging\LogWrapperExtensions.cs" />
-    <Compile Include="Logging\NLogWrapper.cs" />
-    <Compile Include="LogSeverity.cs" />
-    <Compile Include="Math\Extensions.cs" />
-    <Compile Include="Math\Geometry.cs" />
-    <Compile Include="Patterns\ChainOfResponsibility.cs" />
-    <Compile Include="Patterns\DelegateCommand.cs" />
-    <Compile Include="Patterns\ExceptionHandlingCommandWrapper.cs" />
-    <Compile Include="Patterns\ExecutionTimeCommand.cs" />
-    <Compile Include="Patterns\ExecutionTimeGetterDecorator.cs" />
-    <Compile Include="Patterns\CommandExtensions.cs" />
-    <Compile Include="Patterns\ICommand.cs" />
-    <Compile Include="Patterns\LoggingCommandWrapper.cs" />
-    <Compile Include="Percent.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\VersionInfo.cs" />
-    <Compile Include="ReaderWriterLockSlimExtensions.cs" />
-    <Compile Include="Result.cs" />
-    <Compile Include="SimpleResult.cs" />
-    <Compile Include="ResultBase.cs" />
-    <Compile Include="StringExtensions.cs" />
-    <Compile Include="Text\ITextParser.cs" />
-    <Compile Include="UniChar.cs" />
-    <Compile Include="Util.cs" />
-    <Compile Include="ValueChangedEventArgs.cs" />
-    <Compile Include="ValueEventArgs.cs" />
-    <Compile Include="ValueRange.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Collections\" />
-  </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
@@ -133,21 +29,8 @@
     <PackageReference Include="NLog">
       <Version>4.4.12</Version>
     </PackageReference>
-    <PackageReference Include="NuGet.Build.Tasks.Pack">
-      <Version>5.9.0</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="sharpconvert">
       <Version>1.1.0.4</Version>
     </PackageReference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
