@@ -27,7 +27,7 @@ namespace MmiSoft.Core.Logging
 		/// <summary>
 		/// This overload is to be used when the message creation is an expensive process and might yield extra string
 		/// allocations, format operations etc. If the <see cref="LogLevel"/> won't allow the message to be written
-		/// then you don't want this extra performance penalty. It's effectiveness though can be dubious as the creation
+		/// then you don't want this extra performance penalty. Its effectiveness though can be dubious as the creation
 		/// of the <paramref name="messageProvider"/> <i>is</i> an allocation by itself as you will need to allocate a
 		/// lambda. You might be better off checking the logging level with a plain ol' <c>if</c>.
 		/// </summary>
@@ -49,6 +49,21 @@ namespace MmiSoft.Core.Logging
 		/// <param name="category">The category to log this message at. Usually this corresponds to a logger based on
 		/// the type name of the calling class</param>
 		void Exception(Exception e, LogSeverity severity, string message, string category);
+		
+		/// <summary>
+		/// Checks if the 
+		/// </summary>
+		/// <param name="severity"></param>
+		/// <param name="loggerCategory"></param>
+		/// <returns>True if a message with that severity for a logger with that name will be logged.</returns>
+		bool IsLevelSet(LogSeverity severity, string loggerCategory);
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="severity"></param>
+		/// <param name="loggerCategory"></param>
+		void SetLevel(LogSeverity severity, string loggerCategory);
 	}
 
 }

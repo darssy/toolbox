@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace MmiSoft.Core.Logging
 {
@@ -9,6 +10,8 @@ namespace MmiSoft.Core.Logging
 	/// </summary>
 	public class ConsoleLogWrapper : ILogWrapper
 	{
+		private Dictionary<string, LogSeverity> perLoggerLevels = new Dictionary<string, LogSeverity>();
+			
 		/// <inheritdoc />
 		public LogSeverity LogLevel { get; set; }
 
@@ -22,7 +25,7 @@ namespace MmiSoft.Core.Logging
 		/// the type name of the calling class</param>
 		public void Log(LogSeverity severity, string message, string category)
 		{
-			if (severity > LogLevel) return;
+			if (!IsLevelSet(severity, category)) return;
 
 			if (severity <= LogSeverity.Error)
 			{
@@ -49,7 +52,7 @@ namespace MmiSoft.Core.Logging
 		/// <exception cref="ArgumentNullException">If <paramref name="messageProvider"/> is null</exception>
 		public void Log(LogSeverity severity, Func<string> messageProvider, string category)
 		{
-			if (severity > LogLevel) return;
+			if (!IsLevelSet(severity, category)) return;
 			if (messageProvider == null) throw new ArgumentNullException(nameof(messageProvider));
 
 			if (severity <= LogSeverity.Error)
@@ -65,7 +68,7 @@ namespace MmiSoft.Core.Logging
 		/// <inheritdoc />
 		public void Exception(Exception e, LogSeverity severity, string message, string category)
 		{
-			if (severity > LogLevel) return;
+			if (!IsLevelSet(severity, category)) return;
 
 			if (severity <= LogSeverity.Error)
 			{
@@ -78,5 +81,28 @@ namespace MmiSoft.Core.Logging
 				Console.WriteLine(e.StackTrace);
 			}
 		}
+
+		/// <summary>
+		/// Checks if a logging level is set for that logger.
+		/// </summary>
+		/// <param name="severity"></param>
+		/// <param name="loggerCategory"></param>
+		/// <returns></returns>
+		public bool IsLevelSet(LogSeverity severity, string loggerCategory)
+		{
+			if (string.IsNullOrWhiteSpace(loggerCategory)
+			    || !perLoggerLevels.TryGetValue(loggerCategory, out LogSeverity existing))
+			{
+				return severity < LogLevel;
+			}
+			return existing >= severity;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="severity"></param>
+		/// <param name="loggerCategory"></param>
+		public void SetLevel(LogSeverity severity, string loggerCategory) => perLoggerLevels[loggerCategory] = severity;
 	}
 }
