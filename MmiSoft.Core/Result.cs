@@ -27,5 +27,8 @@ namespace MmiSoft.Core
 		{
 			return Succeeded ? "<Success>" : error.ToString();
 		}
+
+		public static implicit operator Result<R, E>(R success) => new Result<R, E>(success);
+		public static implicit operator Result<R, E>(E failure) => new Result<R, E>(failure);
 	}
 }
