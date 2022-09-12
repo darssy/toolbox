@@ -63,8 +63,8 @@ namespace MmiSoft.Core
 		/// <param name="format"></param>
 		protected InfiniteEndpointInterval(T endpoint, string format)
 		{
-			this.endpoint = endpoint;
-			this.format = format;
+			this.endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
+			this.format = format ?? throw new ArgumentNullException(nameof(format));
 		}
 
 		/// <summary>
@@ -142,9 +142,9 @@ namespace MmiSoft.Core
 
 		public BoundedInterval(GreaterThanInterval<T> lower, LessThanInterval<T> upper, string format="[{0},{1}]")
 		{
-			this.lower = lower;
-			this.upper = upper;
-			this.format = format;
+			this.lower = lower ?? throw new ArgumentNullException(nameof(lower));
+			this.upper = upper ?? throw new ArgumentNullException(nameof(upper));
+			this.format = format ?? throw new ArgumentNullException(nameof(format));
 		}
 
 		public BoundedInterval(T lower, T upper, string format="[{0},{1}]")
@@ -194,8 +194,8 @@ namespace MmiSoft.Core
 
 		public DegenerateInterval(T endpoint, string format="[{0},{0}]")
 		{
-			this.endpoint = endpoint;
-			this.format = format;
+			this.endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
+			this.format = format ?? throw new ArgumentNullException(nameof(format));
 		}
 
 		/// <inheritdoc />
