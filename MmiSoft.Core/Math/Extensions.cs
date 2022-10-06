@@ -128,11 +128,18 @@ namespace MmiSoft.Core.Math
 			return number * number;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool AlmostEqual(this double x, double y) {
 			double epsilon = Math.Max(Math.Abs(x), Math.Abs(y)) * 1E-14;
-			return Math.Abs(x - y) <= epsilon;
+			return x.AlmostEqual(y, epsilon);
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool AlmostEqual(this double x, double y, double epsilon) {
+			return Math.Abs(x - y) < epsilon;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool AlmostEqual(this float left, float right, float tolerance=0.000001f)
 		{
 			return (left - right).Abs() < tolerance;

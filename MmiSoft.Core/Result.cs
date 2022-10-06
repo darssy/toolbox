@@ -52,7 +52,10 @@ namespace MmiSoft.Core
 	/// </para>
 	/// </remarks>
 	/// <typeparam name="E">The type of the error. Could be string or an enum or a class combining both etc.</typeparam>
-	/// <exception cref="ArgumentException"></exception>
+	/// <exception cref="ArgumentException">Attempt to invoke the constructor with a default value (null for classes
+	/// first value of enum etc.) will result in ArgumentException complaining that such an object will "impersonate"
+	/// success. Instead, you can simply call <c>new Result&lt;ErrType&gt;()</c> which wil do exactly the same -without
+	/// the exception.</exception>
 	public readonly ref struct Result<E>
 	{
 		private readonly E error;
