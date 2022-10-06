@@ -1,5 +1,8 @@
 # Toolbox
 
+[![Build status](https://ci.appveyor.com/api/projects/status/73usvufg8c3a0csq/branch/master?svg=true&passingText=master%20-%20OK&failingText=master%20-%20FAILED&pendingText=master%20-%20PENDING)](https://ci.appveyor.com/project/adamstyl/toolbox/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/73usvufg8c3a0csq/branch/develop?svg=true&passingText=dev%20-%20OK&failingText=dev%20-%20FAILED&pendingText=dev%20-%20PENDING)](https://ci.appveyor.com/project/adamstyl/toolbox/branch/master)
+
 ## About
 A collection of classes methods and utilities that seem useful and quite common to me. The code is pretty simple and most of the times what you need to know is in documentation, which admittedly is not complete yet.
 
