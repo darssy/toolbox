@@ -43,4 +43,25 @@ namespace MmiSoft.Core
 		/// <returns>A function returning always <c>false</c> if <c>func</c> is null or the <c>func</c> otherwise</returns>
 		public static Func<T, bool> FalseIfNull<T>(this Func<T, bool> func) => func ?? (t => false);
 	}
+
+	public static class ActionExtensions
+	{
+		public static Action<T> Then<T>(this Action<T> first, Action<T> second)
+		{
+			return t =>
+			{
+				first.Invoke(t);
+				second.Invoke(t);
+			};
+		}
+		
+		public static Action Then(this Action first, Action second)
+		{
+			return () =>
+			{
+				first.Invoke();
+				second.Invoke();
+			};
+		}
+	}
 }
