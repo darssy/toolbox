@@ -42,6 +42,19 @@ namespace MmiSoft.Core
 		/// <param name="func">The function to evaluate</param>
 		/// <returns>A function returning always <c>false</c> if <c>func</c> is null or the <c>func</c> otherwise</returns>
 		public static Func<T, bool> FalseIfNull<T>(this Func<T, bool> func) => func ?? (t => false);
+
+		public static Action AndIfTrue(this Func<bool> condition, Action willRunIfTrue)
+		{
+			if (condition == null) throw new ArgumentNullException(nameof(condition));
+			if (willRunIfTrue == null) throw new ArgumentNullException(nameof(willRunIfTrue));
+			return () =>
+			{
+				if (condition.Invoke())
+				{
+					willRunIfTrue.Invoke();
+				}
+			};
+		}
 	}
 
 	public static class ActionExtensions
