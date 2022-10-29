@@ -58,5 +58,21 @@ namespace MmiSoft.Core
 				rwLock.ExitWriteLock();
 			}
 		}
+
+		public static bool SwapIfNotEqual<T>(this ReaderWriterLockSlim rwLock, ref T variable, T value) where T : class
+		{
+			try
+			{
+				if (variable == value) return false;
+				rwLock.EnterWriteLock();
+				variable = value;
+				rwLock.ExitWriteLock();
+			}
+			finally
+			{
+				rwLock.ExitUpgradeableReadLock();
+			}
+			return true;
+		}
 	}
 }
