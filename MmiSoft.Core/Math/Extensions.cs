@@ -136,13 +136,13 @@ namespace MmiSoft.Core.Math
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool AlmostEqual(this double x, double y, double epsilon) {
-			return Math.Abs(x - y) < epsilon;
+			return Math.Abs(x - y) <= epsilon;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool AlmostEqual(this float left, float right, float tolerance=0.000001f)
 		{
-			return (left - right).Abs() < tolerance;
+			return (left - right).Abs() <= tolerance;
 		}
 	}
 }
