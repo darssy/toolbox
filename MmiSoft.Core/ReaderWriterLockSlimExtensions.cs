@@ -63,6 +63,7 @@ namespace MmiSoft.Core
 		{
 			try
 			{
+				rwLock.EnterUpgradeableReadLock();
 				if (variable == value) return false;
 				rwLock.EnterWriteLock();
 				variable = value;
