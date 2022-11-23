@@ -11,6 +11,7 @@ namespace MmiSoft.Core.ComponentModel
 		protected string designation;
 		private bool selected;
 
+        [field:NonSerialized]
 		public virtual event EventHandler SelectedChanged;
 
 		public SelectableItemBase(string designation)
