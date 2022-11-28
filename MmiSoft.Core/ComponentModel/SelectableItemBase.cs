@@ -16,7 +16,7 @@ namespace MmiSoft.Core.ComponentModel
 
 		public SelectableItemBase(string designation)
 		{
-			this.designation = designation;
+			this.designation = designation ?? throw new ArgumentNullException(nameof(designation));
 		}
 
 		public virtual string Designation => designation;
