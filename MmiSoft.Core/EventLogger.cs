@@ -134,9 +134,14 @@ namespace MmiSoft.Core
 			loggerImplementation.Log(LogSeverity.Trace, messageProvider, category);
 		}
 
-		public static void Log(this Exception exc, string userMessage, string module="N/A")
+		public static void Log(this Exception exc, string userMessage, string module="")
 		{
 			loggerImplementation.Exception(exc, LogSeverity.Error, userMessage, module);
+		}
+
+		public static void LogFatal(this Exception exc, string userMessage, string module="")
+		{
+			loggerImplementation.Exception(exc, LogSeverity.Fatal, userMessage, module);
 		}
 	}
 }
