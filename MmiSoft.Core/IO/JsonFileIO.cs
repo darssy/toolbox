@@ -34,7 +34,12 @@ namespace MmiSoft.Core.IO
 		public static T Read<T>(string filename, JsonSerializerSettings serializerSettings = null)
 		{
 			using var streamReader = new StreamReader(filename);
-			using var jsonTextReader = new JsonTextReader(streamReader);
+			return Read<T>(streamReader, serializerSettings);
+		}
+
+		public static T Read<T>(TextReader reader, JsonSerializerSettings serializerSettings = null)
+		{
+			using var jsonTextReader = new JsonTextReader(reader);
 
 			serializerSettings ??= CreateSettingsWithConvertersForClass(typeof(T));
 			JsonSerializer serializer = JsonSerializer.CreateDefault(serializerSettings);
