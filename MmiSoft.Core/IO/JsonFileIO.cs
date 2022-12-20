@@ -42,13 +42,30 @@ namespace MmiSoft.Core.IO
 			return serializer.Deserialize<T>(jsonTextReader);
 		}
 
+		public static void WriteWithConverters(string filename, object obj, params JsonConverter[] converters)
+		{
+			JsonSerializerSettings settings = CreateJsonSettings(null);
+			settings.Converters.Add(new StringEnumConverter());
+			settings.Converters.Add(new IpAddressJsonConverter());
+			foreach (JsonConverter converter in converters)
+			{
+				settings.Converters.Add(converter);
+			}
+
+			Write(filename, obj, settings);
+		}
+
 		public static void Write(string filename, object obj, JsonSerializerSettings settings = null)
+		{
+			Write(new StreamWriter(filename), obj, settings);
+		}
+
+		public static void Write(TextWriter writer, object obj, JsonSerializerSettings settings = null)
 		{
 			if (obj == null) throw new ArgumentNullException(nameof(obj));
 
 			settings ??= CreateSettingsWithConvertersForClass(obj.GetType());
 
-			using TextWriter writer = new StreamWriter(filename);
 			JsonSerializer serializer = JsonSerializer.CreateDefault(settings);
 			serializer.Serialize(writer, obj);
 		}
@@ -65,7 +82,7 @@ namespace MmiSoft.Core.IO
 			return jsonSettings;
 		}
 
-		private static JsonSerializerSettings CreateJsonSettings(ITraceWriter traceWriter)
+		internal static JsonSerializerSettings CreateJsonSettings(ITraceWriter traceWriter)
 		{
 			return new JsonSerializerSettings
 			{

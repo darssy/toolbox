@@ -8,15 +8,14 @@ using Newtonsoft.Json.Converters;
 
 namespace MmiSoft.Core.IO
 {
+	[Obsolete("This class was experimental and is now obsolete")]
 	public static class FileReader
 	{
-		private static readonly StringEnumConverter StringEnumConverter = new StringEnumConverter();
-		private static readonly IpAddressJsonConverter IpAddressConverter = new IpAddressJsonConverter();
 		public static event EventHandler<ValueEventArgs<LogEntry>> LogEntryCreated;
 
 		public static IList<string> ReadFile(string file)
 		{
-			return ReadFile(CreateStream(file));
+			return ReadFile(new StreamReader(file));
 		}
 
 		public static IList<string> ReadFile(StreamReader fileStream)
@@ -43,34 +42,19 @@ namespace MmiSoft.Core.IO
 			return (T)serializer.Deserialize(textReader);
 		}
 
+		[Obsolete("Use JsonFileIO.Read<T>() instead")]
 		public static T ReadJson<T>(string filename, JsonSerializerSettings serializerSettings)
 		{
-			JsonSerializer serializer = JsonSerializer.CreateDefault(serializerSettings);
-
-			using var streamReader = new StreamReader(filename);
-			using var jsonTextReader = new JsonTextReader(streamReader);
-			return serializer.Deserialize<T>(jsonTextReader);
+			return JsonFileIO.Read<T>(filename, serializerSettings);
 		}
 
+		[Obsolete("Use JsonFileIO.Read<T>() instead")]
 		public static T ReadJson<T>(string filename, params JsonConverter[] converters)
 		{
-			JsonSerializerSettings settings = new JsonSerializerSettings
-			{
-				Formatting = Formatting.Indented,
-				ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
-				DefaultValueHandling = DefaultValueHandling.Include
-			};
-			settings.Converters.Add(StringEnumConverter);
-			settings.Converters.Add(IpAddressConverter);
-
-			foreach (JsonConverter converter in converters)
-			{
-				settings.Converters.Add(converter);
-			}
-
-			return ReadJson<T>(filename, settings);
+			return JsonFileIO.Read<T>(filename, converters);
 		}
 
+		[Obsolete("This method was experimental and is now obsolete")]
 		public static StreamReader CreateStream(string file)
 		{
 			if (!File.Exists(file)) throw new FileNotFoundException($"File '{file}' does not exist", file);

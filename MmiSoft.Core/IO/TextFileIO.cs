@@ -4,6 +4,7 @@ using System.IO;
 
 namespace MmiSoft.Core.IO
 {
+	[Obsolete("This class was experimental and is now obsolete")]
 	public class TextFileIO
 	{
 		public static IList<string> ReadFile(string file)
@@ -29,7 +30,7 @@ namespace MmiSoft.Core.IO
 
 		public static void WriteFile(string filename, string text)
 		{
-			using var textWriter = CreateStreamWriter(filename);
+			using var textWriter = new StreamWriter(filename);
 			try
 			{
 				textWriter.Write(text);

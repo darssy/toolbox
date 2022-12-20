@@ -7,9 +7,9 @@ using NLog.Targets;
 namespace MmiSoft.Core.Logging
 {
 	/// <summary>
-	/// The caveat with this class is that the calls to <see cref="IsLevelSet"/> and <see cref="SetLevel"/> is that it
+	/// The caveat with this class is that the calls to <see cref="IsLevelSet"/> and <see cref="SetLevel"/>
 	/// will fail if you don't set <see cref="LogManager"/>.<see cref="LogManager.Configuration"/> manually. It would
-	/// be super easy to set it in the constructor bu then the "automatic" discovery of the "default" nlog config goes
+	/// be super easy to set it in the constructor but then the "automatic" discovery of the "default" nlog config goes
 	/// out the window. Unfortunately the mechanism of retrieving the config path is not part of NLog's public API.
 	/// </summary>
 	public class NLogWrapper : ILogWrapper

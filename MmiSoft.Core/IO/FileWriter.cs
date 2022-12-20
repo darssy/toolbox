@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Serialization;
-using MmiSoft.Core.Json;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace MmiSoft.Core.IO
 {
@@ -36,29 +34,16 @@ namespace MmiSoft.Core.IO
 			}
 		}
 
+		[Obsolete("Use JsonFileIO.WriteWithConverters() instead")]
 		public static void WriteJson(string filename, object obj, params JsonConverter[] converters)
 		{
-			JsonSerializerSettings settings = new JsonSerializerSettings
-			{
-				Formatting = Formatting.Indented,
-				ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
-				DefaultValueHandling = DefaultValueHandling.Include
-			};
-			settings.Converters.Add(new StringEnumConverter());
-			settings.Converters.Add(new IpAddressJsonConverter());
-			foreach (JsonConverter converter in converters)
-			{
-				settings.Converters.Add(converter);
-			}
-
-			WriteJson(filename, obj, settings);
+			JsonFileIO.WriteWithConverters(filename, obj, converters);
 		}
 
+		[Obsolete("Use JsonFileIO.Write() instead")]
 		public static void WriteJson(string filename, object obj, JsonSerializerSettings settings)
 		{
-			using TextWriter writer = new StreamWriter(filename);
-			JsonSerializer serializer = JsonSerializer.CreateDefault(settings);
-			serializer.Serialize(writer, obj);
+			JsonFileIO.Write(filename, obj, settings);
 		}
 	}
 }
