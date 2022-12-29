@@ -62,7 +62,8 @@ namespace MmiSoft.Core.IO
 
 		public static void Write(string filename, object obj, JsonSerializerSettings settings = null)
 		{
-			Write(new StreamWriter(filename), obj, settings);
+			using StreamWriter streamWriter = new StreamWriter(filename);
+			Write(streamWriter, obj, settings);
 		}
 
 		public static void Write(TextWriter writer, object obj, JsonSerializerSettings settings = null)
