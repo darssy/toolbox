@@ -2,8 +2,8 @@ using System;
 
 namespace MmiSoft.Core
 {
-    [Serializable]
-	public class ResultBase<R> : SimpleResult
+	[Serializable]
+	public class ResultBase<R> : SimpleResult, IResult<R>
 	{
 		private R value;
 
@@ -28,5 +28,11 @@ namespace MmiSoft.Core
 		}
 
 		public R Value => Succeeded ? value : throw new InvalidOperationException("Result is not successful");
+	}
+
+	public interface IResult<out R>
+	{
+		R Value { get; }
+		bool Succeeded { get; }
 	}
 }
