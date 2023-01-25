@@ -77,30 +77,9 @@ namespace MmiSoft.Core.Logging
 		/// <inheritdoc />
 		public void Log(LogSeverity severity, Func<string> messageProvider, string category)
 		{
-			Logger logger = LogManager.GetLogger(category);
-			switch (severity)
-			{
-				case LogSeverity.Error:
-					logger.Error(messageProvider);
-					break;
-				case LogSeverity.Warning:
-					logger.Warn(messageProvider);
-					break;
-				case LogSeverity.Info:
-					logger.Info(messageProvider);
-					break;
-				case LogSeverity.Debug:
-					logger.Debug(messageProvider);
-					break;
-				case LogSeverity.Trace:
-					logger.Trace(messageProvider);
-					break;
-				case LogSeverity.Fatal:
-					logger.Fatal(messageProvider);
-					break;
-				default:
-					throw new ArgumentOutOfRangeException(nameof(severity), severity, null);
-			}
+			LogManager
+				.GetLogger(category)
+				.Log(levelMapper[severity], (IFormatProvider)null, new LogMessageGenerator(messageProvider));
 		}
 
 		/// <inheritdoc />
