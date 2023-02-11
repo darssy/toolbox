@@ -91,11 +91,11 @@ namespace MmiSoft.Core.Logging
 		public bool IsLevelSet(LogSeverity severity, string loggerCategory)
 		{
 			if (string.IsNullOrWhiteSpace(loggerCategory)
-			    || !perLoggerLevels.TryGetValue(loggerCategory, out LogSeverity existing))
+			    || !perLoggerLevels.TryGetValue(loggerCategory, out LogSeverity loggerLevel))
 			{
-				return severity < LogLevel;
+				return severity <= LogLevel;
 			}
-			return existing >= severity;
+			return severity <= loggerLevel;
 		}
 
 		/// <summary>

@@ -17,7 +17,7 @@ namespace MmiSoft.Core
 		Error = 1,
 
 		/// <summary>
-		/// Not necessarily an error but definitely something out of order that the user must know
+		/// Not necessarily an error but definitely something out of order that the user must know of
 		/// </summary>
 		Warning = 2,
 		
