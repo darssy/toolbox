@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace MmiSoft.Core.Logging
 {
@@ -70,16 +71,10 @@ namespace MmiSoft.Core.Logging
 		{
 			if (!IsLevelSet(severity, category)) return;
 
-			if (severity <= LogSeverity.Error)
-			{
-				Console.Error.WriteLine($"{severity} {category}\t{message}");
-				Console.Error.WriteLine(e.StackTrace);
-			}
-			else
-			{
-				Console.WriteLine($"{severity} {category}\t{message}");
-				Console.WriteLine(e.StackTrace);
-			}
+			TextWriter textWriter = severity <= LogSeverity.Error ? Console.Error : Console.Out;
+			textWriter.WriteLine($"{severity} {category}\t{message}");
+			textWriter.WriteLine(e.Message);
+			textWriter.WriteLine(e.StackTrace);
 		}
 
 		/// <summary>
