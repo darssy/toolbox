@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using MmiSoft.Core.Math;
 
@@ -70,6 +71,7 @@ namespace MmiSoft.Core
 		/// <param name="swapAxles">Set to true to get the azimuth from "north", clockwise. The default is from "east"
 		/// and counterclockwise</param>
 		/// <returns>The azimuth of <c>to</c> relative to <c>from</c> in radians.</returns>
+		[Obsolete("Use the overload using the CoordinatesSystem")]
 		public static double AzimuthTo(this Point from, Point to, bool swapAxles = false)
 		{
 			int dx = to.X - from.X;
@@ -78,6 +80,36 @@ namespace MmiSoft.Core
 			return swapAxles
 				? System.Math.Atan2(dy, dx)
 				: System.Math.Atan2(dx, dy);
+		}
+
+		/// <summary>
+		/// Returns the azimuth or bearing of the second argument relative to the first one.
+		/// </summary>
+		/// <param name="from">The start point or the "observer"</param>
+		/// <param name="to">The end point or the "destination"</param>
+		/// <param name="cs">The coordinates system to use </param>
+		/// <returns>The azimuth of <c>to</c> relative to <c>from</c> in radians.</returns>
+		public static double AzimuthTo(this Point from, Point to, CoordinatesSystem cs = CoordinatesSystem.Arithmetic)
+		{
+			int dx = to.X - from.X;
+			int dy = to.Y - from.Y;
+
+			if ((CoordinatesSystem.NegateX & cs) == CoordinatesSystem.NegateX)
+			{
+				dx = -dx;
+			}
+
+			if ((CoordinatesSystem.NegateY & cs) == CoordinatesSystem.NegateY)
+			{
+				dy = -dy;
+			}
+
+			if ((CoordinatesSystem.SwapAxles & cs) == CoordinatesSystem.SwapAxles)
+			{
+				(dx, dy) = (dy, dx);
+			}
+
+			return System.Math.Atan2(dx, dy);
 		}
 
 		public static Point ExtrapolateTo(this Point from, double bearing, double distance,
