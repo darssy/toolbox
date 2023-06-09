@@ -65,7 +65,7 @@ namespace MmiSoft.Core.IO
 			catch (Exception e)
 			{
 				string msg = $"Failed to read file: {e.Message}";
-				LogEntry entry = new LogEntry(msg, LogSeverity.Error, "Generic I/O");
+				LogEntry entry = new LogEntry(msg, "Generic I/O", LogSeverity.Error);
 				OnLogEntryCreated(new ValueEventArgs<LogEntry>(entry));
 			}
 			return null;

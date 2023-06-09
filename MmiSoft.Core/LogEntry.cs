@@ -24,7 +24,7 @@ namespace MmiSoft.Core
 		{
 		}
 
-		public LogEntry(string message, LogSeverity severity = LogSeverity.Info, string module = "N/A")
+		public LogEntry(string message, string module = "", LogSeverity severity = LogSeverity.Info)
 			: this(message, severity, module, null)
 		{
 		}
