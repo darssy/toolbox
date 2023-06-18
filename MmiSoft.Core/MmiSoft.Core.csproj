@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>9</LangVersion>
     <RootNamespace>MmiSoft.Core</RootNamespace>
     <Authors>adamstyl</Authors>
     <PackageId>MmiSoft.Core</PackageId>
