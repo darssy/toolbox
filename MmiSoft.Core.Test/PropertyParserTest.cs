@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 
@@ -93,7 +94,10 @@ namespace MmiSoft.Core
 line
 value
 example";
-			Assert.That(properties, Contains.Key("multi-key").WithValue(value));
+			Console.WriteLine(properties["multi-key"]);
+			Console.Error.WriteLine(properties["multi-key"]);
+			Assert.That(properties["multi-key"], Is.EqualTo(value));
+			Assert.That(properties, Contains.Key("multi-key"));
 			
 		}
 
