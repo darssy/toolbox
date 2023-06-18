@@ -23,29 +23,6 @@ namespace MmiSoft.Core
 			typeof(IPAddress)
 		};
 
-		public static Color Negate(in this Color c)
-		{
-			return Color.FromArgb(255 - c.R, 255 - c.G, 255 - c.B);
-		}
-
-		public static Color Darken(in this Color c)
-		{
-			return Color.FromArgb((int) SysMath.Round(c.R * 0.5),
-				(int) SysMath.Round(c.G * 0.5),
-				(int) SysMath.Round(c.B * 0.5));
-		}
-
-		public static Color Lighten(in this Color c)
-		{
-			int r = (int)SysMath.Round(c.R * 1.45);
-			int g = (int)SysMath.Round(c.G * 1.45);
-			int b = (int)SysMath.Round(c.B * 1.45);
-			if (r > 255) r = 255;
-			if (g > 255) g = 255;
-			if (b > 255) b = 255;
-			return Color.FromArgb(r, g, b);
-		}
-
 		public static UInt64 DoubleToLongBits(this double d)
 		{
 			BitArray a = new BitArray(BitConverter.GetBytes(d));

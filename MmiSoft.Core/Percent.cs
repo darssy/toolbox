@@ -65,9 +65,9 @@ namespace MmiSoft.Core
 			return l * r.value;
 		}
 
-		public static float operator * (int l, in Percent r)
+		public static int operator * (int l, in Percent r)
 		{
-			return l * r.value;
+			return (l * r.value).Round();
 		}
 
 		public static decimal operator / (decimal l, in Percent r)
@@ -105,9 +105,9 @@ namespace MmiSoft.Core
 			return l * (1 + r.value);
 		}
 
-		public static float operator + (int l, in Percent r)
+		public static int operator + (int l, in Percent r)
 		{
-			return l * (1 + r.value);
+			return (l * (1 + r.value)).Round();
 		}
 
 		public static Percent operator - (Percent l, in Percent r)
@@ -213,7 +213,7 @@ namespace MmiSoft.Core
 			return new Percent(value, false);
 		}
 
-		private static Dictionary<IFormatProvider, Regex> Validators = new Dictionary<IFormatProvider, Regex>();
+		private static readonly Dictionary<IFormatProvider, Regex> Validators = new Dictionary<IFormatProvider, Regex>();
 
 		public static Regex GetValidator(IFormatProvider provider)
 		{

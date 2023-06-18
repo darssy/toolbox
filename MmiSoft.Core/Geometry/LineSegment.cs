@@ -55,10 +55,10 @@ namespace MmiSoft.Core.Geometry
 
 		public Point GetPointAt(Percent percent)
 		{
-			double percentX = diffX * percent;
-			double percentY = diffY * percent;
+			int percentX = diffX * percent;
+			int percentY = diffY * percent;
 
-			return new Point(p1.X + (int) percentX.Round(), p1.Y + (int) percentY.Round());
+			return new Point(p1.X + percentX, p1.Y + percentY);
 		}
 
 		public bool IsNear(Point p, int sensitivity)

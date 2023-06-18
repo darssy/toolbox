@@ -58,7 +58,9 @@ namespace MmiSoft.Core
 		[Test]
 		public void PlusOperators()
 		{
-			Assert.AreEqual(13, 10 + new Percent(30), 0.000001f);
+			Assert.AreEqual(13, 10 + new Percent(30));
+			Assert.AreEqual(13, 10 + new Percent(33));
+			Assert.AreEqual(14, 10 + new Percent(36));
 			Assert.AreEqual(8.625, 7.5 + new Percent(15), 0.000001f);
 		}
 
