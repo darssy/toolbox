@@ -115,6 +115,7 @@ line
 value
 
 example".Replace("\r\n", Environment.NewLine);
+			Assert.That(properties["multi-key"], Is.EqualTo(value));
 			Assert.That(properties, Contains.Key("multi-key").WithValue(value));
 			
 		}
