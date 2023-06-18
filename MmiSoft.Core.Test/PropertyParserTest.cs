@@ -109,12 +109,7 @@ namespace MmiSoft.Core
 			};
 			IDictionary<string,string> properties = PropertyParser.ReadProperties(lines);
 			Assert.That(properties, Has.Count.EqualTo(1));
-			string value = @"multi
-line
-
-value
-
-example".Replace("\r\n", Environment.NewLine);
+			string value = string.Join(Environment.NewLine, @"multi", "line", "", "value", "", "example");
 			Assert.That(properties["multi-key"], Is.EqualTo(value));
 			Assert.That(properties, Contains.Key("multi-key").WithValue(value));
 			
