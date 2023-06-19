@@ -14,14 +14,15 @@ namespace MmiSoft.Core.Logging
 	/// </summary>
 	public class NLogWrapper : ILogWrapper
 	{
-		private static Dictionary<LogSeverity, LogLevel> levelMapper = new Dictionary<LogSeverity, LogLevel>
+		private static LogLevel[] levelMapper =
 		{
-			[LogSeverity.Error] = NLog.LogLevel.Error,
-			[LogSeverity.Warning] = NLog.LogLevel.Warn,
-			[LogSeverity.Info] = NLog.LogLevel.Info,
-			[LogSeverity.Debug] = NLog.LogLevel.Debug,
-			[LogSeverity.Trace] = NLog.LogLevel.Trace,
-			[LogSeverity.Fatal] = NLog.LogLevel.Fatal
+			// level ordinals in NLog are reversed compared to LogSeverity
+			NLog.LogLevel.Fatal,
+			NLog.LogLevel.Error,
+			NLog.LogLevel.Warn,
+			NLog.LogLevel.Info,
+			NLog.LogLevel.Debug,
+			NLog.LogLevel.Trace,
 		};
 
 		public NLogWrapper()
@@ -41,7 +42,7 @@ namespace MmiSoft.Core.Logging
 			get => localLogLevel;
 			set
 			{
-				LogManager.GlobalThreshold = levelMapper[value];
+				LogManager.GlobalThreshold = levelMapper[(int)value];
 				localLogLevel = value;
 			}
 		}
@@ -77,13 +78,13 @@ namespace MmiSoft.Core.Logging
 		/// <inheritdoc />
 		public void Log(LogSeverity severity, Func<string> messageProvider, string category)
 		{
-			LogManager.GetLogger(category).Log(levelMapper[severity], new LogMessageGenerator(messageProvider));
+			LogManager.GetLogger(category).Log(levelMapper[(int)severity], new LogMessageGenerator(messageProvider));
 		}
 
 		/// <inheritdoc />
 		public void Exception(Exception e, LogSeverity severity, string message, string category)
 		{
-			LogManager.GetLogger(category).Log(levelMapper[severity], e, message);
+			LogManager.GetLogger(category).Log(levelMapper[(int)severity], e, message);
 		}
 
 		/// <summary>
@@ -100,10 +101,10 @@ namespace MmiSoft.Core.Logging
 			{
 				if (rule.LoggerNamePattern == loggerCategory)
 				{
-					return rule.IsLoggingEnabledForLevel(levelMapper[severity]);
+					return rule.IsLoggingEnabledForLevel(levelMapper[(int)severity]);
 				}
 			}
-			return LogManager.GetLogger(loggerCategory).IsEnabled(levelMapper[severity]);
+			return LogManager.GetLogger(loggerCategory).IsEnabled(levelMapper[(int)severity]);
 		}
 
 		/// <summary>
@@ -117,14 +118,14 @@ namespace MmiSoft.Core.Logging
 			{
 				if (rule.LoggerNamePattern == loggerCategory)
 				{
-					rule.EnableLoggingForLevels(levelMapper[severity], NLog.LogLevel.Fatal);
+					rule.EnableLoggingForLevels(levelMapper[(int)severity], NLog.LogLevel.Fatal);
 					LogManager.ReconfigExistingLoggers();
 					return;
 				}
 			}
 			foreach (Target target in LogManager.Configuration.AllTargets)
 			{
-				LogManager.Configuration.AddRule(levelMapper[severity], NLog.LogLevel.Fatal, target, loggerCategory);
+				LogManager.Configuration.AddRule(levelMapper[(int)severity], NLog.LogLevel.Fatal, target, loggerCategory);
 			}
 			LogManager.ReconfigExistingLoggers();
 		}

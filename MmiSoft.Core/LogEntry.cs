@@ -2,13 +2,13 @@
 
 namespace MmiSoft.Core
 {
-	public class LogEntry
+	public readonly struct LogEntry
 	{
-		private DateTime writeTime;
-		private LogSeverity severity;
-		private string module;
-		private string message;
-		private Exception exception;
+		private readonly DateTime writeTime;
+		private readonly LogSeverity severity;
+		private readonly string module;
+		private readonly string message;
+		private readonly Exception exception;
 
 		private LogEntry(string message, LogSeverity severity, string module, Exception exception)
 		{
@@ -19,7 +19,7 @@ namespace MmiSoft.Core
 			this.exception = exception;
 		}
 
-		public LogEntry(string message, Exception cause, string module = "N/A")
+		public LogEntry(string message, Exception cause, string module = "")
 			: this(message, LogSeverity.Error, module, cause)
 		{
 		}
@@ -33,6 +33,10 @@ namespace MmiSoft.Core
 
 		public LogSeverity Severity => severity;
 
+		/// <summary>
+		/// The originator of the log entry. Usually the FQN of the class is used although in case of obfuscated code that might
+		/// be impractical.
+		/// </summary>
 		public string Module => module;
 
 		public string Message => message;
