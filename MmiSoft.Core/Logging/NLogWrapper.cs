@@ -77,16 +77,13 @@ namespace MmiSoft.Core.Logging
 		/// <inheritdoc />
 		public void Log(LogSeverity severity, Func<string> messageProvider, string category)
 		{
-			LogManager
-				.GetLogger(category)
-				.Log(levelMapper[severity], (IFormatProvider)null, new LogMessageGenerator(messageProvider));
+			LogManager.GetLogger(category).Log(levelMapper[severity], new LogMessageGenerator(messageProvider));
 		}
 
 		/// <inheritdoc />
 		public void Exception(Exception e, LogSeverity severity, string message, string category)
 		{
-			LogManager.GetLogger(category)
-				.Log(levelMapper[severity], e, message);
+			LogManager.GetLogger(category).Log(levelMapper[severity], e, message);
 		}
 
 		/// <summary>
