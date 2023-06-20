@@ -20,6 +20,14 @@ dotnet_csproj:
 nuget:
   account_feed: true
   project_feed: true
+deploy:
+  - provider: NuGet
+    api_key:
+      secure: KvTIb4Uh4YoSifmOkNHOuvsa8+f3NJUMgOkNbVfTNvTJlGHoyRngrOenc/xs5zxy
+    skip_symbols: false
+    artifact: /.*\.*nupkg/
+    on:
+      branch: master
 for:
   -
     branches:
