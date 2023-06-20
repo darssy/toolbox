@@ -12,17 +12,6 @@ namespace MmiSoft.Core.Configuration
 		public abstract JsonConverter Create();
 	}
 
-	public sealed class UnitConverterAttribute : JsonConverterBaseAttribute
-	{
-		private CultureInfo culture;
-		public UnitConverterAttribute(string culture)
-		{
-			this.culture = CultureInfo.GetCultureInfo(culture);
-		}
-
-		public override JsonConverter Create() => new UnitConverter(culture);
-	}
-
 	public class EnumConverterAttribute : JsonConverterBaseAttribute
 	{
 		public override JsonConverter Create() => new StringEnumConverter();
