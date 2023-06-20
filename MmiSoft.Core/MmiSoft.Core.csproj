@@ -21,6 +21,8 @@
     <ThisYear>$([System.DateTime]::Now.ToString("yyyy"))</ThisYear>
     <Copyright>Copyright © adamstyl 2021-$(ThisYear)</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/adamstyl/toolbox</RepositoryUrl>
+    <PackageTags>utilities;toolbox;utility-classes;logger-middleware</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
