@@ -106,7 +106,11 @@ namespace MmiSoft.Core
 
 			if ((CoordinatesSystem.SwapAxles & cs) == CoordinatesSystem.SwapAxles)
 			{
+#if NET47_OR_GREATER
 				(dx, dy) = (dy, dx);
+#else
+				Util.Swap(ref dx, ref dy);
+#endif
 			}
 
 			return System.Math.Atan2(dx, dy);

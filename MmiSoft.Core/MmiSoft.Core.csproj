@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFrameworks>net462;net472;net48</TargetFrameworks>
     <LangVersion>9</LangVersion>
     <RootNamespace>MmiSoft.Core</RootNamespace>
     <Authors>adamstyl</Authors>
@@ -20,20 +20,13 @@
     <Description>A collection of classes methods and utilities that seem useful and quite common to me -and hopefully to you.</Description>
     <ThisYear>$([System.DateTime]::Now.ToString("yyyy"))</ThisYear>
     <Copyright>Copyright © adamstyl 2021-$(ThisYear)</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DocumentationFile>bin\Release\MmiSoft.Core.xml</DocumentationFile>
     <NoWarn>1701;1702; 1591</NoWarn>
   </PropertyGroup>
-
-  <!--<Target Name="PublishNuGetLocally" AfterTargets="Deploy" Condition=" '$(Configuration)' == 'Release' ">
-    <ItemGroup>
-      <NugetFile Include="$(ProjectDir)bin\$(ConfigurationName)\$(PackageId).$(PackageVersion).nupkg" />
-    </ItemGroup>
-    <Exec Command="dotnet nuget delete &#45;&#45;source $(UserProfile)\.nuget\packages $(PackageId) $(PackageVersion) &#45;&#45;non-interactive" ContinueOnError="WarnAndContinue" />
-    <Exec Command="dotnet nuget push &#45;&#45;source $(UserProfile)\.nuget\packages @(NugetFile)" />
-  </Target>-->
   
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">

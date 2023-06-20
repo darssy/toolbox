@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace MmiSoft.Core
 {
 	public static class Util
@@ -9,6 +11,7 @@ namespace MmiSoft.Core
 		/// <param name="x"></param>
 		/// <param name="y"></param>
 		/// <typeparam name="T"></typeparam>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static void Swap<T>(ref T x, ref T y)
 		{
 			T temp = x;
