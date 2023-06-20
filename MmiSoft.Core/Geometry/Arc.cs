@@ -1,43 +1,38 @@
-using MmiSoft.Core.Math.Units;
-
 namespace MmiSoft.Core.Geometry
 {
 	public class Arc
 	{
-		private Degrees start;
-		private Degrees end;
+		public const double FullCircle = 360;
 
-		public Arc(Degrees start, Degrees end)
-		{
-			this.start = start > Degrees.FullCircle ? new Degrees(start.UnitValue % Degrees.FullCircle.UnitValue) : start;
-			this.end = end > Degrees.FullCircle ? new Degrees(end.UnitValue % Degrees.FullCircle.UnitValue) : end;
-		}
+		private double start;
+		private double end;
 
-		public bool Contains(Degrees angle)
+		public Arc(double start, double end)
 		{
-			return Contains(angle.UnitValue);
+			this.start = start > FullCircle ? start % FullCircle : start;
+			this.end = end > FullCircle ? end % FullCircle : end;
 		}
 
 		public bool Contains(double angle)
 		{
-			if (angle > Degrees.FullCircle.UnitValue)
+			if (angle > FullCircle)
 			{
-				angle %= Degrees.FullCircle.UnitValue;
+				angle %= FullCircle;
 			}
 			if (angle < 0)
 			{
-				angle = Degrees.FullCircle.UnitValue + angle;
+				angle = FullCircle + angle;
 			}
 			if (start < end)
 			{
-				return angle >= start.UnitValue && angle <= end.UnitValue;
+				return angle >= start && angle <= end;
 			}
-			return angle >= start.UnitValue || angle <= end.UnitValue;
+			return angle >= start || angle <= end;
 		}
 
 		public override string ToString()
 		{
-			return $"Arc [{start.UnitValue}->{end.UnitValue}] Degrees";
+			return $"Arc [{start:0.###}->{end:0.###}] Degrees";
 		}
 	}
 }
