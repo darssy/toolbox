@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace MmiSoft.Core
 {
@@ -23,6 +24,7 @@ namespace MmiSoft.Core
 		/// </summary>
 		/// <returns>The last element of the list</returns>
 		/// <exception cref="IndexOutOfRangeException">If the list is empty</exception>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static T Last<T>(this IList<T> list) => list[list.Count - 1];
 
 		/// <summary>

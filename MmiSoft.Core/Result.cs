@@ -3,24 +3,59 @@ using System.Collections.Generic;
 
 namespace MmiSoft.Core
 {
-	public readonly ref struct Result<R, E> where E : class
+	/// <summary>
+	/// This is a ref struct version of <see cref="ResultBase{R}"/> with the enhancement of an arbitrary error type. Useful for
+	/// cases where allocations matter.
+	/// </summary>
+	/// <remarks>
+	/// <para>E can be of any type, struct or ref but the former is to allow enum types to be used as errors. Otherwise I don't
+	/// see any reason of having a struct as an error. If you do so though, take care to make the default value of the struct
+	/// (the one returned by the empty constructor plugged in by default) the one that denotes a "no error" (aka success)
+	/// situation.
+	/// </para>
+	/// <para>
+	/// In case you want to use an enum, make sure that the very first constant declared, the one that will take the value zero,
+	/// to be the one denoting a "no error" situation. Otherwise the setup will fail miserably: you will try to create an
+	/// error result with the first error argument and you will get an <see cref="ArgumentException"/>
+	/// </para>
+	/// <para>
+	/// One obvious drawback of this class is that if R and E are of the same type, the compiler will complain when trying to invoke
+	/// the none default constructors. While that might seem obviously wrong in case of <c>Result&lt;MyErrorEnum, MyErrorEnum&gt;</c>
+	/// it might make sense for <c>Result&lt;string, string&gt;</c>
+	/// </para>
+	/// </remarks>
+	/// <typeparam name="R">The expected actual result type under normal circumstances</typeparam>
+	/// <typeparam name="E">The type of the error. Could be string or an enum or a class combining both etc.</typeparam>
+	public readonly ref struct Result<R, E>
 	{
 		private readonly E error;
 		private readonly R value;
 
+		/// <summary>
+		/// Creates an error result with the appropriate error state
+		/// </summary>
+		/// <param name="error">The specific error of this result</param>
+		/// <exception cref="ArgumentException">Attempt to invoke the constructor with a default value (null for classes
+		/// first value of enum etc.) will result in ArgumentException complaining that such an object will "impersonate"
+		/// success.</exception>
 		public Result(E error)
 		{
-			this.error = error ?? throw new ArgumentException("Error state can't be null -it will \"impersonate\" Success");
+			if (EqualityComparer<E>.Default.Equals(error, default))
+			{
+				string errText = error == null ? "null" : error.ToString();
+				throw new ArgumentException($"Error state can't be {errText} -it will \"impersonate\" Success");
+			}
+			this.error = error;
 			value = default;
 		}
 
 		public Result(R value)
 		{
 			this.value = value;
-			error = null;
+			error = default;
 		}
 
-		public bool Succeeded => error == null;
+		public bool Succeeded => EqualityComparer<E>.Default.Equals(error, default);
 
 		public R Value => Succeeded ? value : throw new InvalidOperationException("Result is not successful");
 
