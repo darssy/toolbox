@@ -7,6 +7,7 @@ namespace MmiSoft.Core.IO
 {
 	public static class FileWriter
 	{
+		[Obsolete("This method was experimental and is now obsolete")]
 		public static void WriteText(string filename, string text)
 		{
 			using var textWriter = new StreamWriter(filename);
@@ -20,6 +21,7 @@ namespace MmiSoft.Core.IO
 			}
 		}
 
+		[Obsolete("Use XmlFileIO.WriteXml() instead")]
 		public static void WriteXml<T>(string filename, T item)
 		{
 			XmlSerializer serializer = new XmlSerializer(typeof(T));
