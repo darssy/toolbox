@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>System</RootNamespace>
+    <TargetFrameworks>netstandard2.0;net462;net472;net48</TargetFrameworks>
+    <LangVersion>8</LangVersion>
+    <Authors>adamstyl</Authors>
+    <PackageId>MmiSoft.Core.System</PackageId>
+    <Product>MmiSoft.Core.System</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <VersionPrefix>0.1.5</VersionPrefix>
+    <Description>A trick to use the Range and Index syntax in .NET Framework and .NET standard</Description>
+    <ThisYear>$([System.DateTime]::Now.ToString("yyyy"))</ThisYear>
+    <Copyright>Copyright © adamstyl 2021-$(ThisYear)</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/adamstyl/toolbox</RepositoryUrl>
+    <PackageTags>utilities;toolbox;utility-classes;logger-middleware</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net462'">
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+
+</Project>
