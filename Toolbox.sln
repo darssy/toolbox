@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MmiSoft.Core", "MmiSoft.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MmiSoft.Core.Test", "MmiSoft.Core.Test\MmiSoft.Core.Test.csproj", "{67641DC4-9C03-4ED3-8CCE-ADEBA475526D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MmiSoft.Core.System", "MmiSoft.Core.System\MmiSoft.Core.System.csproj", "{6AE60DE7-A177-4CF6-9B2C-230927A094F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{67641DC4-9C03-4ED3-8CCE-ADEBA475526D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67641DC4-9C03-4ED3-8CCE-ADEBA475526D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67641DC4-9C03-4ED3-8CCE-ADEBA475526D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AE60DE7-A177-4CF6-9B2C-230927A094F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AE60DE7-A177-4CF6-9B2C-230927A094F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AE60DE7-A177-4CF6-9B2C-230927A094F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AE60DE7-A177-4CF6-9B2C-230927A094F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
