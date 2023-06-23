@@ -30,10 +30,16 @@ namespace MmiSoft.Core.Configuration
 			EventLogger.Info($"Configuration saved to {fullFilePath}");
 		}
 
+		/// <summary>
+		/// Attempts to populate configuration from the current file path with optional tracing.
+		/// </summary>
+		/// <param name="fullFilePath">The full path of the json file containing the configuration.</param>
+		/// <param name="withTracing">Set to true if you want JSON.net to read the configuration with a <c>DiagnosticsTraceWriter</c>
+		/// and the <c>LevelFilter</c> set to <c>TraceLevel.Verbose</c></param>
 		public void ReadConfig(string fullFilePath, bool withTracing = false)
 		{
 			string jsonText;
-			using (StreamReader fileStream = FileReader.CreateStream(fullFilePath))
+			using (StreamReader fileStream = new(fullFilePath))
 			{
 				jsonText = fileStream.ReadToEnd();
 			}
