@@ -17,7 +17,7 @@ artifacts:
   - path: MmiSoft.Core.System\bin\$(configuration)\*.*nupkg
 dotnet_csproj:
   patch: true
-  file: '**\*.csproj'
+  file: '**\MmiSoft.Core.csproj'
   version_prefix: '{version}'
 nuget:
   account_feed: true
