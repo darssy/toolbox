@@ -1,11 +1,11 @@
 namespace MmiSoft.Core.Geometry
 {
-	public class Arc
+	public readonly struct Arc
 	{
 		public const double FullCircle = 360;
 
-		private double start;
-		private double end;
+		private readonly double start;
+		private readonly double end;
 
 		public Arc(double start, double end)
 		{
