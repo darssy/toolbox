@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace MmiSoft.Core
@@ -25,12 +26,42 @@ namespace MmiSoft.Core
 		public static string[] SplitNewLine(this string s) => s?.Split(NewLines, StringSplitOptions.None);
 
 		/// <summary>
-		/// A more straightforward syntax for <c>elements.Any(s.Contains)</c>
+		/// A more straightforward syntax for <c>elements.Any(s.Contains) are strings</c>
 		/// </summary>
 		/// <param name="s">The string to test</param>
 		/// <param name="elements">The substrings to test if they are contained in <c>s</c></param>
 		/// <returns><c>true</c> if <paramref name="s" /> contains at least one of the <paramref name="elements" /></returns>
 		public static bool ContainsAnyOf(this string s, IEnumerable<string> elements) => elements.Any(s.Contains);
+
+		/// <summary>
+		/// A more straightforward syntax for <c>elements.Any(s.Contains) when elements are characters</c>
+		/// </summary>
+		/// <param name="s">The string to test</param>
+		/// <param name="elements">The characters to test if they are contained in <c>s</c></param>
+		/// <returns><c>true</c> if <paramref name="s" /> contains at least one of the <paramref name="elements" /></returns>
+		public static bool ContainsAnyOf(this string s, IEnumerable<char> elements) => elements.Any(s.Contains);
+
+		/// <summary>
+		/// Joins a series of characters with the separator into a string
+		/// </summary>
+		/// <param name="chars">The chars to join</param>
+		/// <param name="separator">The separator to use. Default is space</param>
+		/// <returns></returns>
+		public static string Join(this IEnumerable<char> chars, char separator = ' ')
+		{
+			if (chars is not char[] charArray)
+			{
+				charArray = chars.ToArray();
+			}
+			if (charArray.Length == 0) return "";
+			StringBuilder builder = new(charArray.Length * 2);
+			for (var i = 0; i < charArray.Length - 1; i++)
+			{
+				builder.Append(charArray[i]).Append(separator);
+			}
+			builder.Append(charArray.Last());
+			return builder.ToString();
+		}
 
 		/// <summary>
 		/// An easier way of getting the last character of a string. So instead of writing

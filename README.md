@@ -46,6 +46,10 @@ SolidBrush solidBrush = BrushCache.GetOrCreate(e.Item.BackColor, () => new Solid
 e.Graphics.FillRectangle(solidBrush, new Rectangle(Point.Empty, e.Item.Size));
 ```
 
+#### String and char extensions
+
+`Join(this IEnumerable<char> chars, char separator = ' ')`<br/>Allows us to join a series of characters with another character. Similar to `string.Join()`.
+
 ### Logging
 You can use `EventLogger` static class logger wrapper if you want to wrap a logging library inside an `ILogWrapper` and then switch implementation if you change your mind. You can skip `EventLogger` altogether and go straight to `ILogWrapper` if you are hard-core into DI, but I consider it an overkill. Whenever I want to log, **I want to log.** Not to think how the heck I could get the logger in XYZ class.
 
