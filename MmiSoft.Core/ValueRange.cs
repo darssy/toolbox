@@ -6,6 +6,7 @@ namespace MmiSoft.Core
 	/// A simple value range between 2 comparable values. Not to be confused with the C# 8 ranges API.
 	/// </summary>
 	/// <typeparam name="T">Any type that implements Comparable</typeparam>
+	[Serializable]
 	public sealed class ValueRange<T> where T : IComparable<T>
 	{
 		private T minValue;
