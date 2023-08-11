@@ -26,7 +26,7 @@ namespace MmiSoft.Core
 		public static string[] SplitNewLine(this string s) => s?.Split(NewLines, StringSplitOptions.None);
 
 		/// <summary>
-		/// A more straightforward syntax for <c>elements.Any(s.Contains) are strings</c>
+		/// A more straightforward syntax for <c>elements.Any(s.Contains) when elements are strings</c>
 		/// </summary>
 		/// <param name="s">The string to test</param>
 		/// <param name="elements">The substrings to test if they are contained in <c>s</c></param>
