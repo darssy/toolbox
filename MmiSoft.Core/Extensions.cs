@@ -23,17 +23,6 @@ namespace MmiSoft.Core
 			typeof(IPAddress)
 		};
 
-		public static UInt64 DoubleToLongBits(this double d)
-		{
-			BitArray a = new BitArray(BitConverter.GetBytes(d));
-			UInt64 longBits = 0;
-			for (int i = 0; i < a.Length; i++)
-			{
-				longBits += Convert.ToUInt16(a[i]) * ((UInt64)SysMath.Pow(2, i));
-			}
-			return longBits;
-		}
-
 		public static IEnumerable<T> OfExactType<T>(this IEnumerable collection)
 		{
 			foreach (object item in collection)
