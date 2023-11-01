@@ -3,19 +3,25 @@ using System.Threading;
 
 namespace MmiSoft.Core
 {
+	/// <summary>
+	/// A simple class that generates sequential integers. It's a wrapper to Interlocked.Increment
+	/// </summary>
 	public class AutoIncrementGenerator
 	{
-		private volatile int nextDigit;
+		private int currentDigit;
 
+		/// <summary>
+		/// Initializes an autoincrement generator starting from 1
+		/// </summary>
 		public AutoIncrementGenerator()
 		{
-			nextDigit = 0;
 		}
 
-		public int NextDigit()
-		{
-			return Interlocked.Increment(ref nextDigit);
-		}
+		/// <summary>
+		/// This method returns the next digit of the sequence after each call. As a result it violates CQRS and it's not pure.
+		/// </summary>
+		/// <returns>The next digit of the sequence</returns>
+		public int NextDigit() => Interlocked.Increment(ref currentDigit);
 
 	}
 }
