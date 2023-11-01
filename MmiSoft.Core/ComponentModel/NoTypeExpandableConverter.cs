@@ -25,6 +25,7 @@ namespace MmiSoft.Core.ComponentModel
 		}
 	}
 
+#if !NET
 	public class ConstrainedFontConverter : FontConverter
 	{
 		private static readonly List<string> Fields = new List<string>
@@ -46,5 +47,6 @@ namespace MmiSoft.Core.ComponentModel
 			return properties;
 		}
 	}
+#endif
 
 }
