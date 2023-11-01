@@ -18,7 +18,11 @@ namespace MmiSoft.Core.Json
 
 		public override bool CanConvert(Type objectType)
 		{
+#if NET5_0_OR_GREATER
+			return objectType.IsAssignableTo(typeof(IPAddress));
+#else
 			return objectType == typeof(IPAddress);
+#endif
 		}
 	}
 }
