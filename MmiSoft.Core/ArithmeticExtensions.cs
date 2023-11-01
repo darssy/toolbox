@@ -1,4 +1,6 @@
 using System;
+using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace MmiSoft.Core
 {
@@ -30,11 +32,111 @@ namespace MmiSoft.Core
 			return number <= a && number >= b || number <= b && number >= a;
 		}
 
-		public static bool Between(this TimeSpan number, TimeSpan a, TimeSpan b)
+		public static bool Between(this TimeSpan t, TimeSpan a, TimeSpan b)
 		{
-			return number <= a && number >= b || number <= b && number >= a;
+			return t <= a && t >= b || t <= b && t >= a;
 		}
 
+		#region RangeChecking
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AssertWithin(this byte number, byte min, byte max)
+		{
+			if (number < min || number > max)
+				throw new ArgumentOutOfRangeException(nameof(number), $"Value is outside expected range [{min}, {max}]");
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsWithin(this byte b, byte min, byte max)
+		{
+			return b >= min && b <= max;
+		}
+
+#if NET7_0_OR_GREATER
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsWithin<T>(this T number, T min, T max) where T : INumber<T>
+		{
+			return number >= min && number <= max;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AssertWithin<T>(this T number, T min, T max) where T : INumber<T>
+		{
+			if (number < min || number > max)
+			{
+				throw new ArgumentOutOfRangeException(nameof(number), $"Value is outside expected range [{min}, {max}]");
+			}
+		}
+#else
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AssertWithin(this decimal number, decimal min, decimal max)
+		{
+			if (number < min || number > max)
+				throw new ArgumentOutOfRangeException(nameof(number), $"Value is outside expected range [{min}, {max}]");
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsWithin(this decimal number, decimal min, decimal max)
+		{
+			return number >= min && number <= max;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AssertWithin(this double number, double min, double max)
+		{
+			if (number < min || number > max)
+				throw new ArgumentOutOfRangeException(nameof(number), $"Value is outside expected range [{min}, {max}]");
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsWithin(this double number, double min, double max)
+		{
+			return number >= min && number <= max;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AssertWithin(this float number, float min, float max)
+		{
+			if (number < min || number > max)
+				throw new ArgumentOutOfRangeException(nameof(number), $"Value is outside expected range [{min}, {max}]");
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsWithin(this float number, float min, float max)
+		{
+			return number >= min && number <= max;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AssertWithin(this int number, int min, int max)
+		{
+			if (number < min || number > max)
+				throw new ArgumentOutOfRangeException(nameof(number), $"Value is outside expected range [{min}, {max}]");
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsWithin(this int number, int min, int max)
+		{
+			return number >= min && number <= max;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void AssertWithin(this long number, long min, long max)
+		{
+			if (number < min || number > max)
+				throw new ArgumentOutOfRangeException(nameof(number), $"Value is outside expected range [{min}, {max}]");
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsWithin(this long number, long min, long max)
+		{
+			return number >= min && number <= max;
+		}
+
+#endif
+
+		#endregion
 		public static Percent PercentBetween(this int value, int from, int to)
 		{
 			float dif = value - from;
