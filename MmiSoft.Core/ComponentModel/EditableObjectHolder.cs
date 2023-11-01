@@ -4,14 +4,14 @@ namespace MmiSoft.Core.ComponentModel
 {
 	public class EditableObjectHolder<T> : IEditableObjectWrapper where T : class, new()
 	{
-		private T original;
+		private T memento;
 		private Func<T, T> copyAction;
 		private bool isEditing;
 
 		public EditableObjectHolder(T o, Func<T, T> copyAction = null)
 		{
 			Object = o;
-			original = null;
+			memento = null;
 			this.copyAction = copyAction;
 		}
 
@@ -33,26 +33,26 @@ namespace MmiSoft.Core.ComponentModel
 			IsEditing = true;
 			if (copyAction == null)
 			{
-				original = new T();
-				Object.Copy(original);
+				memento = new T();
+				Object.Copy(memento);
 			}
 			else
 			{
-				original = copyAction.Invoke(Object);
+				memento = copyAction.Invoke(Object);
 			}
 		}
 
 		public void CancelEdit()
 		{
 			if (!IsEditing) return;
-			original.Copy(Object);
-			original = null;
+			memento.Copy(Object);
+			memento = null;
 			IsEditing = false;
 		}
 
 		public void EndEdit()
 		{
-			original = null;
+			memento = null;
 			IsEditing = false;
 		}
 
