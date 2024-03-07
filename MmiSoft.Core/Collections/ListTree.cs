@@ -1,10 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace MmiSoft.Core.Collections
 {
-	public class ListTree<T>
+	public class ListTree<T> : IEnumerable<ListTree<T>>
 	{
 		private T data;
 		private LinkedList<ListTree<T>> children;
@@ -40,7 +41,7 @@ namespace MmiSoft.Core.Collections
 
 		public ListTree<T> GetChildNodeAt(int i)
 		{
-			return children.FirstOrDefault(n => --i == 0);
+			return children.FirstOrDefault(_ => i-- == 0);
 		}
 
 		public bool ContainsChild(Func<T, bool> condition)
@@ -62,9 +63,13 @@ namespace MmiSoft.Core.Collections
 			}
 		}
 
+		public IEnumerator<ListTree<T>> GetEnumerator() => children.GetEnumerator();
+
 		public override string ToString()
 		{
 			return $"NTree Node ['{data}', {children.Count} child(ren)]";
 		}
+
+		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 	}
 }
