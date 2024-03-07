@@ -1,4 +1,4 @@
-version: 0.1.6
+version: 0.1.7
 branches:
   only:
     - master
@@ -59,4 +59,4 @@ for:
     branches:
       only:
         - develop
-    version: 0.1.6-dev.{build}
+    version: 0.1.7-dev.{build}
