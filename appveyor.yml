@@ -12,6 +12,10 @@ before_build:
   - cmd: nuget restore
 build:
   verbosity: normal
+only_commits:
+  files:  # works on Github and BitBucket only
+    - '**/*.cs'
+    - '**/*.csproj'
 artifacts:
   - path: MmiSoft.Core\bin\$(configuration)\*.*nupkg
   - path: MmiSoft.Core.System\bin\$(configuration)\*.*nupkg
