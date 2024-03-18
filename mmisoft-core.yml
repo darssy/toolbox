@@ -1,4 +1,4 @@
-version: 0.0.1
+version: 0.1.7
 branches:
   only:
     - master
@@ -14,13 +14,13 @@ build:
   verbosity: normal
 only_commits:
   files:  # works on Github and BitBucket only
-    - MmiSoft.Parser/**/*.cs
-    - MmiSoft.Parser/**/*.csproj
+    - 'MmiSoft.Core/**/*.cs'
+    - 'MmiSoft.Core/**/*.csproj'
 artifacts:
-  - path: MmiSoft.Parser\bin\$(configuration)\*.*nupkg
+  - path: MmiSoft.Core\bin\$(configuration)\*.*nupkg
 dotnet_csproj:
   patch: true
-  file: 'MmiSoft.Parser\MmiSoft.Parser.csproj'
+  file: '**\MmiSoft.Core.csproj'
   version_prefix: '{version}'
 nuget:
   account_feed: true
@@ -62,4 +62,4 @@ for:
     branches:
       only:
         - develop
-    version: 0.0.1-dev.{build}
+    version: 0.1.7-dev.{build}

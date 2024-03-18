@@ -4,6 +4,16 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <LangVersion>11</LangVersion>
+    <PackageId>MmiSoft.Parser</PackageId>
+    <Product>MmiSoft.Parser</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <VersionPrefix>0.0.1.0</VersionPrefix>
+    <Description>TBA</Description>
+    <ThisYear>$([System.DateTime]::Now.ToString("yyyy"))</ThisYear>
+    <Copyright>Copyright © adamstyl $(ThisYear)</Copyright>
     <TargetFrameworks>net48;net7.0-windows</TargetFrameworks>
   </PropertyGroup>
 
