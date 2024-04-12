@@ -9,8 +9,8 @@ namespace MmiSoft.Core.ComponentModel
 		[Test]
 		public void TestCancelEditWithNotifyPropertyChanged()
 		{
-			PropertyNotifier stub = new PropertyNotifier();
-			EditableObjectHolder<PropertyNotifier> objectHolder = new EditableObjectHolder<PropertyNotifier>(stub);
+			PropertyNotifier stub = new();
+			EditableObjectHolder<PropertyNotifier> objectHolder = new(stub);
 			objectHolder.BeginEdit();
 			Assert.True(objectHolder.IsEditing);
 			Assert.AreEqual(stub.TimesEventFired, 0);
@@ -22,7 +22,7 @@ namespace MmiSoft.Core.ComponentModel
 			Assert.False(objectHolder.IsEditing);
 		}
 
-		private class PropertyNotifier : INotifyPropertyChanged, IExternallyEditable
+		private class PropertyNotifier : ExternallyEditableObject, INotifyPropertyChanged
 		{
 			public event PropertyChangedEventHandler PropertyChanged;
 
@@ -46,11 +46,8 @@ namespace MmiSoft.Core.ComponentModel
 			protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
 			{
 				timesEventFired++;
-				PropertyChangedEventHandler handler = PropertyChanged;
-				if (handler != null) handler(this, e);
+				PropertyChanged?.Invoke(this, e);
 			}
-
-			public bool IsEdited { get; set; }
 		}
 	}
 }

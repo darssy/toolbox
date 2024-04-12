@@ -37,7 +37,7 @@ namespace MmiSoft.Core
 		[Test]
 		public void TestWithInheritance()
 		{
-			EditableObjectHolder<InheritedStub> editable = new EditableObjectHolder<InheritedStub>(new InheritedStub());
+			EditableObjectHolder<InheritedStub> editable = new(new InheritedStub());
 			editable.Object.SomeString = "string";
 			Assert.False(editable.Object.IsEdited);
 			editable.BeginEdit();
@@ -48,7 +48,7 @@ namespace MmiSoft.Core
 			Assert.AreEqual(editable.Object.SomeString, "string");
 		}
 
-		private class PrimitivesStub : IExternallyEditable
+		private class PrimitivesStub : ExternallyEditableObject
 		{
 			public int SomeInt { get; set; }
 			public string SomeString { get; set; }
@@ -69,8 +69,6 @@ namespace MmiSoft.Core
 			{
 				ReadonlyProp = val;
 			}
-
-			public bool IsEdited { get; set; }
 		}
 
 		private class StructStub

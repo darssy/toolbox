@@ -6,7 +6,6 @@ namespace MmiSoft.Core.ComponentModel
 	{
 		private T memento;
 		private Func<T, T> copyAction;
-		private bool isEditing;
 
 		public EditableObjectHolder(T o, Func<T, T> copyAction = null)
 		{
@@ -17,20 +16,13 @@ namespace MmiSoft.Core.ComponentModel
 
 		public T Object { get; }
 
-		public bool IsEditing
-		{
-			get => isEditing;
-			private set
-			{
-				isEditing = value;
-				if (Object is IExternallyEditable et) et.IsEdited = IsEditing;
-			}
-		}
+		public bool IsEditing { get; private set; }
 
 		public void BeginEdit()
 		{
 			if (IsEditing) return;
 			IsEditing = true;
+			if (Object is IEditableObjectWithEvents et) et.BeginEdit();
 			if (copyAction == null)
 			{
 				memento = new T();
@@ -48,12 +40,14 @@ namespace MmiSoft.Core.ComponentModel
 			memento.Copy(Object);
 			memento = null;
 			IsEditing = false;
+			if (Object is IEditableObjectWithEvents et) et.CancelEdit();
 		}
 
 		public void EndEdit()
 		{
 			memento = null;
 			IsEditing = false;
+			if (Object is IEditableObjectWithEvents et) et.EndEdit();
 		}
 
 		object IEditableObjectWrapper.Object => Object;
