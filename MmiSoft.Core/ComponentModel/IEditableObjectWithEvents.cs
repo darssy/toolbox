@@ -3,11 +3,17 @@ using System.ComponentModel;
 
 namespace MmiSoft.Core.ComponentModel;
 
-public interface IEditableObjectWithEvents : IEditableObject
+public interface IEditableObjectWithEvents
 {
-	public event EventHandler EditStarted;
-	public event EventHandler EditAccepted;
-	public event EventHandler EditRejected;
+	event EventHandler EditStarted;
+	event EventHandler EditAccepted;
+	event EventHandler EditRejected;
 
 	bool IsEdited { get; }
+	
+	void BeginEdit();
+
+	void EndEdit();
+
+	void CancelEdit();
 }
