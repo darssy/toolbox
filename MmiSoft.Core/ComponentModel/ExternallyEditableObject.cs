@@ -11,18 +11,21 @@ public class ExternallyEditableObject : IEditableObjectWithEvents
 	public bool IsEdited { get; private set; }
 	public void BeginEdit()
 	{
+		if (IsEdited) return; // unfortunately a data grid view is calling BeginEdit just for kicks...
 		IsEdited = true;
 		EditStarted?.Invoke(this, EventArgs.Empty);
 	}
 
 	public void EndEdit()
 	{
+		if (!IsEdited) return;
 		IsEdited = false;
 		EditAccepted?.Invoke(this, EventArgs.Empty);
 	}
 
 	public void CancelEdit()
 	{
+		if (!IsEdited) return;
 		IsEdited = false;
 		EditRejected?.Invoke(this, EventArgs.Empty);
 	}

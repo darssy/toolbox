@@ -45,6 +45,7 @@ namespace MmiSoft.Core.ComponentModel
 
 		public void EndEdit()
 		{
+			if (!IsEditing) return;
 			memento = null;
 			IsEditing = false;
 			if (Object is IEditableObjectWithEvents et) et.EndEdit();
