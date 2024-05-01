@@ -21,21 +21,21 @@ public class TokenCollection<T> : IReadOnlyList<Token<T>>
 	public Token<T> Peek(int i = 0)
 	{
 		if (i < 0) throw new IndexOutOfRangeException("Negative index not allowed");
-		if (i >= reversedTokens.Length) throw new IndexOutOfRangeException("Index must less than count");
-		return reversedTokens[^(i + 1)];
+		if (i >= Count) throw new IndexOutOfRangeException("Index must be less than count");
+		return reversedTokens[Count - i - 1];
 	}
 
 	public Token<T> Pop(int i = 0)
 	{
 		Token<T> result = Peek(i);
-		reversedTokens[^(i + 1)] = default;
+		reversedTokens[Count - i - 1] = default;
 		Count--;
 		return result;
 	}
 
 	public int Count { get; private set; }
 
-	public IEnumerator<Token<T>> GetEnumerator() => new ReverseEnumerator(reversedTokens);
+	public IEnumerator<Token<T>> GetEnumerator() => new ReverseEnumerator(reversedTokens, Count);
 
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
@@ -45,12 +45,15 @@ public class TokenCollection<T> : IReadOnlyList<Token<T>>
 	{
 		private Token<T>[] reversedTokens;
 		private int index;
+		private int count;
 		private int capturedLength;
 
-		public ReverseEnumerator(Token<T>[] reversedTokens)
+		public ReverseEnumerator(Token<T>[] reversedTokens, int count)
 		{
 			this.reversedTokens = reversedTokens ?? throw new ArgumentNullException(nameof(reversedTokens));
+			this.count = count;
 			capturedLength = this.reversedTokens.Length;
+			index = count;
 		}
 
 		public void Dispose()
@@ -60,22 +63,22 @@ public class TokenCollection<T> : IReadOnlyList<Token<T>>
 
 		public bool MoveNext()
 		{
-			if (index >= reversedTokens.Length) return false;
+			if (index == 0) return false;
 			if (capturedLength != reversedTokens.Length)
 			{
 				throw new Exception("Collection modified during iteration");
 			}
-			index++;
+			index--;
 			return true;
 		}
 
 		public void Reset()
 		{
-			index = 0;
+			index = count;
 			capturedLength = reversedTokens.Length;
 		}
 
-		public Token<T> Current => reversedTokens[^(index + 1)];
+		public Token<T> Current => reversedTokens[index];
 
 		object IEnumerator.Current => Current;
 	}
