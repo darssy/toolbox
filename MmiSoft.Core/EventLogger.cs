@@ -124,5 +124,10 @@ namespace MmiSoft.Core
 		{
 			loggerImplementation.Exception(exc, LogSeverity.Fatal, userMessage, module);
 		}
+
+		public static void Log(this LogEntry entry)
+		{
+			loggerImplementation.Log(entry.Severity, entry.Message, entry.Module);
+		}
 	}
 }
