@@ -16,6 +16,7 @@ only_commits:
   files:  # works on Github and BitBucket only
     - MmiSoft.Parser/**/*.cs
     - MmiSoft.Parser/**/*.csproj
+    - '*.yml'
 artifacts:
   - path: MmiSoft.Parser\bin\$(configuration)\*.*nupkg
 dotnet_csproj:
