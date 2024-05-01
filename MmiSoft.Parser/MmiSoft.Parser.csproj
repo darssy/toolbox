@@ -14,14 +14,11 @@
     <Description>TBA</Description>
     <ThisYear>$([System.DateTime]::Now.ToString("yyyy"))</ThisYear>
     <Copyright>Copyright © adamstyl $(ThisYear)</Copyright>
-    <TargetFrameworks>net48;net7.0-windows</TargetFrameworks>
+    <TargetFrameworks>net7.0-windows;net48</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MmiSoft.Core\MmiSoft.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="MmiSoft.Core" Version="0.1.7" />
     <PackageReference Include="MmiSoft.Core.System" Version="1.0.0" Condition="'$(TargetFramework)' == 'net48'" />
   </ItemGroup>
 </Project>
