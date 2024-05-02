@@ -14,7 +14,7 @@
     <Description>TBA</Description>
     <ThisYear>$([System.DateTime]::Now.ToString("yyyy"))</ThisYear>
     <Copyright>Copyright © adamstyl $(ThisYear)</Copyright>
-    <TargetFrameworks>net7.0-windows;net48</TargetFrameworks>
+    <TargetFrameworks>net48;net7.0;net8.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>

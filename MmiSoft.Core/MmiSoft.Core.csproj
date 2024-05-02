@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net7.0-windows;net462;net472;net48</TargetFrameworks>
+    <TargetFrameworks>net8.0;net462;net472;net48;net7.0</TargetFrameworks>
     <LangVersion>11</LangVersion>
     <RootNamespace>MmiSoft.Core</RootNamespace>
     <Authors>adamstyl</Authors>
