@@ -16,6 +16,8 @@ only_commits:
   files:  # works on Github and BitBucket only
     - 'MmiSoft.Core/**/*.cs'
     - 'MmiSoft.Core/**/*.csproj'
+    - 'MmiSoft.Core.Test/**/*.cs'
+    - 'MmiSoft.Core.Test/**/*.csproj'
     - mmisoft-core.yml
 artifacts:
   - path: MmiSoft.Core\bin\$(configuration)\*.*nupkg
