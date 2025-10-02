@@ -59,9 +59,12 @@ namespace MmiSoft.Core
 
 		private class PrimitivesStub : ExternallyEditableObject
 		{
+			private float readonlyProp;
 			public int SomeInt { get; set; }
 			public string SomeString { get; set; }
-			public float ReadonlyProp { get; private set; }
+
+			public float ReadonlyProp => readonlyProp;
+
 			private byte PrivateProp { get; set; }
 
 			public void SetPrivateProp(byte val)
@@ -76,7 +79,7 @@ namespace MmiSoft.Core
 
 			public void SetReadonlyProp(float val)
 			{
-				ReadonlyProp = val;
+				readonlyProp = val;
 			}
 		}
 
