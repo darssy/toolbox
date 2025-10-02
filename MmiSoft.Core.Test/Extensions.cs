@@ -48,6 +48,15 @@ namespace MmiSoft.Core
 			Assert.AreEqual(editable.Object.SomeString, "string");
 		}
 
+		[Test]
+		public void PropertyWithPrivateSetterIsCopiedToMemento()
+		{
+			PrivateSetterStub original = new ("123");
+			PrivateSetterStub clone = new ("");
+			original.Copy(clone);
+			Assert.AreEqual("123", clone.SomeString);
+		}
+
 		private class PrimitivesStub : ExternallyEditableObject
 		{
 			public int SomeInt { get; set; }
@@ -79,6 +88,16 @@ namespace MmiSoft.Core
 		private class InheritedStub : PrimitivesStub
 		{
 
+		}
+		
+		private class PrivateSetterStub
+		{
+			public PrivateSetterStub(string someString)
+			{
+				SomeString = someString;
+			}
+
+			public string SomeString { get; private set; }
 		}
 	}
 }

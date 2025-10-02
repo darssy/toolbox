@@ -56,24 +56,25 @@ namespace MmiSoft.Core
 				Converters = typeof(T).GetJsonConverters()
 			};
 
-			IEnumerable<PropertyInfo> properties = typeof(T).GetProperties()
-				.Where(p => p.GetGetMethod() != null && p.GetSetMethod() != null);
+			IEnumerable<PropertyInfo> properties = typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public);
 
 			foreach (PropertyInfo info in properties)
 			{
+				MethodInfo propertyGetter = info.GetGetMethod();
+				MethodInfo propertySetter = info.GetSetMethod(true);
+				if (propertySetter == null || propertyGetter == null) continue;
 				if (info.GetCustomAttributes(true).Contains(BrowsableFalse))
 				{
 					continue;
 				}
 
-				MethodInfo propertyGetter = info.GetGetMethod();
 				object value = propertyGetter.Invoke(from, new object[] { });
 				if (!info.PropertyType.IsValueType && !ignoredTypes.Contains(info.PropertyType))
 				{
 					string json = JsonConvert.SerializeObject(value, settings);
 					value = JsonConvert.DeserializeObject(json, propertyGetter.ReturnType, settings);
 				}
-				info.GetSetMethod().Invoke(to, new[] { value });
+				propertySetter.Invoke(to, new[] { value });
 			}
 		}
 
