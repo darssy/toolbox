@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net;
 using MmiSoft.Core.ComponentModel;
+using MmiSoft.Core.IO;
 using MmiSoft.Core.Math;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -54,6 +55,16 @@ namespace MmiSoft.Core.Configuration
 			Assert.AreEqual(config.AccInputMethod, TestEnum.Three);
 			Assert.AreEqual(config.ConnectionAddress, IPAddress.Parse("192.168.1.1"));
 			Assert.AreEqual(config.Inflation, new Percent(2.34));
+		}
+
+		[Test]
+		public void NullFieldsAreNotSerialized()
+		{
+			var config = new TestConfig { ConnectionAddress = null };
+			using var stringWriter = new StringWriter();
+			JsonFileIO.Write(stringWriter, config);
+			string serializedValue = stringWriter.ToString();
+			Assert.That(serializedValue, Does.Not.Contain(nameof(TestConfig.ConnectionAddress)));
 		}
 
 		[EnumConverter]

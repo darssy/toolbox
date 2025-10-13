@@ -88,14 +88,15 @@ namespace MmiSoft.Core.IO
 			return jsonSettings;
 		}
 
-		internal static JsonSerializerSettings CreateJsonSettings(ITraceWriter traceWriter)
+		private static JsonSerializerSettings CreateJsonSettings(ITraceWriter traceWriter)
 		{
 			return new JsonSerializerSettings
 			{
 				TraceWriter = traceWriter,
 				Formatting = Formatting.Indented,
 				ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
-				DefaultValueHandling = DefaultValueHandling.Include
+				DefaultValueHandling = DefaultValueHandling.Include,
+				NullValueHandling = NullValueHandling.Ignore
 			};
 		}
 	}
