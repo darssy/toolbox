@@ -31,16 +31,16 @@ namespace MmiSoft.Core.Math
 
 		public static PointF Intersection(LineSegment s1, LineSegment s2, out IntersectionType type)
 		{
-			int x1 = s1.X1;
-			int x2 = s1.X2;
-			int x3 = s2.X1;
-			int x4 = s2.X2;
+			float x1 = s1.X1;
+			float x2 = s1.X2;
+			float x3 = s2.X1;
+			float x4 = s2.X2;
 
-			int y1 = s1.Y1;
-			int y2 = s1.Y2;
-			int y3 = s2.Y1;
-			int y4 = s2.Y2;
-			int denominator = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+			float y1 = s1.Y1;
+			float y2 = s1.Y2;
+			float y3 = s2.Y1;
+			float y4 = s2.Y2;
+			float denominator = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
 			if (denominator == 0)
 			{
 				type = IntersectionType.Parallel;
