@@ -15,10 +15,12 @@ namespace MmiSoft.Core
 		public static readonly Percent Hundred = new Percent(100);
 
 		private readonly float value;
+		private readonly long roundedRepresentationForComparisons;
 
 		private Percent(float value, bool _)
 		{
 			this.value = value;
+			roundedRepresentationForComparisons = (value / MmiSoft.Core.Math.Extensions.DefaultTolerance).Round();
 		}
 
 		/// <summary>
@@ -31,6 +33,7 @@ namespace MmiSoft.Core
 		public Percent(float value)
 		{
 			this.value = value / 100;
+			roundedRepresentationForComparisons = (this.value / MmiSoft.Core.Math.Extensions.DefaultTolerance).Round();
 		}
 
 		/// <summary>
@@ -43,6 +46,7 @@ namespace MmiSoft.Core
 		public Percent(double value)
 		{
 			this.value = (float) (value / 100);
+			roundedRepresentationForComparisons = (this.value / MmiSoft.Core.Math.Extensions.DefaultTolerance).Round();
 		}
 
 		/// <summary>
@@ -117,22 +121,22 @@ namespace MmiSoft.Core
 
 		public static bool operator ==(in Percent left, in Percent right)
 		{
-			return left.value.AlmostEqual(right.value);
+			return left.roundedRepresentationForComparisons == right.roundedRepresentationForComparisons;
 		}
 
 		public static bool operator !=(in Percent left, in Percent right)
 		{
-			return !left.value.AlmostEqual(right.value);
+			return left.roundedRepresentationForComparisons != right.roundedRepresentationForComparisons;
 		}
 
 		public override bool Equals(object obj)
 		{
-			return obj is Percent percent && percent.value.AlmostEqual(value);
+			return obj is Percent percent && percent.roundedRepresentationForComparisons == roundedRepresentationForComparisons;
 		}
 
 		public override int GetHashCode()
 		{
-			return value.GetHashCode() * 113;
+			return roundedRepresentationForComparisons.GetHashCode();
 		}
 
 		public string ToString(string format, IFormatProvider formatProvider)
@@ -156,27 +160,27 @@ namespace MmiSoft.Core
 
 		public int CompareTo(Percent other)
 		{
-			return value.CompareTo(other.value);
+			return roundedRepresentationForComparisons.CompareTo(other.roundedRepresentationForComparisons);
 		}
 
 		public static bool operator <(Percent left, Percent right)
 		{
-			return left.value < right.value;
+			return left.roundedRepresentationForComparisons < right.roundedRepresentationForComparisons;
 		}
 
 		public static bool operator >(Percent left, Percent right)
 		{
-			return left.value > right.value;
+			return left.roundedRepresentationForComparisons > right.roundedRepresentationForComparisons;
 		}
 
 		public static bool operator <=(Percent left, Percent right)
 		{
-			return left.value <= right.value;
+			return left.roundedRepresentationForComparisons <= right.roundedRepresentationForComparisons;
 		}
 
 		public static bool operator >=(Percent left, Percent right)
 		{
-			return left.value >= right.value;
+			return left.roundedRepresentationForComparisons >= right.roundedRepresentationForComparisons;
 		}
 
 		/// <summary>

@@ -139,8 +139,10 @@ namespace MmiSoft.Core.Math
 			return Math.Abs(x - y) <= epsilon;
 		}
 
+		public const float DefaultTolerance = 0.000001f;
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool AlmostEqual(this float left, float right, float tolerance=0.000001f)
+		public static bool AlmostEqual(this float left, float right, float tolerance=DefaultTolerance)
 		{
 			return (left - right).Abs() <= tolerance;
 		}
