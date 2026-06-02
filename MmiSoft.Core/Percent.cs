@@ -222,8 +222,11 @@ namespace MmiSoft.Core
 		public static Regex GetValidator(IFormatProvider provider)
 		{
 			NumberFormatInfo formatInfo = NumberFormatInfo.GetInstance(provider);
-			return Validators.GetOrCreate(provider, formatInfo,
-				info => new Regex($@"^-?[0-9]+({info.PercentDecimalSeparator}[0-9]+)?{info.PercentSymbol}$"));
+			lock (Validators)
+			{
+				return Validators.GetOrCreate(provider, formatInfo,
+					info => new Regex($"^-?[0-9]+({info.PercentDecimalSeparator}[0-9]+)?{info.PercentSymbol}$"));
+			}
 		}
 
 		public static Percent Parse(string text, IFormatProvider provider)

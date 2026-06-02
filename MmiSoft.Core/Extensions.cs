@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -41,11 +42,15 @@ namespace MmiSoft.Core
 			{
 				type = type.GetGenericArguments()[1];
 			}
-			return ConverterCache.GetOrCreate(type, () => type
-				.GetCustomAttributes(true)
-				.OfType<JsonConverterBaseAttribute>()
-				.Select(attr => attr.Create())
-				.ToList());
+
+			lock (ConverterCache)
+			{
+				return ConverterCache.GetOrCreate(type, () => type
+					.GetCustomAttributes(true)
+					.OfType<JsonConverterBaseAttribute>()
+					.Select(attr => attr.Create())
+					.ToList());
+			}
 		}
 
 		public static void Copy<T>(this T from, T to)
