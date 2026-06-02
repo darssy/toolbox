@@ -31,24 +31,24 @@ namespace MmiSoft.Core.Math
 
 		public static PointF Intersection(LineSegment s1, LineSegment s2, out IntersectionType type)
 		{
-			float x1 = s1.X1;
-			float x2 = s1.X2;
-			float x3 = s2.X1;
-			float x4 = s2.X2;
+			double x1 = s1.X1;
+			double x2 = s1.X2;
+			double x3 = s2.X1;
+			double x4 = s2.X2;
 
-			float y1 = s1.Y1;
-			float y2 = s1.Y2;
-			float y3 = s2.Y1;
-			float y4 = s2.Y2;
-			float denominator = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+			double y1 = s1.Y1;
+			double y2 = s1.Y2;
+			double y3 = s2.Y1;
+			double y4 = s2.Y2;
+			double denominator = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
 			if (denominator == 0)
 			{
 				type = IntersectionType.Parallel;
 				return Point.Empty;
 			}
 
-			float px = (x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4);
-			float py = (x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4);
+			double px = (x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4);
+			double py = (x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4);
 
 			px /= denominator;
 			py /= denominator;
@@ -63,7 +63,7 @@ namespace MmiSoft.Core.Math
 			}
 			else type = IntersectionType.NoLine;
 
-			return new PointF(px, py);
+			return new PointF((float) px, (float) py);
 		}
 	}
 }
