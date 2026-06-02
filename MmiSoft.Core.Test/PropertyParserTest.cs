@@ -109,9 +109,35 @@ namespace MmiSoft.Core
 			};
 			IDictionary<string,string> properties = PropertyParser.ReadProperties(lines);
 			Assert.That(properties, Has.Count.EqualTo(1));
-			string value = string.Join(Environment.NewLine, @"multi", "line", "", "value", "", "example");
+			string value = string.Join(Environment.NewLine, "multi", "line", "", "value", "", "example");
 			Assert.That(properties, Contains.Key("multi-key").WithValue(value));
 			
+		}
+
+		[Test]
+		public void MultilineProperty_DanglingContinuationOnLastLine_DoesNotThrowAndStripsMarker()
+		{
+			List<string> lines = new List<string>
+			{
+				"multi-key = multi \\",
+				"  line \\"
+			};
+			IDictionary<string,string> properties = PropertyParser.ReadProperties(lines);
+			Assert.That(properties, Has.Count.EqualTo(1));
+			string value = string.Join(Environment.NewLine, "multi", "line");
+			Assert.That(properties, Contains.Key("multi-key").WithValue(value));
+		}
+
+		[Test]
+		public void SingleLineProperty_EndsWithContinuationMarker_DoesNotThrow()
+		{
+			List<string> lines = new List<string>
+			{
+				"key = value \\"
+			};
+			IDictionary<string,string> properties = PropertyParser.ReadProperties(lines);
+			Assert.That(properties, Has.Count.EqualTo(1));
+			Assert.That(properties, Contains.Key("key").WithValue("value"));
 		}
 
 		[Test]

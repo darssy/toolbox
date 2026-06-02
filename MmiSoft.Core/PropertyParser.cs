@@ -31,9 +31,10 @@ namespace MmiSoft.Core
 				}
 				value = value.TrimStart();
 				const string lineContinuation = "\\";
-				while (line.EndsWith(lineContinuation) && i < lines.Count)
+				while (line.EndsWith(lineContinuation))
 				{
 					value = value.Substring(0, value.Length - lineContinuation.Length).Trim(trimChars);
+					if (i + 1 >= lines.Count) break; //dangling continuation
 					line = lines[++i];
 					value += Environment.NewLine + line.Trim();
 				}
