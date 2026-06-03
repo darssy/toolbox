@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -75,6 +75,7 @@ namespace MmiSoft.Core.Geometry
 		public ICollection<LineSegment> GetLineSegments()
 		{
 			List<LineSegment> segments = new List<LineSegment>(Count);
+			if (Count < 2) return segments;
 
 			for (int i = 0; i < Count - 1; i++)
 			{

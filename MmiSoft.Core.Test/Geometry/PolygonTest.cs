@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Drawing;
 using NUnit.Framework;
 
@@ -82,6 +83,33 @@ namespace MmiSoft.Core.Geometry
 
 			Assert.True(polygon.Contains(188, 291));
 			//Assert.False(polygon.Encloses(188, 291));
+		}
+
+		[Test]
+		public void GetLineSegments_Triangle_ReturnsThreeEdgesIncludingClosingEdge()
+		{
+			Polygon polygon = new Polygon(new Point(0, 0), new Point(10, 0), new Point(0, 10));
+
+			ICollection<LineSegment> segments = polygon.GetLineSegments();
+
+			Assert.That(segments, Is.EqualTo(new[]
+			{
+				new LineSegment(new Point(0, 0), new Point(10, 0)),
+				new LineSegment(new Point(10, 0), new Point(0, 10)),
+				new LineSegment(new Point(0, 10), new Point(0, 0)) //closing edge
+			}));
+		}
+
+		[Test]
+		public void GetLineSegments_EmptyPolygon_ReturnsEmptyAndDoesNotThrow()
+		{
+			Assert.That(new Polygon().GetLineSegments(), Is.Empty);
+		}
+
+		[Test]
+		public void GetLineSegments_SingleVertex_ReturnsEmpty()
+		{
+			Assert.That(new Polygon(new Point(5, 5)).GetLineSegments(), Is.Empty);
 		}
 
 		[Test]
