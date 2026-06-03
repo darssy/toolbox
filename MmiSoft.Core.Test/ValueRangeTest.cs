@@ -19,9 +19,19 @@ namespace MmiSoft.Core
 		}
 
 		[Test]
-		public void Intersects_OuterRangeRange_ReturnsFalse()
+		public void Intersects_SmallRangeIsContainedInsideBiggerRange_ReturnsTrue()
 		{
-			Assert.False(new ValueRange<int>(6, 7).Intersects(new ValueRange<int>(5, 10)));
+			Assert.True(new ValueRange<int>(6, 7).Intersects(new ValueRange<int>(5, 10)));
+		}
+
+		[Test]
+		public void Intersects_RangeFullyContainsThis_ReturnsTrue()
+		{
+			var inner = new ValueRange<int>(5, 10);
+			var outer = new ValueRange<int>(0, 20);
+
+			Assert.True(outer.Intersects(inner), "outer.Intersects(inner)");
+			Assert.True(inner.Intersects(outer), "inner.Intersects(outer)");
 		}
 
 		[Test]

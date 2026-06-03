@@ -45,16 +45,17 @@ namespace MmiSoft.Core
 		}
 
 		/// <summary>
-		/// Checks if this range intersects with another.
+		/// Checks if this range intersects with another. Two ranges intersect if they share at least one value,
+		/// which includes the case where one range fully contains the other.
 		/// </summary>
 		/// <param name="range"></param>
-		/// <returns>True if either min or max of range are between min and max of this range. False otherwise</returns>
+		/// <returns>True if the two ranges overlap (bounds included), false otherwise</returns>
 		public bool Intersects(ValueRange<T> range)
 		{
 			if (range == null) return false;
 			if (ReferenceEquals(this, range)) return true;
 
-			return IsInRange(range.minValue) || IsInRange(range.maxValue);
+			return minValue.CompareTo(range.maxValue) <= 0 && range.minValue.CompareTo(maxValue) <= 0;
 		}
 
 		public override string ToString()
