@@ -139,19 +139,25 @@ namespace MmiSoft.Core
 		#endregion
 		public static Percent PercentBetween(this int value, int from, int to)
 		{
+			if (from == to)
+			{
+				throw new ArgumentException($"'from' ({from}) and 'to' ({to}) must differ to define a range");
+			}
 			float dif = value - from;
 			return new Percent(dif * 100 / (to - from));
 		}
 
 		public static float[] FillSeries(this float start, float end, int series)
 		{
+			if (series < 0) throw new ArgumentOutOfRangeException(nameof(series));
 			int totalSteps = series + 1;
 			float step = (end - start) / totalSteps;
 			float[] result = new float[series];
-			result[0] = start + step;
-			for (int i = 1; i < series; i++)
+			float current = start;
+			for (int i = 0; i < series; i++)
 			{
-				result[i] = result[i - 1] + step;
+				current += step;
+				result[i] = current;
 			}
 			return result;
 		}

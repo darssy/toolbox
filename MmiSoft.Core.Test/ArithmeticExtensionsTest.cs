@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 
 namespace MmiSoft.Core
@@ -5,6 +6,39 @@ namespace MmiSoft.Core
 	[TestFixture]
 	public class ArithmeticExtensionsTest
 	{
+		// Issue A (part 1): zero interior points is a valid request -the result is an empty array.
+		[Test]
+		public void FillSeries_ZeroSeries_ReturnsEmptyArray()
+		{
+			Assert.That(0f.FillSeries(10f, 0), Is.Empty);
+		}
+
+		[Test]
+		public void FillSeries_ReturnsInteriorDivisionPoints()
+		{
+			Assert.That(0f.FillSeries(10f, 3), Is.EqualTo(new[] { 2.5f, 5f, 7.5f }));
+		}
+
+		[Test]
+		public void FillSeries_NegativeSeries_Throws()
+		{
+			Assert.Throws<ArgumentOutOfRangeException>(() => 0f.FillSeries(10f, -1));
+		}
+
+		// Issue A (part 2): a percentage within a zero-width range is undefined, so it fails fast instead
+		// of silently producing a non-finite Percent.
+		[Test]
+		public void PercentBetween_FromEqualsTo_Throws()
+		{
+			Assert.Throws<ArgumentException>(() => 5.PercentBetween(3, 3));
+		}
+
+		[Test]
+		public void PercentBetween_ValueInRange_ReturnsPosition()
+		{
+			Assert.That(5.PercentBetween(0, 10), Is.EqualTo(new Percent(50)));
+		}
+
 		[Test]
 		public void IsWithin_RandomCase_7IsWithin4To9Range()
 		{
