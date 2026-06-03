@@ -71,6 +71,25 @@ namespace MmiSoft.Core
 			Assert.AreEqual(expected, date.TruncateMillis());
 		}
 
+		// DateTime equality compares ticks only, not Kind -hence the asserts below check Kind explicitly.
+		[TestCase(DateTimeKind.Utc)]
+		[TestCase(DateTimeKind.Local)]
+		[TestCase(DateTimeKind.Unspecified)]
+		public void RoundToMinute_PreservesKind(DateTimeKind kind)
+		{
+			DateTime date = new DateTime(2000, 10, 1, 13, 5, 30, 350, kind);
+			Assert.That(date.RoundToMinute().Kind, Is.EqualTo(kind));
+		}
+
+		[TestCase(DateTimeKind.Utc)]
+		[TestCase(DateTimeKind.Local)]
+		[TestCase(DateTimeKind.Unspecified)]
+		public void RoundToSecond_PreservesKind(DateTimeKind kind)
+		{
+			DateTime date = new DateTime(2000, 10, 1, 13, 5, 30, 501, kind);
+			Assert.That(date.RoundToSecond().Kind, Is.EqualTo(kind));
+		}
+
 		[Test]
 		public void TimeSpanMultipliedBy2ReturnsTwiceAsBigValue()
 		{

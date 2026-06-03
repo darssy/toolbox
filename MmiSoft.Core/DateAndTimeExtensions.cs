@@ -17,7 +17,7 @@ namespace MmiSoft.Core
 		public static DateTime RoundToMinute(this DateTime date)
 		{
 			double totalMinutes = date.Ticks / (double)TimeSpan.TicksPerMinute;
-			return new DateTime((long) (totalMinutes.Round() * TimeSpan.TicksPerMinute));
+			return new DateTime((long) (totalMinutes.Round() * TimeSpan.TicksPerMinute), date.Kind);
 		}
 
 		/// <summary>
@@ -32,8 +32,8 @@ namespace MmiSoft.Core
 		{
 			long mod = date.Ticks % TimeSpan.TicksPerSecond;
 			return mod >= TimeSpan.TicksPerSecond / 2
-				? new DateTime(date.Ticks - mod + TimeSpan.TicksPerSecond)
-				: new DateTime(date.Ticks - mod);
+				? new DateTime(date.Ticks - mod + TimeSpan.TicksPerSecond, date.Kind)
+				: new DateTime(date.Ticks - mod, date.Kind);
 		}
 
 		/// <summary>
