@@ -34,6 +34,7 @@ namespace MmiSoft.Core.Collections
 
 		public bool Remove(string item)
 		{
+			if (!stringCollection.Contains(item)) return false;
 			stringCollection.Remove(item);
 			return true;
 		}
