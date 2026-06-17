@@ -4,7 +4,7 @@ namespace MmiSoft.Core.Logging
 {
 	/// <summary>
 	/// Interface to wrap a logger implementation and use in <see cref="EventLogger.LoggerImplementation"/>.
-	/// Currently this wrapper supports only setting the global <see cref="LogLevel"/> of the underlying logger.
+	/// Currently, this wrapper supports only setting the global <see cref="LogLevel"/> of the underlying logger.
 	/// </summary>
 	public interface ILogWrapper
 	{

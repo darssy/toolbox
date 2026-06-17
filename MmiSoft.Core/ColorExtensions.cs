@@ -15,13 +15,14 @@ namespace MmiSoft.Core
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Color Negate(this Color c)
 		{
-			return Color.FromArgb(255 - c.R, 255 - c.G, 255 - c.B);
+			return Color.FromArgb(c.A, 255 - c.R, 255 - c.G, 255 - c.B);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Color Darken(this Color c)
 		{
-			return Color.FromArgb((int) SysMath.Round(c.R * 0.5),
+			return Color.FromArgb(c.A,
+				(int) SysMath.Round(c.R * 0.5),
 				(int) SysMath.Round(c.G * 0.5),
 				(int) SysMath.Round(c.B * 0.5));
 		}
@@ -34,7 +35,7 @@ namespace MmiSoft.Core
 			if (r > 255) r = 255;
 			if (g > 255) g = 255;
 			if (b > 255) b = 255;
-			return Color.FromArgb(r, g, b);
+			return Color.FromArgb(c.A, r, g, b);
 		}
 	}
 }
