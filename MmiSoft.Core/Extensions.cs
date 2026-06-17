@@ -28,7 +28,7 @@ namespace MmiSoft.Core
 		{
 			foreach (object item in collection)
 			{
-				if (item.GetType() == typeof(T)) yield return (T)item;
+				if (item?.GetType() == typeof(T)) yield return (T)item;
 			}
 		}
 
