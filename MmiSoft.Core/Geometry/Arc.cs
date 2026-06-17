@@ -9,25 +9,28 @@ namespace MmiSoft.Core.Geometry
 
 		public Arc(double start, double end)
 		{
-			this.start = start > FullCircle ? start % FullCircle : start;
-			this.end = end > FullCircle ? end % FullCircle : end;
+			this.start = Normalize(start);
+			this.end = Normalize(end);
 		}
 
 		public bool Contains(double angle)
 		{
-			if (angle > FullCircle)
-			{
-				angle %= FullCircle;
-			}
-			if (angle < 0)
-			{
-				angle = FullCircle + angle;
-			}
+			angle = Normalize(angle);
 			if (start < end)
 			{
 				return angle >= start && angle <= end;
 			}
 			return angle >= start || angle <= end;
+		}
+
+		/// <summary>
+		/// Maps any angle to its equivalent in the <c>[0, 360)</c> range, so negative and over-360 inputs
+		/// are treated consistently whether they come from the constructor or <see cref="Contains"/>.
+		/// </summary>
+		private static double Normalize(double angle)
+		{
+			angle %= FullCircle;
+			return angle < 0 ? angle + FullCircle : angle;
 		}
 
 		public override string ToString()

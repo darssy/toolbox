@@ -46,5 +46,12 @@ namespace MmiSoft.Core.Geometry
 			Arc arc = new Arc(320, 15);
 			Assert.True(arc.Contains(-10));
 		}
+
+		[Test]
+		public void Contains_ArcConstructedWithNegativeStart_ContainsEquivalentWrappedAngle()
+		{
+			Arc arc = new Arc(-10, 10);
+			Assert.True(arc.Contains(355));
+		}
 	}
 }
