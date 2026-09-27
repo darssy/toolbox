@@ -13,7 +13,9 @@ public interface IEditableObjectWithEvents
 	
 	void BeginEdit();
 
+	void BeforeEndEdit();
 	void EndEdit();
 
+	void BeforeCancelEdit();
 	void CancelEdit();
 }

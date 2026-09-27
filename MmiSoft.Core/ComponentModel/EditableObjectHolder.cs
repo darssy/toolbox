@@ -37,18 +37,35 @@ namespace MmiSoft.Core.ComponentModel
 		public void CancelEdit()
 		{
 			if (!IsEditing) return;
-			memento.Copy(Object);
-			memento = null;
-			IsEditing = false;
-			if (Object is IEditableObjectWithEvents et) et.CancelEdit();
+			
+			IEditableObjectWithEvents et = Object as IEditableObjectWithEvents;
+			try
+			{
+				et?.BeforeCancelEdit();
+			}
+			finally
+			{
+				memento.Copy(Object);
+				memento = null;
+				IsEditing = false;
+				et?.CancelEdit();
+			}
 		}
 
 		public void EndEdit()
 		{
 			if (!IsEditing) return;
-			memento = null;
-			IsEditing = false;
-			if (Object is IEditableObjectWithEvents et) et.EndEdit();
+			IEditableObjectWithEvents et = Object as IEditableObjectWithEvents;
+			try
+			{
+				et?.BeforeEndEdit();
+			}
+			finally
+			{
+				memento = null;
+				IsEditing = false;
+				et?.EndEdit();
+			}
 		}
 
 		object IEditableObjectWrapper.Object => Object;
