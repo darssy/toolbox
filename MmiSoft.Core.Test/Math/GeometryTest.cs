@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace MmiSoft.Core.Math;
 
 [TestFixture]
-public class GeometryTest
+public class GeometryUtilsTest
 {
 
 	[Test]
@@ -13,7 +13,7 @@ public class GeometryTest
 	{
 		var s1 = new LineSegment(new Point(-1, -1), new Point(1, 1));
 		var s2 = new LineSegment(new Point(-2, 2), new Point(2, -2));
-		Assert.That(Geometry.Intersection(s1, s2, out IntersectionType type), Is.EqualTo(PointF.Empty));
+		Assert.That(GeometryUtils.Intersection(s1, s2, out IntersectionType type), Is.EqualTo(PointF.Empty));
 		Assert.That(type, Is.EqualTo(IntersectionType.BothLines));
 	}
 
@@ -22,7 +22,7 @@ public class GeometryTest
 	{
 		var s1 = new LineSegment(new Point(-1, -1), new Point(1, 1));
 		var s2 = new LineSegment(new Point(8, -8), new Point(12, -12));
-		Assert.That(Geometry.Intersection(s1, s2, out IntersectionType type), Is.EqualTo(PointF.Empty));
+		Assert.That(GeometryUtils.Intersection(s1, s2, out IntersectionType type), Is.EqualTo(PointF.Empty));
 		Assert.That(type, Is.EqualTo(IntersectionType.OneLine));
 	}
 
@@ -31,7 +31,7 @@ public class GeometryTest
 	{
 		var s1 = new LineSegment(new Point(1, 1), new Point(5, 5));
 		var s2 = new LineSegment(new Point(8, -8), new Point(12, -12));
-		Assert.That(Geometry.Intersection(s1, s2, out IntersectionType type), Is.EqualTo(PointF.Empty));
+		Assert.That(GeometryUtils.Intersection(s1, s2, out IntersectionType type), Is.EqualTo(PointF.Empty));
 		Assert.That(type, Is.EqualTo(IntersectionType.NoLine));
 	}
 		
@@ -40,7 +40,7 @@ public class GeometryTest
 	{
 		var s1 = new LineSegment(new Point(3, 7), new Point(15, 5));
 		var s2 = new LineSegment(new Point(0, 4), new Point(12, 2));
-		Assert.That(Geometry.Intersection(s1, s2, out IntersectionType type), Is.EqualTo(PointF.Empty));
+		Assert.That(GeometryUtils.Intersection(s1, s2, out IntersectionType type), Is.EqualTo(PointF.Empty));
 		Assert.That(type, Is.EqualTo(IntersectionType.Parallel));
 	}
 
@@ -58,7 +58,7 @@ public class GeometryTest
 		var vertical = new LineSegment(new Point(50000, 0), new Point(50000, 100000));
 		var horizontal = new LineSegment(new Point(0, 50000), new Point(100000, 50000));
 
-		PointF p = Geometry.Intersection(vertical, horizontal, out IntersectionType type);
+		PointF p = GeometryUtils.Intersection(vertical, horizontal, out IntersectionType type);
 
 		Assert.That(type, Is.EqualTo(IntersectionType.BothLines));
 		Assert.That(p.X, Is.EqualTo(50000f).Within(Tolerance));
@@ -72,7 +72,7 @@ public class GeometryTest
 		var rising = new LineSegment(new Point(0, 0), new Point(200000, 200000));    // y = x
 		var falling = new LineSegment(new Point(0, 200000), new Point(200000, 0));   // y = 200000 - x
 
-		PointF p = Geometry.Intersection(rising, falling, out IntersectionType type);
+		PointF p = GeometryUtils.Intersection(rising, falling, out IntersectionType type);
 
 		Assert.That(type, Is.EqualTo(IntersectionType.BothLines));
 		Assert.That(p.X, Is.EqualTo(100000f).Within(Tolerance));
@@ -85,7 +85,7 @@ public class GeometryTest
 		var vertical = new LineSegment(new Point(100000, 0), new Point(100000, 200000));
 		var horizontal = new LineSegment(new Point(0, 100000), new Point(200000, 100000));
 
-		PointF p = Geometry.Intersection(vertical, horizontal, out IntersectionType type);
+		PointF p = GeometryUtils.Intersection(vertical, horizontal, out IntersectionType type);
 
 		Assert.That(type, Is.EqualTo(IntersectionType.BothLines));
 		Assert.That(p.X, Is.EqualTo(100000f).Within(Tolerance));
@@ -99,7 +99,7 @@ public class GeometryTest
 		var a = new LineSegment(new Point(0, 0), new Point(50000, 50000));             // y = x
 		var b = new LineSegment(new Point(200000, 100000), new Point(250000, 50000));  // y = -x + 300000
 
-		PointF p = Geometry.Intersection(a, b, out IntersectionType type);
+		PointF p = GeometryUtils.Intersection(a, b, out IntersectionType type);
 
 		Assert.That(type, Is.EqualTo(IntersectionType.NoLine));
 		Assert.That(p.X, Is.EqualTo(150000f).Within(Tolerance));
@@ -113,7 +113,7 @@ public class GeometryTest
 		var a = new LineSegment(new Point(0, 0), new Point(200000, 200000));            // y = x
 		var b = new LineSegment(new Point(10000, 190000), new Point(40000, 160000));    // y = -x + 200000
 
-		PointF p = Geometry.Intersection(a, b, out IntersectionType type);
+		PointF p = GeometryUtils.Intersection(a, b, out IntersectionType type);
 
 		Assert.That(type, Is.EqualTo(IntersectionType.OneLine));
 		Assert.That(p.X, Is.EqualTo(100000f).Within(Tolerance));
@@ -126,7 +126,7 @@ public class GeometryTest
 		var a = new LineSegment(new Point(0, 0), new Point(200000, 200000));        // y = x
 		var b = new LineSegment(new Point(0, 100000), new Point(200000, 300000));   // y = x + 100000
 
-		PointF p = Geometry.Intersection(a, b, out IntersectionType type);
+		PointF p = GeometryUtils.Intersection(a, b, out IntersectionType type);
 
 		Assert.That(type, Is.EqualTo(IntersectionType.Parallel));
 		Assert.That(p, Is.EqualTo(PointF.Empty));

@@ -215,7 +215,7 @@ namespace MmiSoft.Core
 		[Test]
 		public void HashCode_Contract_RandomPairsWithinTolerance()
 		{
-			const float tolerance = Math.Extensions.DefaultTolerance; // 1e-6 on the raw value
+			const float tolerance = MathExtensions.DefaultTolerance; // 1e-6 on the raw value
 			Random rng = new Random(20240601); // fixed seed for reproducibility
 			int violations = 0;
 			string firstCounterexample = null;

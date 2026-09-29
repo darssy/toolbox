@@ -1,6 +1,5 @@
 using System;
 using System.Runtime.CompilerServices;
-using MmiSoft.Core.Math;
 
 namespace MmiSoft.Core
 {

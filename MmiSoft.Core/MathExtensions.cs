@@ -1,88 +1,92 @@
-﻿using System.Drawing;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
-namespace MmiSoft.Core.Math
+namespace MmiSoft.Core
 {
-	using System;
 
-	public static class Extensions
+	public static class MathExtensions
 	{
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static double Abs(this double number)
 		{
-			return Math.Abs(number);
+			return System.Math.Abs(number);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float Abs(this float number)
 		{
-			return Math.Abs(number);
+			return System.Math.Abs(number);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int Abs(this int number)
 		{
-			return Math.Abs(number);
+			return System.Math.Abs(number);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static decimal Abs(this decimal number)
 		{
-			return Math.Abs(number);
+			return System.Math.Abs(number);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static double Sqrt(this double number)
 		{
-			return Math.Sqrt(number);
+			return System.Math.Sqrt(number);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static double Sqrt(this float number)
+		{
+			return System.Math.Sqrt(number);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static double Sqrt(this int number)
 		{
-			return Math.Sqrt(number);
+			return System.Math.Sqrt(number);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int Round(this float number)
 		{
-			return (int) Math.Round(number);
+			return (int) System.Math.Round(number);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float Round(this float number, int decimals)
 		{
-			return (float) Math.Round(number, decimals);
+			return (float) System.Math.Round(number, decimals);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static double Round(this double number)
 		{
-			return Math.Round(number);
+			return System.Math.Round(number);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static double Round(this double number, int decimals)
 		{
-			return Math.Round(number, decimals);
+			return System.Math.Round(number, decimals);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int RoundToInt(this double number)
 		{
-			return (int) Math.Round(number);
+			return (int) System.Math.Round(number);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int Floor(this double number)
 		{
-			return (int) Math.Floor(number);
+			return (int) System.Math.Floor(number);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int Ceiling(this double number)
 		{
-			return (int) Math.Ceiling(number);
+			return (int) System.Math.Ceiling(number);
 		}
 
 		/*public static T InterpolateWith<T>(this SpeedUnit start, SpeedUnit end, Percent percent) where T : SpeedUnit, new()
@@ -130,13 +134,13 @@ namespace MmiSoft.Core.Math
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool AlmostEqual(this double x, double y) {
-			double epsilon = Math.Max(Math.Abs(x), Math.Abs(y)) * 1E-14;
+			double epsilon = System.Math.Max(System.Math.Abs(x), System.Math.Abs(y)) * 1E-14;
 			return x.AlmostEqual(y, epsilon);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool AlmostEqual(this double x, double y, double epsilon) {
-			return Math.Abs(x - y) <= epsilon;
+			return System.Math.Abs(x - y) <= epsilon;
 		}
 
 		public const float DefaultTolerance = 0.000001f;

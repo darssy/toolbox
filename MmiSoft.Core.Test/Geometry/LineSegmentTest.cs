@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using NUnit.Framework;
 
 namespace MmiSoft.Core.Geometry
@@ -11,6 +12,15 @@ namespace MmiSoft.Core.Geometry
 		{
 			var segment = new LineSegment(new Point(5, 5), new Point(10, 10));
 			Assert.IsTrue(segment.IsNear(new Point(7, 7), 0));
+		}
+        
+		[Test]
+		public void Distance()
+		{
+			var segment = new LineSegment(new Point(2168, 670), new Point(-562, 656));
+			var p = new Point(858, 654);
+			Console.WriteLine(segment.Distance(p));
+			Console.WriteLine(segment.IsNear(p, 10));
 		}
 		
 		[Test]

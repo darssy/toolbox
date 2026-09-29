@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace MmiSoft.Core.Math
 {
 	[TestFixture]
-	public class ExtensionsTest
+	public class MathExtensionsTest
 	{
 		[Test]
 		public void AlmostEqual_ZeroMustBeAlmostEqualToZero()

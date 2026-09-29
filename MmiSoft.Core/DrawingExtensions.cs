@@ -1,6 +1,5 @@
 using System;
 using System.Drawing;
-using MmiSoft.Core.Math;
 
 namespace MmiSoft.Core
 {

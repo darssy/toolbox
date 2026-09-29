@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using MmiSoft.Core.Math;
 
 namespace MmiSoft.Core
 {
@@ -20,7 +19,7 @@ namespace MmiSoft.Core
 		private Percent(float value, bool _)
 		{
 			this.value = value;
-			roundedRepresentationForComparisons = (value / MmiSoft.Core.Math.Extensions.DefaultTolerance).Round();
+			roundedRepresentationForComparisons = (value / MathExtensions.DefaultTolerance).Round();
 		}
 
 		/// <summary>
@@ -33,7 +32,7 @@ namespace MmiSoft.Core
 		public Percent(float value)
 		{
 			this.value = value / 100;
-			roundedRepresentationForComparisons = (this.value / MmiSoft.Core.Math.Extensions.DefaultTolerance).Round();
+			roundedRepresentationForComparisons = (this.value / MathExtensions.DefaultTolerance).Round();
 		}
 
 		/// <summary>
@@ -46,7 +45,7 @@ namespace MmiSoft.Core
 		public Percent(double value)
 		{
 			this.value = (float) (value / 100);
-			roundedRepresentationForComparisons = (this.value / MmiSoft.Core.Math.Extensions.DefaultTolerance).Round();
+			roundedRepresentationForComparisons = (this.value / MathExtensions.DefaultTolerance).Round();
 		}
 
 		/// <summary>

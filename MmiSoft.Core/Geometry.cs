@@ -1,11 +1,10 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using MmiSoft.Core.Geometry;
 
-namespace MmiSoft.Core.Math
+namespace MmiSoft.Core
 {
-	using System;
-
-	public static class Geometry
+	public static class GeometryUtils
 	{
 		private const double RadiansPerDegree = Math.PI / 180.0;
 
